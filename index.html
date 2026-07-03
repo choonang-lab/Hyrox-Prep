@@ -553,8 +553,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="header-inner">
     <div class="logo">
       <h1>Hyrox <span>Training</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 81</div>
-      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 81</strong></p>
+      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 82</div>
+      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 82</strong></p>
     </div>
     <div class="header-btns">
       <button class="hbtn" onclick="openAddModal(null,null)">+ Add</button>
@@ -580,7 +580,7 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
       <div class="dl-header-title" id="dlTitle">—</div>
       <div class="dl-header-progress" id="dlProgress">0 of 0 done</div>
     </div>
-    <button class="dl-check-all" onclick="checkAllDone()">All done ✓</button>
+    <button class="dl-check-all" id="dlCheckAll" onclick="checkAllDone()">All done ✓</button>
   </div>
   <div class="dl-body" id="dlBody"></div>
 </div>
@@ -1783,14 +1783,44 @@ let _storageOk=false;
 }}}catch(e){_storageOk=false;}})();
 function persist(){if(!_storageOk)return;try{localStorage.setItem('hyrox_plan',JSON.stringify(workouts));}catch(e){}}
 
-// ── Card expand / tap ─────────────────────────────────────
+// ── Card expand / tap · long-press to log ─────────────────────────────────────
 let _expandedCard=null;
+let _lpTimer=null,_lpFired=false;
+const LP_DELAY=500;
+
+// Long-press a card to open its single-exercise logging view. Runs a timer on
+// pointer-down; a drag beyond 10px or an early release cancels it. When it
+// fires it sets _lpFired so the trailing click does NOT also expand the card.
+function cardPressStart(e,id){
+  if(e.target.closest('.wcard-expanded-actions,.wcard-expanded-close,button,a'))return;
+  const card=document.querySelector(`[data-id="${id}"]`);
+  if(card&&card.classList.contains('expanded'))return; // no long-press while expanded
+  _lpFired=false;
+  const sx=e.clientX,sy=e.clientY;
+  clearTimeout(_lpTimer);
+  _lpTimer=setTimeout(()=>{
+    _lpTimer=null;_lpFired=true;
+    if(navigator.vibrate)navigator.vibrate(30);
+    openExLog(id);
+  },LP_DELAY);
+  function move(ev){if(Math.abs(ev.clientX-sx)>10||Math.abs(ev.clientY-sy)>10)cancel();}
+  function cancel(){
+    if(_lpTimer){clearTimeout(_lpTimer);_lpTimer=null;}
+    document.removeEventListener('pointermove',move);
+    document.removeEventListener('pointerup',cancel);
+    document.removeEventListener('pointercancel',cancel);
+  }
+  document.addEventListener('pointermove',move);
+  document.addEventListener('pointerup',cancel,{once:true});
+  document.addEventListener('pointercancel',cancel,{once:true});
+}
 
 // Tap a card to expand it into the full-screen detail view.
 // A plain click only fires on tap (not while scrolling), so no drag-guard is
 // needed. Taps on interactive children (action buttons, the close bar) are
 // ignored here so they run their own handlers.
 function cardTap(e,id){
+  if(_lpFired){_lpFired=false;return;} // a long-press just fired — swallow this click
   if(e.target.closest('.wcard-expanded-actions,.wcard-expanded-close,button,a'))return;
   const card=document.querySelector(`[data-id="${id}"]`);
   if(!card)return;
@@ -2066,7 +2096,7 @@ function renderCard(w,dim,dateStr){const ds=dateStr||(new Date().toISOString().s
     _lastSection='<div class="wcard-expanded-last"><div class="wcard-expanded-last-label">Last Session</div><div class="wcard-expanded-last-empty">No previous log yet.</div></div>';
   }
   const _dimStyle=dim?' style="opacity:0.55"':'';
-  return '<div class="wcard '+_stateClass+'" data-id="'+w.id+'" data-phase="'+_phase+'" data-block="'+_block+'" onclick="cardTap(event,\''+w.id+'\')" oncontextmenu="return false">'+
+  return '<div class="wcard '+_stateClass+'" data-id="'+w.id+'" data-phase="'+_phase+'" data-block="'+_block+'" onpointerdown="cardPressStart(event,\''+w.id+'\')" onclick="cardTap(event,\''+w.id+'\')" oncontextmenu="return false">'+
     '<div class="wcard-expanded-close" onclick="collapseCard()"><span>\u2715 Tap to close</span><span style="font-size:0.6rem;opacity:0.7">'+_block+'</span></div>'+
     '<div class="wcard-expanded-body">'+
       '<div class="wcard-expanded-hero">'+
@@ -2100,7 +2130,7 @@ function renderCard(w,dim,dateStr){const ds=dateStr||(new Date().toISOString().s
         '<button class="caction del" onclick="delW(\''+w.id+'\')" title="Remove">&#10005;</button>'+
       '</div>'+
     '</div>'+
-    '<span class="wcard-expand-hint">tap to expand</span>'+
+    '<span class="wcard-expand-hint">tap · hold to log</span>'+
     '</div>'+
   '</div>';
 })();}
@@ -2124,6 +2154,24 @@ function openDayLog(week,dayName){
   dayLogState={week,day:dayName,dateStr};
   const dw=workouts.filter(x=>x.week===week&&x.day===dayName);
   document.getElementById('dlTitle').textContent=`${dayName} · ${fmtDate(date)}`;
+  const ca=document.getElementById('dlCheckAll');if(ca)ca.style.display='';
+  renderDayLogBody(dw,dateStr);
+  updateDayLogProgress(dw,dateStr);
+  document.getElementById('dayLogOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+// Open the day-log modal focused on a SINGLE exercise (long-press entry point).
+// Reuses the whole day-log machinery; dayLogState.focusId scopes the render and
+// progress to just this exercise, and the day-level "All done" button is hidden.
+function openExLog(wid){
+  const w=workouts.find(x=>x.id===wid);
+  if(!w)return;
+  const date=getDate(w.week,w.day);
+  const dateStr=date.toISOString().slice(0,10);
+  dayLogState={week:w.week,day:w.day,dateStr,focusId:wid};
+  document.getElementById('dlTitle').textContent=`${w.movement} · ${fmtDate(date)}`;
+  const ca=document.getElementById('dlCheckAll');if(ca)ca.style.display='none';
+  const dw=[w];
   renderDayLogBody(dw,dateStr);
   updateDayLogProgress(dw,dateStr);
   document.getElementById('dayLogOverlay').classList.add('open');
@@ -2160,15 +2208,17 @@ function getExStatus(w,dateStr){
 }
 
 function renderDayLogBody(dw,dateStr){
+  const focusId=dayLogState?.focusId;
+  if(focusId)dw=dw.filter(w=>w.id===focusId); // single-exercise logging view
   const BLOCK_ORDER=['Morning Protocol','Warm-Up','Main Session','Finisher','Mobility'];
   const groups={};
   dw.forEach(w=>{const b=w.block||'Main Session';if(!groups[b])groups[b]=[];groups[b].push(w);});
   const daySkip=daySkips[dateStr];
-  
+
   let html='';
-  
-  // Day-level skip bar
-  html+=`<div class="dl-skip-bar">
+
+  // Day-level skip bar — only in full-day mode (not when focused on one exercise)
+  if(!focusId)html+=`<div class="dl-skip-bar">
     <div class="dl-skip-bar-title">Day Status</div>
     <div class="dl-skip-reasons" id="daySkipReasons">
       <button class="dl-skip-reason ${!daySkip?.skipped?'active':''}" onclick="setDayStatus('done','${dateStr}')" style="${!daySkip?.skipped?'background:var(--green);border-color:var(--green);color:white':''}">✓ Trained</button>
@@ -2220,6 +2270,8 @@ function renderDayLogBody(dw,dateStr){
   document.getElementById('dlBody').innerHTML=html||'<div style="padding:20px;color:var(--muted);font-size:0.8rem;">No exercises for this day.</div>';
 }
 function updateDayLogProgress(dw,dateStr){
+  const focusId=dayLogState?.focusId;
+  if(focusId&&dw)dw=dw.filter(w=>w.id===focusId);
   const total=dw?dw.length:(dayLogState?workouts.filter(x=>x.week===dayLogState.week&&x.day===dayLogState.day).length:0);
   const ds=dateStr||dayLogState?.dateStr||'';
   const done=workouts.filter(x=>x.checks?.[ds]?.done&&(dw?dw.some(d=>d.id===x.id):(x.week===dayLogState?.week&&x.day===dayLogState?.day))).length;
@@ -2374,6 +2426,7 @@ function saveDayNotes(wid,dateStr,text){
 }
 function checkAllDone(){
   if(!dayLogState)return;
+  if(dayLogState.focusId)return; // never mark the whole day from a single-exercise view
   const {week,day,dateStr}=dayLogState;
   const dw=workouts.filter(x=>x.week===week&&x.day===day);
   dw.forEach(w=>{
