@@ -279,6 +279,16 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   font-size:0.6rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
 }
 .wcard-expanded-cue-step-text{font-size:0.87rem;line-height:1.6;color:var(--text2);}
+/* Last session section */
+.wcard-expanded-last{
+  margin:0 20px 16px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px 18px;
+}
+.wcard-expanded-last-label{font-size:0.58rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
+.wcard-expanded-last-meta{font-size:0.82rem;font-weight:700;color:var(--text);margin-bottom:6px;font-family:'JetBrains Mono',monospace;}
+.wcard-expanded-last-notes{font-size:0.85rem;line-height:1.6;color:var(--text2);white-space:pre-wrap;}
+.wcard-expanded-last-empty{font-size:0.8rem;color:var(--muted);font-style:italic;}
 /* Superset chip */
 .wcard-expanded-ss{
   margin:0 20px 16px;padding:12px 16px;
@@ -543,8 +553,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="header-inner">
     <div class="logo">
       <h1>Hyrox <span>Training</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 80</div>
-      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 80</strong></p>
+      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 81</div>
+      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 81</strong></p>
     </div>
     <div class="header-btns">
       <button class="hbtn" onclick="openAddModal(null,null)">+ Add</button>
@@ -1773,61 +1783,32 @@ let _storageOk=false;
 }}}catch(e){_storageOk=false;}})();
 function persist(){if(!_storageOk)return;try{localStorage.setItem('hyrox_plan',JSON.stringify(workouts));}catch(e){}}
 
-// ── Card expand / long-press ─────────────────────────────────────
-let _expandTimer=null,_expandedCard=null;
-const EXPAND_DELAY=600;
+// ── Card expand / tap ─────────────────────────────────────
+let _expandedCard=null;
 
-function cardLongPressStart(e,id){
-  if(e.target.closest('.wcard-expanded-actions,button,a'))return;
-  const t=e.touches?e.touches[0]:e;
-  const startX=t.clientX,startY=t.clientY;
-  clearTimeout(_expandTimer);
-  _expandTimer=setTimeout(()=>{
-    _expandTimer=null;
-    const card=document.querySelector(`[data-id="${id}"]`);
-    if(!card)return;
-    if(card.classList.contains('expanded')){
-      collapseCard();
-    } else {
-      if(_expandedCard)collapseCard();
-      // Set hero border colour from phase
-      const phaseColor=getComputedStyle(card).borderLeftColor;
-      const hero=card.querySelector('.wcard-expanded-hero');
-      if(hero)hero.style.borderBottom=`3px solid ${phaseColor}`;
-      const icon=card.querySelector('.wcard-expanded-icon');
-      if(icon)icon.style.background=phaseColor;
-      card.classList.add('expanded');
-      card.scrollTop=0;
-      _expandedCard=card;
-      document.getElementById('cardOverlay').classList.add('active');
-      document.body.style.overflow='hidden';
-    }
-    if(navigator.vibrate)navigator.vibrate(40);
-  },EXPAND_DELAY);
-
-  // Cancel if finger moves more than 10px (scrolling)
-  function onMove(ev){
-    const mt=ev.touches?ev.touches[0]:ev;
-    if(Math.abs(mt.clientX-startX)>10||Math.abs(mt.clientY-startY)>10){
-      cancelExpand();
-    }
-  }
-  function onEnd(){cancelExpand();}
-  function cancelExpand(){
-    if(_expandTimer){clearTimeout(_expandTimer);_expandTimer=null;}
-    document.removeEventListener('touchmove',onMove);
-    document.removeEventListener('touchend',onEnd);
-    document.removeEventListener('mousemove',onMove);
-    document.removeEventListener('mouseup',onEnd);
-  }
-  document.addEventListener('touchmove',onMove,{passive:true,once:false});
-  document.addEventListener('touchend',onEnd,{once:true});
-  document.addEventListener('mousemove',onMove,{once:false});
-  document.addEventListener('mouseup',onEnd,{once:true});
+// Tap a card to expand it into the full-screen detail view.
+// A plain click only fires on tap (not while scrolling), so no drag-guard is
+// needed. Taps on interactive children (action buttons, the close bar) are
+// ignored here so they run their own handlers.
+function cardTap(e,id){
+  if(e.target.closest('.wcard-expanded-actions,.wcard-expanded-close,button,a'))return;
+  const card=document.querySelector(`[data-id="${id}"]`);
+  if(!card)return;
+  if(card.classList.contains('expanded'))return; // already open — use close bar / overlay to collapse
+  if(_expandedCard)collapseCard();
+  // Set hero border colour from phase
+  const phaseColor=getComputedStyle(card).borderLeftColor;
+  const hero=card.querySelector('.wcard-expanded-hero');
+  if(hero)hero.style.borderBottom=`3px solid ${phaseColor}`;
+  const icon=card.querySelector('.wcard-expanded-icon');
+  if(icon)icon.style.background=phaseColor;
+  card.classList.add('expanded');
+  card.scrollTop=0;
+  _expandedCard=card;
+  document.getElementById('cardOverlay').classList.add('active');
+  document.body.style.overflow='hidden';
+  if(navigator.vibrate)navigator.vibrate(20);
 }
-
-function cardLongPressEnd(e){}
-function cardLongPressCancel(){}
 
 function collapseCard(){
   if(_expandedCard){
@@ -2006,6 +1987,27 @@ if(/mobility|stretch|foam|roll|deadbug|wiper|tibialis|adductor|band pull|pull.ap
 if(/rest|recovery|biological/i.test(m))return SVG.rest;
 return SVG.default;
 }
+// Find the most recent PRIOR logged session of the same movement, across all
+// weeks/days, strictly before this card's date. A session counts as logged when
+// it carries a real status (done/partial/skip/deferred), a done flag, or notes.
+function lastSessionFor(w,currentDateStr){
+  let best=null;
+  workouts.forEach(x=>{
+    if(x.movement!==w.movement)return;
+    const checks=x.checks||{};
+    Object.keys(checks).forEach(dt=>{
+      if(dt>=currentDateStr)return; // only sessions before this card's date
+      const c=checks[dt]||{};
+      const hasData=(c.status&&c.status!=='none')||c.done||(c.notes&&c.notes.trim());
+      if(!hasData)return;
+      if(!best||dt>best.date){
+        best={date:dt,status:c.status||(c.done?'done':''),notes:(c.notes||'').trim(),week:x.week,day:x.day};
+      }
+    });
+  });
+  return best;
+}
+function escHtml(s){return String(s).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));}
 function renderCard(w,dim,dateStr){const ds=dateStr||(new Date().toISOString().slice(0,10));const doneToday=w.checks?.[ds]?.done;
   const exStatus=w.checks?.[ds]?.status||(doneToday?'done':'none');
   const skipReason=w.checks?.[ds]?.skipReason||'';
@@ -2050,9 +2052,22 @@ function renderCard(w,dim,dateStr){const ds=dateStr||(new Date().toISOString().s
   }
   const _ss=w.superset?'<div class="wcard-expanded-ss">\u21c4 Superset '+w.superset+' \u2014 perform with paired exercise, rest after both</div>':'';
   const _cueSection=w.cue?'<div class="wcard-expanded-cue-section"><div class="wcard-expanded-cue-label">Coaching Cue</div>'+_cueHtml+'</div>':'';
+  // Last session of the same movement (most recent before this card's date)
+  const _last=lastSessionFor(w,ds);
+  const _stMap={done:['\u2713 Done','var(--green)'],partial:['~ Partial','#6B3FA0'],skip:['\u2717 Skipped','var(--amber)'],deferred:['\u2192 Deferred','#2563EB']};
+  let _lastSection;
+  if(_last){
+    const _st=_stMap[_last.status]||['Logged','var(--text)'];
+    _lastSection='<div class="wcard-expanded-last"><div class="wcard-expanded-last-label">Last Session \u00b7 '+fmtDate(new Date(_last.date))+'</div>'+
+      '<div class="wcard-expanded-last-meta"><span style="color:'+_st[1]+'">'+_st[0]+'</span> \u00b7 W'+_last.week+' '+_last.day+'</div>'+
+      (_last.notes?'<div class="wcard-expanded-last-notes">'+escHtml(_last.notes)+'</div>':'<div class="wcard-expanded-last-empty">No notes recorded.</div>')+
+      '</div>';
+  } else {
+    _lastSection='<div class="wcard-expanded-last"><div class="wcard-expanded-last-label">Last Session</div><div class="wcard-expanded-last-empty">No previous log yet.</div></div>';
+  }
   const _dimStyle=dim?' style="opacity:0.55"':'';
-  return '<div class="wcard '+_stateClass+'" data-id="'+w.id+'" data-phase="'+_phase+'" data-block="'+_block+'" ontouchstart="cardLongPressStart(event,\''+w.id+'\')" oncontextmenu="return false">'+
-    '<div class="wcard-expanded-close"><span>\u25b2 Hold to close</span><span style="font-size:0.6rem;opacity:0.7">'+_block+'</span></div>'+
+  return '<div class="wcard '+_stateClass+'" data-id="'+w.id+'" data-phase="'+_phase+'" data-block="'+_block+'" onclick="cardTap(event,\''+w.id+'\')" oncontextmenu="return false">'+
+    '<div class="wcard-expanded-close" onclick="collapseCard()"><span>\u2715 Tap to close</span><span style="font-size:0.6rem;opacity:0.7">'+_block+'</span></div>'+
     '<div class="wcard-expanded-body">'+
       '<div class="wcard-expanded-hero">'+
         '<div class="wcard-expanded-icon">'+icon+'</div>'+
@@ -2062,6 +2077,7 @@ function renderCard(w,dim,dateStr){const ds=dateStr||(new Date().toISOString().s
         '</div>'+
       '</div>'+
       '<div class="wcard-expanded-stats">'+_stats+'</div>'+
+      _lastSection+
       _ss+
       _cueSection+
       '<div class="wcard-expanded-actions">'+
@@ -2084,7 +2100,7 @@ function renderCard(w,dim,dateStr){const ds=dateStr||(new Date().toISOString().s
         '<button class="caction del" onclick="delW(\''+w.id+'\')" title="Remove">&#10005;</button>'+
       '</div>'+
     '</div>'+
-    '<span class="wcard-expand-hint">hold to expand</span>'+
+    '<span class="wcard-expand-hint">tap to expand</span>'+
     '</div>'+
   '</div>';
 })();}
