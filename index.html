@@ -594,8 +594,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="header-inner">
     <div class="logo">
       <h1>Hyrox <span>Training</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 89</div>
-      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 89</strong></p>
+      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 90</div>
+      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 90</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -620,7 +620,7 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 <main id="mainContent"></main>
 <div class="drawer-scrim" id="drawerScrim" style="display:none"></div>
 
-<div class="day-log-overlay" id="dayLogOverlay">
+<div class="day-log-overlay" id="dayLogOverlay" onpointerdown="dlPressStart(event)">
   <div class="dl-header">
     <button class="dl-back" onclick="closeDayLog()">← Back</button>
     <div class="dl-header-info">
@@ -1707,7 +1707,7 @@ function cardTap(e,id){
   if(e.target.closest('.wcard-expanded-actions,.wcard-expanded-close,button,a'))return;
   const card=document.querySelector(`[data-id="${id}"]`);
   if(!card)return;
-  if(card.classList.contains('expanded'))return; // already open — use close bar / overlay to collapse
+  if(card.classList.contains('expanded')){collapseCard();return;} // tap anywhere on the open card to close it
   if(_expandedCard)collapseCard();
   // Set hero border colour from phase
   const phaseColor=getComputedStyle(card).borderLeftColor;
@@ -2064,6 +2064,27 @@ function closeDayLog(){
   document.body.style.overflow='';
   dayLogState=null;
   render();
+}
+// Long-press anywhere on the open log (except on controls) to close it — mirrors
+// the long-press that opened it, so you do not have to reach the top-left Back.
+function dlPressStart(e){
+  if(e.target.closest('button,a,input,textarea,select,label,[contenteditable]'))return;
+  const sx=e.clientX,sy=e.clientY;
+  let t=setTimeout(function(){
+    t=null;
+    if(navigator.vibrate)navigator.vibrate(30);
+    closeDayLog();
+  },LP_DELAY);
+  function move(ev){if(Math.abs(ev.clientX-sx)>10||Math.abs(ev.clientY-sy)>10)cancel();}
+  function cancel(){
+    if(t){clearTimeout(t);t=null;}
+    document.removeEventListener('pointermove',move);
+    document.removeEventListener('pointerup',cancel);
+    document.removeEventListener('pointercancel',cancel);
+  }
+  document.addEventListener('pointermove',move);
+  document.addEventListener('pointerup',cancel,{once:true});
+  document.addEventListener('pointercancel',cancel,{once:true});
 }
 const SKIP_REASONS_DAY=[
   {id:'illness',emoji:'🤒',label:'Illness'},
