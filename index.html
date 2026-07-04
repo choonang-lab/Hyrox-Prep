@@ -582,7 +582,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .chip.sets{background:var(--surface2);border-color:var(--border2);color:var(--text2);}
 .wcard.expanded{background:var(--bg);}
 .day-log-btn{border:1.5px solid var(--text);background:var(--surface);color:var(--text);}
-.day-log-btn:hover{background:#E4FF3A;border-color:#E4FF3A;color:#16171A;}
+.day-log-btn:hover,.day-log-btn:active{background:#E4FF3A;border-color:#E4FF3A;color:#16171A;}
+.day-log-btn.all-done{background:#16171A;border-color:#16171A;color:#E4FF3A;}
 /* Uniform card width: let flex items shrink and long chips wrap instead of overflowing */
 .wcard{min-width:0;}
 .card-chips{min-width:0;}
@@ -597,8 +598,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="header-inner">
     <div class="logo">
       <h1>Hyrox <span>Training</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 93</div>
-      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 93</strong></p>
+      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 94</div>
+      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 94</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
