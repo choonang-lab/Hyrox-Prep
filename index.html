@@ -587,6 +587,9 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .wcard{min-width:0;}
 .card-chips{min-width:0;}
 .chip{white-space:normal;overflow-wrap:break-word;}
+/* No accidental text selection from the long-press-to-close gesture */
+.day-log-overlay{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
+.day-log-overlay input,.day-log-overlay textarea{-webkit-user-select:text;user-select:text;}
 </style>
 </head>
 <body>
@@ -594,8 +597,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="header-inner">
     <div class="logo">
       <h1>Hyrox <span>Training</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 92</div>
-      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 92</strong></p>
+      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 93</div>
+      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 93</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -2090,13 +2093,17 @@ function dlPressStart(e){
 // After a long-press-close the finger is still down over the main page; drop a
 // transparent full-screen shield that swallows the trailing release/click so it
 // does not activate a card or button, then remove it once the finger lifts.
+function clearSelection(){var s=window.getSelection?window.getSelection():null;if(s&&s.removeAllRanges){try{s.removeAllRanges();}catch(e){}}}
 function shieldTaps(){
+  clearSelection();
   const s=document.createElement('div');
-  s.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;z-index:99999;background:transparent;touch-action:none;';
+  s.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;z-index:99999;background:transparent;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;';
   const swallow=function(ev){ev.stopPropagation();ev.preventDefault();};
-  ['pointerdown','pointerup','pointermove','click','touchstart','touchend','mousedown','mouseup'].forEach(function(t){s.addEventListener(t,swallow,{passive:false,capture:true});});
+  ['pointerdown','pointerup','pointermove','click','touchstart','touchend','mousedown','mouseup','selectstart','contextmenu'].forEach(function(t){s.addEventListener(t,swallow,{passive:false,capture:true});});
+  const blockSel=function(ev){ev.preventDefault();};
+  document.addEventListener('selectstart',blockSel,true);
   let done=false;
-  const kill=function(){if(done)return;done=true;s.remove();};
+  const kill=function(){if(done)return;done=true;document.removeEventListener('selectstart',blockSel,true);clearSelection();s.remove();};
   s.addEventListener('pointerup',function(){setTimeout(kill,90);},{once:true});
   s.addEventListener('touchend',function(){setTimeout(kill,90);},{once:true});
   setTimeout(kill,1000);
