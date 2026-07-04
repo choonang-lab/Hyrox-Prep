@@ -198,7 +198,7 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .day-col{border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg);transition:background 0.12s;}
 .day-col:last-child{border-right:none;}
 
-.day-head{padding:10px 10px 8px;background:var(--surface);border-bottom:1px solid var(--border);border-top:3px solid transparent;position:sticky;top:109px;z-index:10;}
+.day-head{padding:10px 6px 8px;background:var(--surface);border-bottom:1px solid var(--border);border-top:3px solid transparent;position:sticky;top:109px;z-index:10;}
 .day-name{font-size:0.78rem;font-weight:700;letter-spacing:-0.01em;color:var(--text);}
 .day-date{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--muted);margin-top:1px;}
 .day-date.today{color:var(--accent);font-weight:500;}
@@ -583,6 +583,10 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .wcard.expanded{background:var(--bg);}
 .day-log-btn{border:1.5px solid var(--text);background:var(--surface);color:var(--text);}
 .day-log-btn:hover{background:#E4FF3A;border-color:#E4FF3A;color:#16171A;}
+/* Uniform card width: let flex items shrink and long chips wrap instead of overflowing */
+.wcard{min-width:0;}
+.card-chips{min-width:0;}
+.chip{white-space:normal;overflow-wrap:break-word;}
 </style>
 </head>
 <body>
@@ -590,8 +594,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="header-inner">
     <div class="logo">
       <h1>Hyrox <span>Training</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 88</div>
-      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 88</strong></p>
+      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 89</div>
+      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 89</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -1856,7 +1860,7 @@ function renderDayCol(weekNum,dayName){const date=getDate(weekNum,dayName);const
   const deferredBanner=deferredIn.length>0?'<div class="deferred-banner">\uD83D\uDCCB '+deferredIn.length+' exercise'+(deferredIn.length>1?'s':'')+' deferred here: '+deferredIn.map(function(x){return x.movement;}).join(', ')+'</div>':'';
   let logLabel=doneCount>0?`✓ Log (${doneCount}/${dw.length})`:`Log day`;
   if(skipCount>0)logLabel+=` · ${skipCount}S`;
-  if(partialCount>0)logLabel+=` · ${partialCount}◑`;const allDone=dw.length>0&&(doneCount+skipCount+partialCount)===dw.length;const dayTotal=dw.length?getDayTotal(weekNum,dayName):0;const hrs=Math.floor(dayTotal/60);const mins=dayTotal%60;const totalStr=dayTotal>=60?(mins>0?`${hrs}h ${mins}m`:`${hrs}h`):dayTotal>0?`${dayTotal}m`:'';const timeTag=totalStr?`<span style="font-size:0.5rem;font-weight:600;color:var(--muted);background:var(--surface2);border:1px solid var(--border2);border-radius:4px;padding:1px 5px;margin-left:5px;vertical-align:middle;">⏱ ${totalStr}</span>`:'';return`<div class="day-col ${today?'is-today':''}" data-week="${weekNum}" data-day="${dayName}"><div class="day-head" style="border-top-color:${phaseColor};"><div class="day-name" style="${past?'opacity:0.5':''}">${dayName}${timeTag}</div><div class="day-date ${today?'today':''}">${fmtDate(date)}${today?' · Today':''}</div>${phase?`<span class="day-phase" style="color:${phaseColor}">${phase}</span>`:''}<button class="day-add-btn" onclick="openAddModal(${weekNum},'${dayName}')">+ Add</button>${dw.length?`<button class="day-log-btn${allDone?' all-done':''}" onclick="openDayLog(${weekNum},'${dayName}')">${logLabel}</button>`:''}</div><div class="day-cards">${deferredBanner}${cardsHTML}<div style="flex:1;min-height:30px;" data-drop="${weekNum}:${dayName}"></div></div></div>`;}
+  if(partialCount>0)logLabel+=` · ${partialCount}◑`;const allDone=dw.length>0&&(doneCount+skipCount+partialCount)===dw.length;const dayTotal=dw.length?getDayTotal(weekNum,dayName):0;const hrs=Math.floor(dayTotal/60);const mins=dayTotal%60;const totalStr=dayTotal>=60?(mins>0?`${hrs}h ${mins}m`:`${hrs}h`):dayTotal>0?`${dayTotal}m`:'';const timeTag=totalStr?`<span style="font-size:0.5rem;font-weight:600;color:var(--muted);background:var(--surface2);border:1px solid var(--border2);border-radius:4px;padding:1px 5px;margin-left:5px;vertical-align:middle;">⏱ ${totalStr}</span>`:'';return`<div class="day-col ${today?'is-today':''}" data-week="${weekNum}" data-day="${dayName}"><div class="day-head" style="border-top-color:${phaseColor};"><div class="day-name" style="${past?'opacity:0.5':''}">${dayName}${timeTag}</div><div class="day-date ${today?'today':''}">${fmtDate(date)}${today?' · Today':''}</div>${phase?`<span class="day-phase" style="color:${phaseColor}">${phase}</span>`:''}${dw.length?`<button class="day-log-btn${allDone?' all-done':''}" onclick="openDayLog(${weekNum},'${dayName}')">${logLabel}</button>`:''}</div><div class="day-cards">${deferredBanner}${cardsHTML}<div style="flex:1;min-height:30px;" data-drop="${weekNum}:${dayName}"></div></div></div>`;}
 
 function getExIcon(movement){const m=(movement||'').toLowerCase();
 const SVG={
@@ -2010,7 +2014,6 @@ function renderCard(w,dim,dateStr){const ds=dateStr||(new Date().toISOString().s
       '</div>'+
     '</div>'+
     '<span class="wcard-expand-hint">tap · hold to log</span>'+
-    '</div>'+
   '</div>';
 })();}
 
