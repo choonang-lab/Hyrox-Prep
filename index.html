@@ -594,8 +594,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="header-inner">
     <div class="logo">
       <h1>Hyrox <span>Training</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 91</div>
-      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 91</strong></p>
+      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 92</div>
+      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 92</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -3225,6 +3225,22 @@ document.addEventListener('click',function(e){var w=document.querySelector('.hme
 /* Race-day countdown chip */
 function updateRaceCountdown(){var el=document.getElementById('raceCountdown');if(!el)return;var race=new Date('2026-11-27T00:00:00');var now=new Date();var days=Math.ceil((race-now)/86400000);if(days<0){el.textContent='🏁 race day';return;}var wk=Math.floor(days/7),d=days%7;el.textContent='⏳ '+wk+'w '+d+'d to race';}
 updateRaceCountdown();
+/* Pin the week-nav bar (and main content) to the header's ACTUAL height, so a
+   taller header — e.g. with the race pill, or a device notch — never overlaps
+   the week bar below. Replaces the old hardcoded 50/65/128px offsets. */
+function syncHeaderOffsets(){
+  var h=document.querySelector('.site-header'), nav=document.querySelector('.week-nav-wrap'), main=document.getElementById('mainContent');
+  if(!h||!nav)return;
+  var hh=Math.round(h.getBoundingClientRect().height);
+  nav.style.top=hh+'px';
+  var fixed=getComputedStyle(h).position==='fixed';
+  if(main) main.style.paddingTop = fixed ? (hh+Math.round(nav.getBoundingClientRect().height))+'px' : '';
+}
+window.addEventListener('resize',syncHeaderOffsets);
+window.addEventListener('orientationchange',syncHeaderOffsets);
+window.addEventListener('load',syncHeaderOffsets);
+syncHeaderOffsets();
+setTimeout(syncHeaderOffsets,300);
 </script>
 </body>
 </html>
