@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#1D4E89">
+<meta name="theme-color" content="#17181C">
 <link rel="manifest" href="manifest.json">
 <title>Hyrox Plan v28</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#EFEDE8;--surface:#FFFFFF;--surface2:#F2F1EE;--border:#E5E3DD;--border2:#D0CEC8;
-  --text:#1C1B18;--text2:#4A4845;--muted:#6E6C66;--muted2:#8E8C86;
-  --accent:#1A6B45;--accent-bg:#E8F4EE;--green:#1A6B45;--green-bg:#E8F4EE;
-  --amber:#92560A;--amber-bg:#FBF2E6;--red:#9B2C2C;--red-bg:#FBEAEA;
-  --p-crucible:#9B2C2C;--p-flush:#0D6E6E;--p-armor:#1D4E89;--p-pull:#6B3FA0;
-  --p-uni:#1A6B45;--p-dvsn:#2563EB;--p-rest:#6B6860;--p-aerobic:#0D6E6E;
-  --p-speed:#92560A;--p-quar:#B45309;--p-ski:#1E40AF;--p-travel:#6B6860;
+  --bg:#17181C;--surface:#212228;--surface2:#292A30;--border:#34353C;--border2:#42434B;
+  --text:#F2F2F0;--text2:#B8B9BE;--muted:#85868C;--muted2:#6A6B71;
+  --accent:#E4FF3A;--accent-bg:#26290F;--green:#35D07A;--green-bg:#152A1E;
+  --amber:#E0A93A;--amber-bg:#2C2410;--red:#F26D6D;--red-bg:#2E1A1A;
+  --p-crucible:#F26D6D;--p-flush:#2BC4C4;--p-armor:#4D8FE0;--p-pull:#B98CE8;
+  --p-uni:#35D07A;--p-dvsn:#5B9BFF;--p-rest:#8A8B91;--p-aerobic:#2BC4C4;
+  --p-speed:#E0A93A;--p-quar:#F0902E;--p-ski:#5B9BFF;--p-travel:#8A8B91;
   --radius:10px;--radius-sm:6px;
   --shadow-sm:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.05);
   --shadow:0 4px 16px rgba(0,0,0,0.08),0 1px 4px rgba(0,0,0,0.05);
@@ -571,6 +571,30 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .copy-modal-actions{display:flex;gap:8px;}
 .copy-modal-btn{flex:1;padding:11px;border:1.5px solid var(--border2);background:var(--surface2);color:var(--text2);border-radius:7px;cursor:pointer;font-size:0.78rem;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;}
 .copy-modal-btn.primary{background:var(--accent);border-color:var(--accent);color:white;}
+/* ═══ Hyrox dark theme adjustments (charcoal + acid yellow) ═══ */
+.hbtn.primary,.hbtn.success{color:#121316;}
+.hbtn.primary:hover{background:#C9E82F;}
+.hbtn.success:hover{background:#2BB86A;}
+.ex-icon{background:var(--surface2);}
+.wcard.expanded{background:var(--bg);}
+.wcard.st-done{background:#152A1E;}
+.wcard.st-skip{background:#1E1F24;}
+.wcard.st-partial{background:#2A2410;}
+.wcard.st-deferred{background:#14243A;}
+.wcard.past-done-card{opacity:0.6;}
+.chip.weight{background:var(--amber-bg);border-color:#5A4A1E;color:var(--amber);}
+.chip.sets{background:var(--accent-bg);border-color:#4C521C;color:var(--accent);}
+.chip.superset{background:#241B33;border-color:#4A3A66;color:#C6A6F0;}
+.sbadge-done{background:var(--green);color:#0E1A12;}
+.sbadge-partial{background:var(--amber);color:#1E1608;}
+.sbadge-carry{background:#14243A;color:#8CBBFF;border-color:#2A466E;}
+.deferred-banner{background:#14243A;border-color:#2A466E;color:#8CBBFF;}
+.dl-skip-reason.active{background:var(--amber);color:#1E1608;}
+.race-chip{border-color:#4C521C;}
+.storage-banner{background:var(--amber-bg);color:var(--amber);border-color:#5A4A1E;}
+.storage-banner button{color:var(--amber) !important;border-color:#5A4A1E !important;background:transparent !important;}
+.wcard-expanded-ss{background:#241B33 !important;border-color:#4A3A66 !important;color:#C6A6F0;}
+.toast{background:var(--surface2);color:var(--text);border:1px solid var(--border2);}
 </style>
 </head>
 <body>
@@ -578,8 +602,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="header-inner">
     <div class="logo">
       <h1>Hyrox <span>Training</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 86</div>
-      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 86</strong></p>
+      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 87</div>
+      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 87</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">

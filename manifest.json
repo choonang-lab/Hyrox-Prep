@@ -6,8 +6,8 @@
   "scope": "/Hyrox-Prep/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "theme_color": "#1D4E89",
-  "background_color": "#F7F6F3",
+  "theme_color": "#17181C",
+  "background_color": "#17181C",
   "icons": [
     {
       "src": "icon-192.png",
