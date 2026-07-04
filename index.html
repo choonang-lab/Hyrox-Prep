@@ -594,8 +594,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="header-inner">
     <div class="logo">
       <h1>Hyrox <span>Training</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 90</div>
-      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 90</strong></p>
+      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 91</div>
+      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 91</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -2074,6 +2074,7 @@ function dlPressStart(e){
     t=null;
     if(navigator.vibrate)navigator.vibrate(30);
     closeDayLog();
+    shieldTaps();
   },LP_DELAY);
   function move(ev){if(Math.abs(ev.clientX-sx)>10||Math.abs(ev.clientY-sy)>10)cancel();}
   function cancel(){
@@ -2085,6 +2086,21 @@ function dlPressStart(e){
   document.addEventListener('pointermove',move);
   document.addEventListener('pointerup',cancel,{once:true});
   document.addEventListener('pointercancel',cancel,{once:true});
+}
+// After a long-press-close the finger is still down over the main page; drop a
+// transparent full-screen shield that swallows the trailing release/click so it
+// does not activate a card or button, then remove it once the finger lifts.
+function shieldTaps(){
+  const s=document.createElement('div');
+  s.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;z-index:99999;background:transparent;touch-action:none;';
+  const swallow=function(ev){ev.stopPropagation();ev.preventDefault();};
+  ['pointerdown','pointerup','pointermove','click','touchstart','touchend','mousedown','mouseup'].forEach(function(t){s.addEventListener(t,swallow,{passive:false,capture:true});});
+  let done=false;
+  const kill=function(){if(done)return;done=true;s.remove();};
+  s.addEventListener('pointerup',function(){setTimeout(kill,90);},{once:true});
+  s.addEventListener('touchend',function(){setTimeout(kill,90);},{once:true});
+  setTimeout(kill,1000);
+  document.body.appendChild(s);
 }
 const SKIP_REASONS_DAY=[
   {id:'illness',emoji:'🤒',label:'Illness'},
