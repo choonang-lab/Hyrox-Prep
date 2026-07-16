@@ -24,6 +24,31 @@
 - **Stations are the WEAKNESS** (bottom ~5–15%): biggest sinks **Wall Balls (~12:16), Sandbag Lunges (~10:00), Sled Pull (~7:27)** = ~57% of the gap to 1:25.
 - **His real run limiter = durability / the compromised-run "fade,"** not raw 5K speed. Trained via the Wednesday compromised tests, not by longer easy runs.
 
+### 3a. FULL 2026 race splits (pulled 2026-07-14 from hyresult, reconciles exactly to 1:46:34)
+Source: `hyresult.com/result/LR3MS4JI4B607D` · AG 50–54, **#24 in AG**, #782/1561 overall.
+- **Runs (8):** 3:57 · 5:26 · 5:47 · 5:38 · 5:50 · 5:35 · 5:40 · 6:04 = **43:57**
+- **Stations (8):** SkiErg 4:46 · Sled Push 4:51 · Sled Pull 7:26 · BBJ 5:20 · Row 5:31 · Farmers 2:41 · Sandbag 9:59 · Wall Balls 12:16 = **52:50**
+- **Roxzone:** **9:47** (entries escalate: 0:03/0:11/0:24/0:39/0:35 → **Farmers 1:33, Sandbag 1:40**)
+- 43:57 + 52:50 + 9:47 = 1:46:34 ✅
+
+**Segment vs the 1:35 model:** run 43:57 (model ~44:30 → **already 1:35-ready, needs NOTHING**) · roxzone 9:47 (~8:00, −1:45) · stations 52:50 (~42:30, **−10:20**). The entire 11:34 gap to 1:35 is stations + roxzone.
+
+**Improvement log — actual vs 1:35 target (ranked):** Wall Balls 12:16→8:00 (**−4:16**) · Sandbag 9:59→7:15 (**−2:44**) · Sled Pull 7:26→5:15 (**−2:11**) · Sled Push 4:51→3:45 (−1:06) · Row 5:31→5:05 (−0:26) · Farmers 2:41→2:15 (−0:26) · **SkiErg 4:46 and BBJ 5:20 are AT TARGET — no work needed.** Top 3 = 9:11 = ~86% of the station gap.
+
+### 3b. THE KEY INSIGHT — it is a DURABILITY problem, not a capacity problem
+- His **fresh** 100 wall balls = **6:01** (W13). A **1:15 reference athlete** (Yew Meng Tan, AG 40–44, 1:15:25, same race — `hyresult.com/result/LR3MS4JI4B63A0`) did **6:34 in-race**. **His fresh wall balls are FASTER than a 1:15 athlete under race fatigue.** He loses **6:15 to fatigue** at station 8.
+- Same pattern on the run: he ran **4:20** on a single compromised test km (W14) but averaged **5:43/km across 8 in-race**. Capacity is fine; expressing it at minute 94 is not.
+- → **Fresh volume is NOT the fix.** The Wednesday EMOM is deliberately slotted "legs fresh," which trains the thing he is already good at. The fix is **coupling stations to accumulated fatigue** = exactly Block 3's job. This raises Block 3's priority above everything else.
+- Reference-athlete pacing lesson: his runs post-opener were **4:11–4:20 (9s spread)**; ours drifted 5:26→6:04 (38s), off a 3:57 opener blowout. Roxzone: his never exceeded 0:50.
+
+### 3c. Post-W16 ramp (agreed 2026-07-14 — build at the W16/W17 calibration, NOT before)
+W16 is the deload; **W17–W20 (2B intensify) is where these ramp**, gated on post-deload recovery markers:
+1. **Wall balls under fatigue** (top lever) — introduce compromised/coupled WB, not just the fresh EMOM.
+2. **Sandbag lunges under fatigue** — adductor-gated as always.
+3. **Sled pull** — already reaching race weight 102kg by W15; hold there.
+4. **Roxzone discipline** — target every station entry <0:45 (~2 min, free, zero injury risk). Rehearse in any sim work.
+Do NOT pre-build W17–20 now: calibrate off W14/W15 logs + how he comes out of the W16 deload.
+
 ## 4. Injury guardrails (also in CLAUDE.md — apply to ANY change)
 - **Right adductor (recovering):** gates sandbag lunges, lunge/wall-ball combos, BBJ landings, lunge-to-run. Scale/skip if it flares.
 - **Knee:** gates wall balls and burpee broad jumps.
@@ -45,6 +70,16 @@
   - **No Hyrox event within reach Sep–Oct** → sims must be self-run/split using his equipment (sled/row/ski only ~2 days/wk); likely "sim across a week" rather than one session.
 
 ## 7. The continuity / calibration loop (how we work each week)
+
+> **REQUIRED OUTPUT FORMAT (agreed 2026-07-14).** Every **Sunday**, when the athlete sends the weekly logs, the FIRST deliverable is a **3-column table**, one row per exercise he logged:
+>
+> | Exercise | What I did | Tweak for next week (from the log) |
+> |---|---|---|
+> | e.g. Smith Front Squat | 50 top / 45×2 — "able to squat deeper on smith" | → 52.5 top / 47.5×2 (+2.5, all clean) |
+> | e.g. Row/Ski 2×1k | 4:26 / 4:25 — failed 2nd round | → cut to 1k + 250m (his call; engine failed) |
+>
+> Rules: one row **per logged exercise** (not per session); column 2 quotes his actual numbers/notes; column 3 is the **specific** prescribed change (or **HOLD** / **CUT**) with the one-line reason from his log. Present this table **before** any narrative, guardrails, or version work. Everything else (fatigue read, vitals, deploy) comes after.
+
 1. Athlete trains and **logs sessions on device** (status + notes per exercise).
 2. App exports a full-plan backup to **Google Drive**: filename `hyrox-backup-YYYY-MM-DD.json`, in his Drive root. Schema `{version, plan:[ {…entry…} ]}`.
 3. We **download the latest backup**, extract that week's logs, and **calibrate the next week** to actuals (respecting the guardrails: loads track logged working weights; conservative ramps; let logs drive increases).
