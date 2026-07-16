@@ -49,6 +49,23 @@ W16 is the deload; **W17–W20 (2B intensify) is where these ramp**, gated on po
 4. **Roxzone discipline** — target every station entry <0:45 (~2 min, free, zero injury risk). Rehearse in any sim work.
 Do NOT pre-build W17–20 now: calibrate off W14/W15 logs + how he comes out of the W16 deload.
 
+### 3d. W17+ re-orientation — LOCKED design principles (2026-07-14)
+**Frame (agreed):** 2 Hyrox-gym days only (realistic). Gym = sled + strength maintenance (day A) and compromised engine (day B). Wall balls done at HOME; sandbag PORTABLE. Running trimmed (see §3c). "Harder = SHARPER not MORE": re-orient toward **fatigued/compromised expression**, funded by trimming running, capped by recovery. Whole week is leg-dominant → **undulate emphasis week to week + deload every ~3–4 wk**; two monster leg days must never sit back-to-back. Wed (compromised engine → compromised wall balls, a half-sim) is the ONE hardest day; Thu (BSS/step-ups + sandbag) is the deliberate MODERATE counterweight.
+
+**WALL BALLS — LOCKED (weakness #1, −4:16):**
+- Gap is **DURABILITY, not capacity** — fresh 100 = 6:01 beats a 1:15 athlete's in-race 6:34. Do NOT train more fresh volume; train the wrecked state.
+- **Marquee = compromised**, stacked on Wednesday AFTER the compromised engine (run→ski/row/sled→run→wall balls). Wall balls done systemically wrecked = the station-8 scenario.
+- **Touches (max 3, distinct jobs):** (1) Wed compromised — durability, HARD; (2) EMOM — pacing/density, fresh-ish, MODERATE (can be made race-like by pre-running or cutting rest/raising reps); (3) OPTIONAL light skill/grease-the-groove dose (5 min, low reps, perfect depth + knee tracking) — **NOT a 3rd hard EMOM.**
+- **KNEE-GATED:** wrecked wall balls = form breaks first → **cap volume, stop on form not the clock.** Tally weekly knee load (Wed WB + EMOM + skill dose + any BBJ + running); the skill dose is the FIRST thing cut if knee/recovery complain.
+
+**SANDBAG LUNGES — LOCKED (weakness #2, −2:44):**
+- Gap is **fatigued expression + distance, NOT load.** **HOLD load at 22.5kg** (race 20kg + margin) — do NOT chase the current plan's 25kg overload; he still struggles at 22.5 fresh, loads track actual.
+- **Three touches:** (1) **Thu fresh distance-builder** after the BSS/step-up primer (priming validated — makes lunges feel easier) → 60→80→100m; (2) **Fri compromised** at race weight 20kg, broken across run intervals (run→20–40m→run) — the money session, lunging wrecked; (3) light **pattern-dose** 12.5kg 6–8/leg skill.
+- **Proposed volume trajectory (ADDUCTOR-GATED, calibrate off W15/W16 logs — target not commitment):** W16 deload 15kg×30m · W17 ~100m/wk (Thu 60 + Fri 40) · W18 ~140m (80+60) · W19 ~160–180m (100+60–80) · W20 taper ~40m. Block 3 consolidates at ~100m race-weight COMPROMISED.
+- **BIGGEST adductor gamble in the plan:** 45m/wk (W13) → ~160–180m/wk (W19) is a 3–4× ramp on the gated joint. **Hard stop:** any groin talk → cut Fri compromised FIRST, hold Thu, stop progressing distance. Ramp slows on any doubt.
+
+**Still to design (same method, later):** sled/engine day content, roxzone rehearsal, the running trim map (Fri intervals → convert/biweekly, long run 90→60, protect tempo + compromised tests). BSS/step-ups/glute-thrust = maintenance dose only (§ they live as the Thu sandbag primer + Mon activation).
+
 ## 4. Injury guardrails (also in CLAUDE.md — apply to ANY change)
 - **Right adductor (recovering):** gates sandbag lunges, lunge/wall-ball combos, BBJ landings, lunge-to-run. Scale/skip if it flares.
 - **Knee:** gates wall balls and burpee broad jumps.
