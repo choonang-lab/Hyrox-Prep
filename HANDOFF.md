@@ -64,13 +64,20 @@ Do NOT pre-build W17–20 now: calibrate off W14/W15 logs + how he comes out of 
 - **Proposed volume trajectory (ADDUCTOR-GATED, calibrate off W15/W16 logs — target not commitment):** W16 deload 15kg×30m · W17 ~100m/wk (Thu 60 + Fri 40) · W18 ~140m (80+60) · W19 ~160–180m (100+60–80) · W20 taper ~40m. Block 3 consolidates at ~100m race-weight COMPROMISED.
 - **BIGGEST adductor gamble in the plan:** 45m/wk (W13) → ~160–180m/wk (W19) is a 3–4× ramp on the gated joint. **Hard stop:** any groin talk → cut Fri compromised FIRST, hold Thu, stop progressing distance. Ramp slows on any doubt.
 
-**Still to design (same method, later):** sled/engine day content, roxzone rehearsal, the running trim map (Fri intervals → convert/biweekly, long run 90→60, protect tempo + compromised tests). BSS/step-ups/glute-thrust = maintenance dose only (§ they live as the Thu sandbag primer + Mon activation).
+**SLED — LOCKED (push −1:06, pull −2:11):** two touches across the 2 gym days, different jobs.
+- **Mon (fresh) = strength + technique.** Sled Push 3×50m building load → race 152kg; cue **GLUTE-DRIVE** (fixes the W13 calf cramp). Sled Pull **3×50m — his call to keep 3; set 3 is AUTO-REGULATED**: stop the instant the back murmurs or form drifts — set 3 is a conditional bonus, never a mandatory grind. Groove braced-hinge + leg-drive; **FILM the pull.** Strength maint (Smith FS + RDL) rides here alternate weeks only (keeps Mon from ballooning).
+- **Wed (compromised, inside the half-sim) = specificity.** run → 1×50m push (race wt) → run → 1×50m pull (race wt) → run → wall balls. Single sets = stations 2/3 exactly; pull as 1 set = no set-3 back point.
+- **Load progression:** Push → toward 152kg (calf/glute-drive gated). Pull → **HOLD 87.5–95kg; progress load ONLY once back is quiet + pattern locked on film.** Race 103kg is the target, NOT rushed — technique before load.
+- **Lower-back note (new, MINOR):** minor strain onsets at set 3 of the 50m pull — fatigue/dosing, not gross rounding. Managed by the set-3 auto-reg rule above; back is the pull VOLUME limiter. Escalate to physio only if it stops settling in a few days, sharpens, or radiates.
+
+**Still to design (same method, later):** engine-day fine detail + roxzone rehearsal, and the running trim map (Fri intervals → convert/biweekly, long run 90→60, protect tempo + compromised tests). BSS/step-ups/glute-thrust = maintenance dose only (they live as the Thu sandbag primer + Mon activation).
 
 ## 4. Injury guardrails (also in CLAUDE.md — apply to ANY change)
 - **Right adductor (recovering):** gates sandbag lunges, lunge/wall-ball combos, BBJ landings, lunge-to-run. Scale/skip if it flares.
 - **Knee:** gates wall balls and burpee broad jumps.
 - **Thoracic kyphosis:** cannot hold a free-bar front rack under load → front squat is **Smith-machine only**; free bar stays light for rack-skill. Do NOT progress the free front squat.
 - **Tempo runs HR-governed** (158–165 bpm, upper Z4, 0% incline); progress by DURATION not pace.
+- **Lower back (MINOR, monitor — new 2026-07-14):** minor strain onsets at set 3 of the 50m sled pull (fatigue/dosing, not gross rounding). Back is the pull VOLUME limiter → set 3 auto-regulated (stop on murmur/form drift, never grind), technique = braced hinge + leg drive, progress pull LOAD only once quiet. See §3d SLED. Escalate to physio only if it stops settling / sharpens / radiates.
 
 ## 5. Benchmarks (Benchmarks tab, recalibrated v84)
 - Recalibrated to **1:25-primary + 1:15-stretch**, with explicit **FRESH vs RACE(compromised)** station targets.
