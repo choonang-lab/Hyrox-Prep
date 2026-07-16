@@ -104,6 +104,29 @@ Do NOT pre-build W17–20 now: calibrate off W14/W15 logs + how he comes out of 
 
 **W17+ RE-ORIENTATION DESIGN = COMPLETE** (wall balls · lunges · sled · running trim · engine day · roxzone). Build W17–20 at the W16 deload calibration off real W14/W15 logs + post-deload recovery — NOT before. BSS/step-ups/glute-thrust stay maintenance-only (Thu sandbag primer + Mon activation).
 
+### 3e. AG-50-54 ELITE STATION TARGETS + testing routine (locked 2026-07-17)
+Two-year-confirmed from the Singapore AG 50-54 **top-5 medians** (2025 + 2026, `hyresult` — pulled the top 5 each year). His station gap to these is **~18 min and STABLE across both years** (2025 ~18:04, 2026 ~18:48); the **big-3 (sandbag/WB/sled pull) = ~75% of it**. These are real, age-appropriate targets hit by his actual peers — NOT 20-something elite times.
+
+| Station | AG-50-54 elite (NORTH STAR) | This-cycle (1:35 model) | His 2026 actual |
+|---|---|---|---|
+| SkiErg | ~4:40 | at target | 4:46 ✅ already there |
+| Farmers | ~1:34 | ~2:15 | 2:41 |
+| Row | ~4:35 | ~5:05 | 5:31 |
+| Burpee BJ | ~4:30 | ~5:30 | 5:20 (near) |
+| Sled Push | ~2:30 | ~3:45 | 4:51 |
+| **Sled Pull** | ~4:15 | ~5:15 | 7:26 (+3:11) |
+| **Wall Balls** | ~7:30 | ~8:00 | 12:16 (+4:46) |
+| **Sandbag Lunges** | ~4:20 | ~7:15 | 9:59 (+5:39) |
+
+**DIRECTIVE — actively PUSH him toward these (his explicit request 2026-07-17):** every weekly review and calibration, frame the big-3 station progressions against **closing the gap to these targets**, and **surface the current gap-to-target each review**. Near-term this-cycle target = the 1:35-model column; NORTH STAR = the AG-elite column (multi-year). Hold the line — do NOT let "good enough" drift set in on sandbag/WB/sled pull. Note: sandbag going from ~10:00 → 4:20 is a MULTI-YEAR arc, gated hard by the adductor; the honest this-cycle win is the 1:35-model numbers.
+
+**TESTING ROUTINE (recovery-limited → test sparingly, mostly fold into existing sessions):**
+1. **Passive weekly:** TIME the compromised big-3 reps INSIDE the Wed engine day (no added load) → running trend vs target. This is the primary progress signal (compromised = the real gap).
+2. **Fresh benchmark at each deload week (~every 3-4 wk, fresh + low-volume):** one rotating big-3 station fresh-for-time — Sandbag 100m@20kg / Wall Balls 100-for-time / Sled Pull 50m@race-wt — vs its AG target. Measures raw capacity trend cleanly.
+3. **Block-boundary battery (W16 deload · W20 exit · ~W24 · ~W29 sim):** big-3 FRESH + COMPROMISED + the secondaries (push/row/farmers/BBJ) once; log all gaps-to-target, recalibrate.
+4. **Metric hierarchy:** COMPROMISED times = primary (closes the 18-min gap); FRESH times = secondary (capacity). Track both against the AG targets.
+5. **Test guardrails:** skip any test when RHR/HRV flag run-down; sandbag/WB tests are adductor/knee-gated → a joint flare = FAILED test, redo when healthy, never push through for a number.
+
 ## 4. Injury guardrails (also in CLAUDE.md — apply to ANY change)
 - **Right adductor (recovering):** gates sandbag lunges, lunge/wall-ball combos, BBJ landings, lunge-to-run. Scale/skip if it flares.
 - **Knee:** gates wall balls and burpee broad jumps.
