@@ -35,6 +35,20 @@ Source: `hyresult.com/result/LR3MS4JI4B607D` · AG 50–54, **#24 in AG**, #782/
 
 **Improvement log — actual vs 1:35 target (ranked):** Wall Balls 12:16→8:00 (**−4:16**) · Sandbag 9:59→7:15 (**−2:44**) · Sled Pull 7:26→5:15 (**−2:11**) · Sled Push 4:51→3:45 (−1:06) · Row 5:31→5:05 (−0:26) · Farmers 2:41→2:15 (−0:26) · **SkiErg 4:46 and BBJ 5:20 are AT TARGET — no work needed.** Top 3 = 9:11 = ~86% of the station gap.
 
+**2025 race baseline (pulled 2026-07-14, `hyresult.com/result/LR3MS4JI42AD24`, reconciles to 1:45:55; AG 50–54, #29):**
+- Runs 41:13 · Stations 53:10 · Roxzone 11:32.
+- Stations 2025: SkiErg 4:53 · Sled Push 4:16 · Sled Pull 6:48 · BBJ 5:59 · Row 5:23 · Farmers 2:28 · Sandbag 10:34 · Wall Balls 12:49.
+- **Two-race read (2025→2026):** total 1:45:55→1:46:34 (+39s). Runs +2:44, stations −0:20 (flat), roxzone **−1:45 (improved)**.
+
+**IMPORTANT — environment-confounded, do NOT read as regression (athlete confirmed):**
+- The **2026 run being +2:44 slower is ENVIRONMENTAL** (warmer venue + heat), not fitness loss. His TRUE run ceiling is 2025's **41:13 — already inside the 1:35 model (~44:30). Running is emphatically not the problem.**
+- The **2026 sleds being slower (push +0:35, pull +0:38) is FLOORING** (2026 poor surface; sled times are floor-dependent) — a surface artifact, not a strength regression.
+- The first Hyrox run is a **short km in both races** (corral start) → the ~4:00 opener is a distance artifact, NOT a hot start. No pacing-error problem; post-opener runs were stable (~5:05 in 2025).
+
+**What SURVIVES the two-race comparison (env-independent, genuinely actionable):**
+- **Roxzone late-station ENTRIES are a 2-year behavioural leak** — Farmers-In 1:38 (2025) / 1:33 (2026) and Sandbag-In 1:48 (2025) / 1:40 (2026); every other transition 0:03–0:55. Transitions are unaffected by heat/floor → this is real. ~3:15 of walk-in on two stations, both years. (He HAS improved overall roxzone 11:32→9:47, mostly on exits — the two entries are the stubborn remainder.) → drives the §3d roxzone rehearsal (attack farmers + sandbag entries).
+- **Worst-3 stations identical both years:** Wall Balls, Sandbag, Sled Pull. Priority ranking confirmed across two independent races.
+
 ### 3b. THE KEY INSIGHT — it is a DURABILITY problem, not a capacity problem
 - His **fresh** 100 wall balls = **6:01** (W13). A **1:15 reference athlete** (Yew Meng Tan, AG 40–44, 1:15:25, same race — `hyresult.com/result/LR3MS4JI4B63A0`) did **6:34 in-race**. **His fresh wall balls are FASTER than a 1:15 athlete under race fatigue.** He loses **6:15 to fatigue** at station 8.
 - Same pattern on the run: he ran **4:20** on a single compromised test km (W14) but averaged **5:43/km across 8 in-race**. Capacity is fine; expressing it at minute 94 is not.
