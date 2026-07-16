@@ -127,6 +127,8 @@ Two-year-confirmed from the Singapore AG 50-54 **top-5 medians** (2025 + 2026, `
 4. **Metric hierarchy:** COMPROMISED times = primary (closes the 18-min gap); FRESH times = secondary (capacity). Track both against the AG targets.
 5. **Test guardrails:** skip any test when RHR/HRV flag run-down; sandbag/WB tests are adductor/knee-gated → a joint flare = FAILED test, redo when healthy, never push through for a number.
 
+**SANDBAG baseline/re-test protocol (his Q 2026-07-17):** at **race weight 20kg** (NOT 22.5), **fresh** (ideally the W16 deload slot). Capture TWO safe numbers — (a) **unbroken max distance**: lunge to the FIRST genuine break, then STOP (do not grind past — that is where the adductor gets hurt); (b) **100m for time with PLANNED breaks** (pre-decide a break every ~20-25m), recording total time + break count. Do NOT do a max 100m unbroken-or-bust grind — he is built to ~45m, so that is pure adductor risk with low info value. Form-break/adductor twinge = effort over. AG-elite ~4:20 (mostly unbroken); his honest first number will likely be ~7-10 min with breaks — that is FINE, it is the baseline to beat. Reduced-weight lunging = the BUILD (pattern dose), NOT the test — keep the test at race weight so it tracks the real thing.
+
 ## 4. Injury guardrails (also in CLAUDE.md — apply to ANY change)
 - **Right adductor (recovering):** gates sandbag lunges, lunge/wall-ball combos, BBJ landings, lunge-to-run. Scale/skip if it flares.
 - **Knee:** gates wall balls and burpee broad jumps.
