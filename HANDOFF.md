@@ -70,7 +70,25 @@ Do NOT pre-build W17–20 now: calibrate off W14/W15 logs + how he comes out of 
 - **Load progression:** Push → toward 152kg (calf/glute-drive gated). Pull → **progress toward race weight 103kg** (athlete wants race-weight specificity — NO fixed 95kg cap). Load and volume both tax the back, so do not max both at once: (a) the **Wed compromised SINGLE (1×50m) is the primary race-weight exposure** — no set-3 volume risk, push race weight there FIRST; (b) on **Mon 3×50m, as load climbs the set-3 auto-reg tightens / drop to 2 sets** — 2 clean sets at higher load is a win, not a miss. Back stays the GOVERNOR: quiet → keep climbing (103 and into overload); flares as load rises → LOAD backs off.
 - **Lower-back note (new, MINOR):** minor strain onsets at set 3 of the 50m pull — fatigue/dosing, not gross rounding. Managed by the set-3 auto-reg rule above; back is the pull VOLUME limiter. Escalate to physio only if it stops settling in a few days, sharpens, or radiates.
 
-**Still to design (same method, later):** engine-day fine detail + roxzone rehearsal, and the running trim map (Fri intervals → convert/biweekly, long run 90→60, protect tempo + compromised tests). BSS/step-ups/glute-thrust = maintenance dose only (they live as the Thu sandbag primer + Mon activation).
+**RUNNING TRIM MAP — LOCKED:** running is 1:35-ready (43:57 vs ~44:30 model) → drop to minimum effective dose; freed recovery FUNDS the station work (reallocate, do not add).
+- **Tue Tempo:** KEEP (~25–30 min, HR-gov 158–165; do NOT chase 35) — threshold = the race run demand, most specific.
+- **Wed compromised:** becomes the ENGINE DAY half-sim (below); Test A/B drop to **periodic checkpoints** (do not run full tests + half-sim same week).
+- **Fri 800m intervals:** CONVERT → run + sandbag lunges (compromised). VO2 = least-specific + most recovery-expensive, and speed is not his limiter (ran 4:20).
+- **Sun long run:** 90 → **60 min** (race never runs 90 continuous; frees Sun leg-freshness).
+- Net ~30km → **~22–25km/wk**; composition flips VO2-heavy → threshold + compromised-durability. Keep the aerobic base (long-60 + compromised volume — do not cut to zero). Optional speed insurance: 4–6×100m strides biweekly, cheap.
+
+**ENGINE DAY (Wed) — LOCKED:** the weekly HALF-SIM, durability centerpiece + hardest day.
+- **4 run→station rounds, priority-weighted, ~45–55 min:** R1 run 600–800m → SkiErg 500–1000m; R2 run → Sled Push 1×50m (race wt); R3 run → Sled Pull 1×50m (race wt, up to 103); R4 FINISHER run → compromised Wall Balls (money set, most wrecked).
+- **Rules:** wall balls ALWAYS last (station-8 rehearsal); sled = compromised singles (back-safe); Row swaps Ski alternate weeks; runs @ threshold, HR-aware. Progression W17→20: runs → 1km, add a 5th round, tighten transitions, more WB volume — recovery-gated.
+- HALF-sim, NOT a full sim (full sims stay capped at 2, Block 3–4).
+- **Stacks ALL gated joints** (pull=back, WB=knee) under fatigue → within-session auto-reg applies hardest; drop a round when in doubt.
+- **Logistics:** wall balls are done at HOME → ideally get a ball AT the gym so round 4 stays continuous; else do WB immediately post-gym (accept minor fatigue dissipation).
+
+**ROXZONE REHEARSAL — LOCKED:** a LAYER on the engine day (+ any sim), not a separate session. Race bled ~2 free min; late entries blew out (Farmers-In 1:33, Sandbag-In 1:40 vs 0:03–0:39 early).
+- **Time every transition, target <0:45.** Rehearse it **FATIGUED** (rounds 3–4 — where it blows out), not fresh. Mental reframe: roxzone = dead clock, NOT recovery (standing 60s barely drops HR, costs a full minute); cue "walk with intent, enter, start." Attack the known-slow entries (farmers, sandbag).
+- Optional once/block: a dedicated transition drill (rapid run→station changeovers, minimal station work).
+
+**W17+ RE-ORIENTATION DESIGN = COMPLETE** (wall balls · lunges · sled · running trim · engine day · roxzone). Build W17–20 at the W16 deload calibration off real W14/W15 logs + post-deload recovery — NOT before. BSS/step-ups/glute-thrust stay maintenance-only (Thu sandbag primer + Mon activation).
 
 ## 4. Injury guardrails (also in CLAUDE.md — apply to ANY change)
 - **Right adductor (recovering):** gates sandbag lunges, lunge/wall-ball combos, BBJ landings, lunge-to-run. Scale/skip if it flares.
