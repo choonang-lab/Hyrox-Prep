@@ -40,6 +40,9 @@ Source: `hyresult.com/result/LR3MS4JI4B607D` · AG 50–54, **#24 in AG**, #782/
 - Stations 2025: SkiErg 4:53 · Sled Push 4:16 · Sled Pull 6:48 · BBJ 5:59 · Row 5:23 · Farmers 2:28 · Sandbag 10:34 · Wall Balls 12:49.
 - **Two-race read (2025→2026):** total 1:45:55→1:46:34 (+39s). Runs +2:44, stations −0:20 (flat), roxzone **−1:45 (improved)**.
 
+**CRITICAL TIMELINE — do NOT read the two races as a year of training (corrected 2026-07-17):** race 1 = **last week Nov 2025**, race 2 = **last week Apr 2026** → only **5 months apart**, and he took a **1.5-month break** between them = **~3.5 months of actual training**. (Corroborated: hyresult labels BOTH races **season 8** — `s8-2025-singapore-expo` + `s8-2026-singapore`.) Any "his times did not move in a year / stagnation" reading is WRONG.
+**Environment-adjusted he clearly IMPROVED:** strip the heat off the runs (−2:44) and the poor floor off the sleds (−1:13) → **~1:42:37 vs 1:45:55 = ~3:18 better in ~3.5 months.** And his **non-sled stations moved −1:33** (sandbag −0:35, WB −0:33, BBJ −0:39, SkiErg −0:07; Row +0:08, Farmers +0:13) — WITHOUT any of the coupling/durability work now designed. **The stations DO respond**; the re-orientation is aiming a better stimulus at something already inching, not at an immovable object.
+
 **IMPORTANT — environment-confounded, do NOT read as regression (athlete confirmed):**
 - The **2026 run being +2:44 slower is ENVIRONMENTAL** (warmer venue + heat), not fitness loss. His TRUE run ceiling is 2025's **41:13 — already inside the 1:35 model (~44:30). Running is emphatically not the problem.**
 - The **2026 sleds being slower (push +0:35, pull +0:38) is FLOORING** (2026 poor surface; sled times are floor-dependent) — a surface artifact, not a strength regression.
@@ -105,7 +108,8 @@ Do NOT pre-build W17–20 now: calibrate off W14/W15 logs + how he comes out of 
 **W17+ RE-ORIENTATION DESIGN = COMPLETE** (wall balls · lunges · sled · running trim · engine day · roxzone). Build W17–20 at the W16 deload calibration off real W14/W15 logs + post-deload recovery — NOT before. BSS/step-ups/glute-thrust stay maintenance-only (Thu sandbag primer + Mon activation).
 
 ### 3e. AG-50-54 ELITE STATION TARGETS + testing routine (locked 2026-07-17)
-Two-year-confirmed from the Singapore AG 50-54 **top-5 medians** (2025 + 2026, `hyresult` — pulled the top 5 each year). His station gap to these is **~18 min and STABLE across both years** (2025 ~18:04, 2026 ~18:48); the **big-3 (sandbag/WB/sled pull) = ~75% of it**. These are real, age-appropriate targets hit by his actual peers — NOT 20-something elite times.
+Confirmed across BOTH races from the Singapore AG 50-54 **top-5 medians** (Nov-2025 + Apr-2026, `hyresult` — pulled the top 5 each year). His station gap to these measured **~18 min at both races** (2025 ~18:04, 2026 ~18:48); the **big-3 (sandbag/WB/sled pull) = ~75% of it**. These are real, age-appropriate targets hit by his actual peers — NOT 20-something elite times.
+**Do NOT read that repeated ~18 min as stagnation** — the races are only 5 months apart with a 1.5-month break between (~3.5 months training), and environment-adjusted he improved ~3:18 (see §3a timeline note). The gap is real and large; the trend is positive.
 
 | Station | AG-50-54 elite (NORTH STAR) | This-cycle (1:35 model) | His 2026 actual |
 |---|---|---|---|
