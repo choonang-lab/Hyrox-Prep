@@ -150,7 +150,11 @@ Confirmed across BOTH races from the Singapore AG 50-54 **top-5 medians** (Nov-2
 **The fresh number is the DIAGNOSTIC — it settles capacity vs durability per station:** fresh close to his in-race time → **capacity-dominant** (barely better fresh than wrecked); fresh much faster than in-race → **durability-dominant**. Build W17-20 off these four numbers, per station — do NOT pre-decide the capacity/durability split by theory.
 
 ## 4. Injury guardrails (also in CLAUDE.md — apply to ANY change)
-- **Right adductor (recovering):** gates sandbag lunges, lunge/wall-ball combos, BBJ landings, lunge-to-run. Scale/skip if it flares.
+- **Right adductor (recovering — GOOD progress as of 2026-07-17):** gates sandbag lunges, lunge/wall-ball combos, BBJ landings, lunge-to-run. Scale/skip if it flares.
+  - **Status 2026-07-17:** long-lever Copenhagen = only a **slight, very mild twinge** (≈ GATE 2, but not yet silent/"pain-free"); dynamic version more strain (but that exercise is hard regardless). Close to recovered, NOT cleared.
+  - **Do NOT lighten the adductor rehab yet — TRANSITION it, do not drop it.** Same exercises (Copenhagen, eccentric adductor slide, loaded lateral lunge), new job: rehab → **prep/insurance that protects the sandbag ramp** (eccentric adductor strength is the best protector against exactly the lunge loading coming). Keep the frequency THROUGH the W16 sandbag baseline + the W17+ 45→100m ramp — that ramp is the biggest adductor load in the plan, so dropping the work right as you load it hardest is when strains recur. Timing note: he wants to lighten "soon"; the honest answer is AFTER the ramp is tolerated, not before.
+  - **CLEARANCE = asymptomatic under LOADED sandbag (GATE 3 = 60m @20kg pain-free, then the 100m build) DURING and NEXT-DAY — not a plank twinge.** The Copenhagen shows healing; the loaded lunge + next-day response is what actually clears him. Only then drop to true maintenance.
+  - Not a medical assessment — gate system + symptom-monitoring is the self-check; formal clearance = physio.
 - **Knee:** gates wall balls and burpee broad jumps.
 - **Thoracic kyphosis:** cannot hold a free-bar front rack under load → front squat is **Smith-machine only**; free bar stays light for rack-skill. Do NOT progress the free front squat.
 - **Tempo runs HR-governed** (158–165 bpm, upper Z4, 0% incline); progress by DURATION not pace.
