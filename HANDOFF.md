@@ -133,6 +133,22 @@ Confirmed across BOTH races from the Singapore AG 50-54 **top-5 medians** (Nov-2
 
 **SANDBAG baseline/re-test protocol (his Q 2026-07-17):** at **race weight 20kg** (NOT 22.5), **fresh** (ideally the W16 deload slot). Capture TWO safe numbers — (a) **unbroken max distance**: lunge to the FIRST genuine break, then STOP (do not grind past — that is where the adductor gets hurt); (b) **100m for time with PLANNED breaks** (pre-decide a break every ~20-25m), recording total time + break count. Do NOT do a max 100m unbroken-or-bust grind — he is built to ~45m, so that is pure adductor risk with low info value. Form-break/adductor twinge = effort over. AG-elite ~4:20 (mostly unbroken); his honest first number will likely be ~7-10 min with breaks — that is FINE, it is the baseline to beat. Reduced-weight lunging = the BUILD (pattern dose), NOT the test — keep the test at race weight so it tracks the real thing.
 
+**SLED baseline protocols (added 2026-07-17).** *Correction to the record: he CAN pull/push race weight — he did both in the race. His 87.5-95kg training loads are a RAMP, not a ceiling. Do not infer capability from training load (Claude made that error).* What is genuinely MISSING is his **fresh time at race weight** on both sleds.
+- **Sled PULL:** fresh **50m @ 103kg** for time, single set. Warm up building 87.5 → 95 → 103 (short pulls). Film it (braced hinge + leg drive). **Single set = BACK-SAFE** — his back issue is set-3 VOLUME, not load, so a one-set max sidesteps it. Log time + rest-pauses. Reference: at 87.5kg fresh he did 3:39-4:17 (W13); AG-elite race pull ~4:15 (so their fresh ~3:30-4:00).
+- **Sled PUSH:** fresh **50m @ 152kg** for time, single set. Warm up building 130 → 141 → 152. Film it and **cue GLUTE DRIVE** — his W13 limiter was **CALVES cramping**, not legs; if calves go again that is a TECHNIQUE tell, not a strength ceiling. Reference: at 130kg fresh he did 2:23-2:58 (W13); his true in-race is ~4:16 (2025; the 2026 4:51 was the poor floor).
+- **FLOOR CAVEAT — important:** sled times are floor-dependent, so **gym-fresh vs race-in-race is CONFOUNDED** (his 2025→2026 sled "decline" of 1:13 was purely a worse floor). **The clean diagnostic is fresh vs compromised AT THE SAME GYM** — fresh 50m @ race wt (this test) vs the compromised 50m @ race wt inside the Wed engine day. Same floor → the delta IS durability. Use that, not race-derived comparisons.
+- **SCHEDULING TRAP:** do **NOT** test both sleds in one session — a max push pre-fatigues the pull and destroys its "fresh" status. **One sled test per gym day.**
+
+**W16-END = ESTABLISH ALL FOUR FRESH BASELINES (the gate for the W17+ build).** He is currently MISSING the fresh baseline on 2 of the big-3, which is exactly why capacity-vs-durability has been argued rather than known. Test at the END of the W16 deload (freshest he will be), one effort per session:
+| Session | Test |
+|---|---|
+| Gym day 1 | Sled **Pull** fresh 50m @ 103kg |
+| Gym day 2 | Sled **Push** fresh 50m @ 152kg |
+| Portable day | **Sandbag** — unbroken max distance + 100m w/ planned breaks @ 20kg |
+| Home (optional) | **Wall Balls** 100 for time (re-baseline vs the 6:01 W13 mark) |
+
+**The fresh number is the DIAGNOSTIC — it settles capacity vs durability per station:** fresh close to his in-race time → **capacity-dominant** (barely better fresh than wrecked); fresh much faster than in-race → **durability-dominant**. Build W17-20 off these four numbers, per station — do NOT pre-decide the capacity/durability split by theory.
+
 ## 4. Injury guardrails (also in CLAUDE.md — apply to ANY change)
 - **Right adductor (recovering):** gates sandbag lunges, lunge/wall-ball combos, BBJ landings, lunge-to-run. Scale/skip if it flares.
 - **Knee:** gates wall balls and burpee broad jumps.
