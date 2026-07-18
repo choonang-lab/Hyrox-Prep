@@ -3,6 +3,8 @@
 Project context and working conventions for Claude Code. **Read this fully before any edit.**
 
 > **Session continuity:** read [`HANDOFF.md`](HANDOFF.md) for the current project state, decisions, rationale, open items, and the weekly log-review/calibration loop. This `CLAUDE.md` holds stable architecture/conventions; `HANDOFF.md` holds the live working context.
+>
+> **Before running a weekly log review or building/calibrating a training block, work through the PRE-FLIGHT CHECKLIST at the top of `HANDOFF.md` (§0).** It is the enforcement layer for the guardrails and design principles — the doc is long, so §0 is what actually gets applied. Do not skip it.
 
 ## What this is
 A single-page Progressive Web App that delivers a personalized Hyrox training plan and logs sessions. Hosted on GitHub Pages at `choonang-lab.github.io/Hyrox-Prep`. It supports one athlete's race: Hyrox Men's Open, target sub-1:15, **Friday 27 November 2026**.

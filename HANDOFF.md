@@ -6,6 +6,29 @@
 
 ---
 
+## 0. PRE-FLIGHT CHECKLIST — run BEFORE the two recurring tasks
+*(This is the enforcement layer. The doc is long; these lists are what actually gets applied. Each bullet cites the detailed section. If a bullet and the detail ever conflict, fix the doc.)*
+
+**A) EVERY WEEKLY REVIEW (Sunday logs):**
+1. **Lead with the 3-col table** — Exercise / What I did / Tweak — before any narrative. [§7]
+2. **Loads track ACTUAL logged weights**; conservative ramp; let logs drive increases. [§4]
+3. **Run every change past the GUARDRAILS**: right adductor, right knee, lower back, kyphosis, HR-tempo, recovery-#1. [§4]
+4. **Recovery lens**: check RHR/HRV/sleep trend; "harder = SHARPER not MORE"; never add load to fix under-recovery. [§3b, §4]
+5. **Surface the gap-to-target** on the big-3 (sandbag/WB/sled pull) vs 1:35-model + AG-elite; actively push toward them. [§3e]
+6. **Running floor**: hold a comfortable ~22:30–23:00 5K; do NOT chase 5K, do NOT erode below floor. [§3d]
+7. **Leg-load**: no two monster leg days back-to-back; **Thursday = knee + adductor double-jeopardy** — watch as sandbag ramps. [§3d, §4]
+
+**B) EVERY BLOCK BUILD (W16 deload calibration + block boundaries):**
+1. Build off **REAL logs + the W16 fresh baselines** (4 tests: pull/push/sandbag/WB) — do NOT pre-decide capacity-vs-durability by theory. [§3e]
+2. **Capacity-vs-durability is now EMPIRICAL, per station** — §3d "compromised-marquee-from-W17" is SUPERSEDED/gated: likely **capacity-dominant W17–20, compromised in Block 3**, decided by the baselines. [§3d, §3e]
+3. **Big-3 priority** (sandbag/WB/sled pull ≈ 75–86% of the gap); **SkiErg + BBJ = maintenance only** (already at target). [§3a, §3e]
+4. **Guardrails as HARD gates**: transition adductor rehab→prep & keep it THROUGH the sandbag ramp; sled pull = progress LOAD not volume (back). [§4, §3d]
+5. **Recovery structure**: 2 gym days; undulate emphasis; deload every ~3–4 wk; protect Sat rest. [§3d]
+6. **Do NOT misread history**: the 2 races are 5 months apart (not a year); env-confounded data (heat/floor) ≠ regression. [§3a]
+7. **Running**: maintain the floor; sub-20 5K is a POST-race goal only. [§3d]
+
+---
+
 ## 1. Snapshot (as of 2026-07-05)
 - **App:** live at **VERSION 95** (`choonang-lab.github.io/Hyrox-Prep`). Single-file vanilla PWA.
 - **Block 2 (W13–W20)** is **built, calibrated from real W12 logs, reviewed, and shipped.** W13 starts **Mon 6 Jul 2026**.
@@ -67,6 +90,8 @@ W16 is the deload; **W17–W20 (2B intensify) is where these ramp**, gated on po
 Do NOT pre-build W17–20 now: calibrate off W14/W15 logs + how he comes out of the W16 deload.
 
 ### 3d. W17+ re-orientation — LOCKED design principles (2026-07-14)
+> **⚠ SUPERSEDED IN PART (2026-07-17): the compromised-marquee-from-W17 emphasis below is NOT final.** He argued (correctly) that capacity feeds durability and that he cannot convert station capacity he does not yet have — and 2 of the big-3 have NO fresh baseline yet. So the **sequencing is now gated on the W16 fresh baselines** (§3e): likely **capacity-dominant W17–20, compromised work shifted into Block 3** (which is already the "Race Specificity" block). The session *shapes* below (engine day, sled, sandbag, roxzone, running trim) still stand; what changes is **capacity-first emphasis in Block 2B**, decided per-station by the baselines. Do NOT apply the "compromised from W17" reading without checking §3e.
+
 **Frame (agreed):** 2 Hyrox-gym days only (realistic). Gym = sled + strength maintenance (day A) and compromised engine (day B). Wall balls done at HOME; sandbag PORTABLE. Running trimmed (see §3c). "Harder = SHARPER not MORE": re-orient toward **fatigued/compromised expression**, funded by trimming running, capped by recovery. Whole week is leg-dominant → **undulate emphasis week to week + deload every ~3–4 wk**; two monster leg days must never sit back-to-back. Wed (compromised engine → compromised wall balls, a half-sim) is the ONE hardest day; Thu (BSS/step-ups + sandbag) is the deliberate MODERATE counterweight.
 
 **WALL BALLS — LOCKED (weakness #1, −4:16):**
