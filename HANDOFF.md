@@ -17,6 +17,7 @@
 5. **Surface the gap-to-target** on the big-3 (sandbag/WB/sled pull) vs 1:35-model + AG-elite; actively push toward them. [§3e]
 6. **Running floor**: hold a comfortable ~22:30–23:00 5K; do NOT chase 5K, do NOT erode below floor. [§3d]
 7. **Leg-load**: no two monster leg days back-to-back; **Thursday = knee + adductor double-jeopardy** — watch as sandbag ramps. [§3d, §4]
+8. **After ANY sets/weight edit, UPDATE THE CUE to match** — editing sets but leaving the prose cue is how stale cues happen (v106/107 fixed a batch). Cue must never contradict its own entry.
 
 **B) EVERY BLOCK BUILD (W16 deload calibration + block boundaries):**
 1. Build off **REAL logs + the W16 fresh baselines** (4 tests: pull/push/sandbag/WB) — do NOT pre-decide capacity-vs-durability by theory. [§3e]
@@ -26,6 +27,7 @@
 5. **Recovery structure**: 2 gym days; undulate emphasis; deload every ~3–4 wk; protect Sat rest. [§3d]
 6. **Do NOT misread history**: the 2 races are 5 months apart (not a year); env-confounded data (heat/floor) ≠ regression. [§3a]
 7. **Running**: maintain the floor; sub-20 5K is a POST-race goal only. [§3d]
+8. **Cue must match sets/weight** — rewrite each entry's cue whenever load/volume changes; never leave copy-pasted cues from the prior block (this is the #1 source of drift). Re-scrub cues after a build.
 
 ---
 
