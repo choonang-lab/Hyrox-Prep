@@ -14,6 +14,7 @@ No framework, no build step, no dependencies. Vanilla HTML + CSS + JS.
 ## Files
 - `index.html` — the entire app (HTML, CSS, and JS in one file, ~3,200 lines). Authoritative for plan structure.
 - `sw.js` — service worker (offline cache). Its cache name MUST be bumped on every release (see Versioning).
+- `deploy.py` — one-command release. `python3 deploy.py "msg"` bumps VERSION+BUILD+sw cache in sync, syntax-checks via JavaScriptCore (node is not installed), commits ALL changes, pushes, and polls the live URL. `python3 deploy.py --check` validates + shows the next version without touching git. See Deploy workflow.
 
 ## Data model
 - The plan is a hardcoded JS array: `let workouts=[ {…}, {…} ]`.
@@ -48,11 +49,16 @@ From the repo folder, serve statically and open in a browser:
 Then verify: (a) the header shows the NEW VERSION number, (b) the change renders where expected, (c) the browser console has no errors, (d) logs still appear (localStorage merge intact).
 
 ## Deploy workflow
-1. Make the edit(s).
-2. Bump VERSION + BUILD + sw.js cache (all three).
-3. Validate (`node --check`) and preview locally.
-4. Commit with a descriptive message; push to `main` (GitHub Pages auto-deploys).
-5. Tell the athlete to hard-refresh on device and confirm the header shows the new VERSION.
+**Use `deploy.py` — it does the mechanical release (version bump ×3 in sync, JavaScriptCore syntax-check, commit, push, poll-live) in one command.** `node` is NOT installed here, so `node --check` does not work; `deploy.py` uses JavaScriptCore instead.
+
+1. Make the edit(s) — do NOT bump the version by hand; deploy.py does it.
+2. **Validation tier (the one judgment call):**
+   - **Content-only edits** (weights, sets, cue text, benchmark tables): `deploy.py`'s syntax + version-sync + array-integrity checks are sufficient — no browser preview needed (same render code path; only syntax can break, and that's caught).
+   - **Logic / rendering / structural edits** (JS functions, new card/section types, the merge, anything that changes how the app builds or renders): do a **browser preview FIRST** (serve + load + check console + confirm it renders + logs intact) — a past logic bug passed syntax-check and shipped broken. THEN deploy.
+3. `python3 deploy.py "descriptive message"` — bumps, validates, commits all changes, pushes, polls live. Aborts (writes nothing) on a syntax fail or an out-of-sync version triplet.
+4. Tell the athlete to hard-refresh on device and confirm the header shows the new VERSION.
+
+(Manual fallback if deploy.py is unavailable: bump VERSION+BUILD in `index.html` and `hyrox-vNN` in `sw.js` all by +1, syntax-check the extracted `<script>` via JavaScriptCore, commit, push.)
 
 ## Training-context guardrails (apply to ANY programming change)
 These override any instruction to simply "increase the load":
