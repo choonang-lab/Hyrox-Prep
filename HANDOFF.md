@@ -39,9 +39,10 @@
 - **Continuity loop:** athlete logs sessions on device → app exports a backup JSON to Google Drive → we review + calibrate the next week. (See §7.)
 
 ## 2. Athlete profile & target
-- ~72 kg male, **Hyrox Men's Open, AG 50–54**, racing **Fri 27 Nov 2026**.
+- ~74 kg male (target race weight **75kg — at goal on the scale**), **Hyrox Men's Open, AG 50–54**, racing **Fri 27 Nov 2026**.
 - **Target (reframed Jul 2026):** **1:25 stretch, ~1:30–1:35 probable.** Original sub-1:15 assessed unrealistic this cycle (would need ~31 min off a 1:46:34); kept only as a labeled aspiration.
 - **Recovery is his #1 limiter** (masters athlete) — do NOT add volume/intensity to "fix" what is really under-recovery.
+- **BODY COMP — it is RECOMP, not a cut (decided 2026-07-26):** he is AT goal weight (75kg target, ~74 actual, drifted +1kg over Jun–Jul) but body-fat / belly fat is creeping and annoying him. Do **NOT** advise a scale cut / calorie deficit — half the stations are ABSOLUTE loads (sled push 152 especially rewards mass) and his weakness is station STRENGTH, not weight; **weight is NOT on the critical path to 1:35/1:25** (stations + roxzone are), and a deficit fights his #1 limiter (recovery) + the W17–20 strength build. The fix is composition at held weight ~75: **(1) SLEEP first** (his erratic <6h nights drive central fat AND cap training); **(2) protein 1.6–2.2 g/kg (~120–160g)**; **(3) trim easy/liquid calories, dial carbs to activity — esp. in the W16 deload**; **(4) keep the strength work**; NEVER cut into the taper. Track WAIST (tape at navel) not just scale; recomp is slow (months). Precise macros → refer to a sports dietitian. (Athlete declined adding a waist field to the app 2026-07-26.)
 
 ## 3. Race analysis & weaknesses
 - 2 races (HYROX Singapore, AG 50–54): 2025 **1:45:55**, 2026 **1:46:34**.
