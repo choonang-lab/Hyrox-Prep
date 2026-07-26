@@ -25,6 +25,7 @@
 3. **Big-3 priority** (sandbag/WB/sled pull ≈ 75–86% of the gap); **SkiErg + BBJ = maintenance only** (already at target). [§3a, §3e]
 4. **Guardrails as HARD gates**: transition adductor rehab→prep & keep it THROUGH the sandbag ramp; sled pull = progress LOAD not volume (back). [§4, §3d]
 5. **Recovery structure**: 2 gym days; undulate emphasis; deload every ~3–4 wk; protect Sat rest. [§3d]
+   - **DELOAD MENTAL-BREAK RULE (athlete-set 2026-07-26, applies to W16 AND every subsequent deload week):** strip the low-value "fiddly" items for a genuine mental break — **remove the Front Squat Mobility Circuit and ALL Form Film entries** from any deload week. Keep the actual training (deloaded lifts/sleds/runs) + daily mobility + adductor rehab. Do NOT carry these two into future deloads. (Done for W16 in v113.)
 6. **Do NOT misread history**: the 2 races are 5 months apart (not a year); env-confounded data (heat/floor) ≠ regression. [§3a]
 7. **Running**: maintain the floor; sub-20 5K is a POST-race goal only. [§3d]
 8. **Cue must match sets/weight** — rewrite each entry's cue whenever load/volume changes; never leave copy-pasted cues from the prior block (this is the #1 source of drift). Re-scrub cues after a build.
