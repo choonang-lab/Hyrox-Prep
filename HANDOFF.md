@@ -228,6 +228,18 @@ Confirmed across BOTH races from the Singapore AG 50-54 **top-5 medians** (Nov-2
    - **⚠ TIMEZONE OFFSET (−1 day) — known + accepted, do NOT "fix" naively (2026-07-17):** check-date keys are stamped **one calendar day EARLY**. Cause: `index.html` builds each training day at LOCAL midnight then keys it with `date.toISOString().slice(0,10)` (UTC); athlete is Singapore (UTC+8), so local-midnight → previous day UTC. So a **Monday** session is stored as **Sunday**, etc. — a consistent −1 on EVERY entry regardless of log time. **When reading a backup, add +1 day to interpret the real training day** (e.g. W14 stamped 07-12→07-18 = actually trained Mon 07-13→Sun 07-19; he trains a normal Mon–Sun week). It is **harmless to him** (app writes+reads the same shifted key, checkmarks land correctly, nothing lost) — decision (2026-07-17) is to **LEAVE the app as-is** and just account for −1 here. A real fix would need a one-time key-migration (+1 day on all existing checks) or it would orphan his history — do NOT change the keying without that migration.
 5. Backups are large (~700KB–1MB) → they exceed a single tool result; the download tool saves them to a file — decode the base64 `content`, parse JSON, and diff against the prior backup to find *new* logs.
 
+### 7a. Weekly review log (newest first)
+**W15 reviewed 2026-07-26** (backup `hyrox-backup-2026-07-26.json`; trained Mon 07-20→Sun 07-26, stamped 07-19→07-25 per the −1 offset). App at **v110**. **Full completion — every session done, no skips.** Highlights:
+- **800m intervals: all 5 held** (3:30/3:25/3:25/3:25/**3:20**, neg-split) vs only 3 + a 200m the week before — the durability chase is landing (aided by cooler/overcast + perf shoes, but real). Target 3:24–3:30 met.
+- **Tempo:** 27 min, faded 12→11.5kmh at 20:30, **HR 161** (in 158–165 band) — threshold-pace endurance still building; HR-governed correctly.
+- **Sled Pull:** went to **100kg** ×3×50m (above the 97.5 plan), set-3 fade (3:57) = auto-reg zone, **no back murmur**. **Sled Push:** 145×3, big set-1→2 drop-off (2:58→3:29) = near fresh ceiling at 145; no calf cramp (glute-drive cue working).
+- **Sandbag:** held **22.5kg** 1×50m (correct, did not chase 25); **zero adductor complaint** all week (Copenhagen both sides at 45s, eccentric slides + lateral lunges done).
+- Self-regulation notes from logs: "RDL felt stronger, +2.5 in W17"; "hold Smith FS 52.5, BB row 60 post-deload."
+- **Perf shoes now standard for all runs** → judge runs by HR, not pace/distance (shoe + weather confound week-to-week).
+- **Recovery:** vitals fine but **sleep erratic** (4 nights <6h incl. 5.62 today); energy dipped to 2 today post long-run; weight crept 73.6→74.7. Ordinary end-of-block fatigue → **W16 deload is well-timed.** No load added.
+- **Guardrails all green** (adductor / knee / back / kyphosis / HR-tempo). No mid-block calibration change; big-3 on plan (pull closing 100→103; WB & sandbag stay conservative until the W17+ compromised/coupled work).
+- **→ W17 flags** (apply at the W16/W17 build): RDL +2.5kg; HOLD Smith FS 52.5 / BB row 60 / sled push 145; sled pull → 102–103 if back stays quiet; intervals target → 3:20–3:25.
+
 ## 8. Block 2 detail (W13–W20, current build)
 Equipment constraint drives the week: he has **sled/row/ski only ~2 days** → machines clustered on **Mon + Wed**.
 - **Mon = Hyrox Gym Day** (strength-first): Form Film → Smith Front Squat → RDLs → Sled Push → Sled Pull → **Row 2×1k → Ski 2×1k** (alternating, race distance, controlled race pace, progress by tightening rest). ~3h — long; open "trim Monday" ideas noted below.
@@ -264,8 +276,9 @@ Equipment constraint drives the week: he has **sled/row/ski only ~2 days** → m
 - **Validate before commit:** `node --check` on the extracted `<script>` AND preview in a browser (a past merge bug passed node --check but shipped broken).
 
 ## 11. Open items / next actions
-- [ ] **W13 Monday:** establish + LOG the Smith front-squat top set (unlocks W14+ numbers).
-- [ ] **Weekly loop:** after W13, athlete re-uploads logs → **calibrate W14** off real W13 numbers (esp. Smith top).
+- [ ] **W16/W17 BUILD (next — W16 is the deload):** apply the W15-review W17 flags → **RDL +2.5kg**; **HOLD** Smith FS 52.5 / BB row 60 / sled push 145; **sled pull → 102–103** if back stays quiet; **intervals target → 3:20–3:25**. Build W17–20 off real W14/W15 logs + post-deload recovery (per §3c/§3d/§3e), NOT before.
+- [x] **W13 Monday:** Smith front-squat top set established (W15 at 52.5 top / 47.5×2).
+- [x] **Weekly loop:** running each Sunday (W15 reviewed 2026-07-26, see §7a).
 - [ ] **Merged backup JSON** (his logs + current v95 plan) so his history travels onto the device via `restore.html` — discussed, **not yet built**.
 - [ ] **Blocks 3 & 4:** build once travel schedule is known (direction in §6).
 - [ ] Optional: add his **143 bpm** as the Zone-2 marker on the long-run card.
