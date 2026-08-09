@@ -25,6 +25,7 @@
 3. **Big-3 priority** (sandbag/WB/sled pull ≈ 75–86% of the gap); **SkiErg + BBJ = maintenance only** (already at target). [§3a, §3e]
 4. **Guardrails as HARD gates**: transition adductor rehab→prep & keep it THROUGH the sandbag ramp; sled pull = progress LOAD not volume (back). [§4, §3d]
 5. **Recovery structure**: 2 gym days; undulate emphasis; deload every ~3–4 wk; protect Sat rest. [§3d]
+   - **ACCESSORY DISCIPLINE (set 2026-08-09, v114 — applies to Blocks 3-4 too):** keep accessories LEAN. Do NOT reintroduce **DB step-ups** (knee), **loaded lateral lunge**, a **2nd loaded carry** (suitcase — Farmers is the race one), or **DB thrusters**. **Adductor work capped ~3/wk** (Copenhagen Mon + Copenhagen-dynamic & eccentric-slide Thu); no duplicate Copenhagen across Mon+Wed. **Never stack a big leg day (Thu BSS/sandbag) the day before the key interval session** — Thu→Fri leg fatigue killed W17 intervals. **Sandbag HOLD 22.5kg, build DISTANCE before load.** **Sleds HOLD competition weight (152/102)** — the +10% friction overload (§3d) stays a labeled FUTURE goal, NOT an in-block ramp this cycle.
    - **DELOAD MENTAL-BREAK RULE (athlete-set 2026-07-26, applies to W16 AND every subsequent deload week):** strip the low-value "fiddly" items for a genuine mental break — **remove the Front Squat Mobility Circuit and ALL Form Film entries** from any deload week. Keep the actual training (deloaded lifts/sleds/runs) + daily mobility + adductor rehab. Do NOT carry these two into future deloads. (Done for W16 in v113.)
 6. **Do NOT misread history**: the 2 races are 5 months apart (not a year); env-confounded data (heat/floor) ≠ regression. [§3a]
 7. **Running**: maintain the floor; sub-20 5K is a POST-race goal only. [§3d]
@@ -245,6 +246,8 @@ Confirmed across BOTH races from the Singapore AG 50-54 **top-5 medians** (Nov-2
 5. Backups are large (~700KB–1MB) → they exceed a single tool result; the download tool saves them to a file — decode the base64 `content`, parse JSON, and diff against the prior backup to find *new* logs.
 
 ### 7a. Weekly review log (newest first)
+**W17 reviewed + W18-20 accessory cull (2026-08-09, v114).** W17 (return-from-flu) — **full recovery confirmed**: HRV rebounded 38→95-134, RHR 54-59, energy 4. BUT he returned TOO HOT (day-1 sleds ABOVE target at 155/105 with HRV still 38; RDL 95 top, form broke) and the week's structure bit him — **2 failed sessions**: Wed compromised Test B (could not finish the 1k post-ski) and Fri intervals (1×800 @3:15 + only 300m, "glutes fried from Thu BSS"). Knee pain on step-ups; sandbag 25kg had to be broken (30+10+10+10). **Fixes shipped v114 (W18-20):** sandbag 25→**22.5kg** (build DISTANCE first); **CUT** step-ups (knee), lateral lunge, Wed Copenhagen, suitcase carry, thrusters → adductor **5→3/wk** (Thu 3→2), Thursday **12→8 items** (relieves the Thu→Fri leg-fatigue chain that killed Fri intervals); sleds **HOLD competition weight** (W19 160/107→152/102, no in-block overload). Bulgarians left 4×10 — trim to 3×8 only if Fri still suffers. RDL held 95 (fix form, no add). Lesson banked: after illness, ease the FIRST session; do not stack a big leg day before the key interval day.
+
 **W16 ended in ILLNESS — flu (reviewed 2026-08-02).** W16 deload was executed flawlessly (full completion, all edits followed), BUT recovery markers went the WRONG way: **HRV avg 108 (W15) → 67 (W16), crashed to 38 on 08-02**; RHR up (~66→~70); energy stuck at 2 — despite BETTER sleep (7.0h avg). Cause = **a virus incubating, not under-recovery**: athlete confirmed a bug (blocked nose, sore throat, now COUGH → likely flu). Lesson: a paradoxical HRV drop during a well-slept deload = look for illness/stress before adding load.
 - **W17 INTENSIFICATION POSTPONED — do NOT ramp.** All W17 load flags (RDL +2.5 / pull → 102–103 / intervals → 3:20–3:25 / tempo back to full 27–30min) are PARKED until markers rebound — gated on symptoms + HRV/RHR, NOT a date.
 - **Guidance given (2026-08-02):** STOP training fully (cough = below-neck/systemic → **viral myocarditis risk**; never train through flu/fever). Rest until symptoms clearly resolving + **≥24–48h symptom-free, no fever**, THEN graded return: easy Z1–2 only → resume intensity only once **HRV back ~90+ / RHR <65 and feels well**; hard/compromised work comes LAST. **Calorie deficit OFF — eat at maintenance+ to recover** (fighting infection). See-a-doctor flags: high/persistent fever, chest pain/tightness, breathlessness, palpitations, chest-deep or worsening cough, no improvement after ~1 week.
@@ -279,13 +282,13 @@ Equipment constraint drives the week: he has **sled/row/ski only ~2 days** → m
 - **Mesocycle:** 2A = W13–16 (accumulate, **W16 deload ~−45%**); 2B = W17–20 (intensify, **W20 = test week**).
 
 **Key progressions (verify in code):**
-- **Sled Push** 130→141→**152 (race by W15)**→[106 DL]→152→152(4×)→160(overload)→re-test.
-- **Sled Pull** 87.5→95→**102 (race)**→[72 DL]→102→102(4×)→107(overload)→re-test.
+- **Sled Push** 130→141→**152 (race by W15)**→[106 DL]→152→152(4×)→**152 (HOLD comp weight — W19 overload 160 CANCELLED v114)**→re-test.
+- **Sled Pull** 87.5→95→**102 (race)**→[72 DL]→102→102(4×)→**102 (HOLD comp weight — W19 overload 107 CANCELLED v114)**→re-test.
 - **RDL** 90→92.5→95→[DL]→95→97.5→100.
 - **Smith Front Squat** AUTO-REGULATED: W13 = *calibrate* a clean 5-rep top (start ~50kg, LOG it); W14+ = "W13-top +2.5/+5/+7.5/+10kg". *He front-squatted free bar all of W12 and never set a Smith number — the top is genuinely unknown until W13.*
 - **Wall Ball EMOM** W14–19: 6→8→[5 DL]→9→10→10 min. **Tempo** 25→35 min @5:00/km. **800m intervals** 4→6 reps, 3:24→3:18 (calibrated rebuild — he FAILED 6×800 in W12).
 - **Long run FLAT 90 min** all weeks (deload/taper 60) — deliberate: maintenance, not chase (validated by his 07-04 long run: 90min/13k/143bpm).
-- **Sandbag Lunges** distance builds 45→**100m (race)** at 25kg (weight chip = kg, sets chip = distance).
+- **Sandbag Lunges** distance builds 45→**100m (race)** at **22.5kg** (dropped from 25kg v114 — build DISTANCE first; weight chip = kg, sets chip = distance).
 - **BBJ "Distance Build"** added W17–19 (15/20/25m), adductor+knee-gated — his only race-pace BBJ exposure (standard BBJ is knee-down form-skill only).
 
 **W13 calibration from W12 logs (2026-07-05):** rows rolled back 60→57.5kg ("felt heavy, hold"); Y-raises 5→4kg; glute thrust 22.5→25, thrusters →8, lateral lunge →3 (bumped to achieved); RDL 90 + incline press 27.5 held; intervals 6×800 (failed) → 4×800. Wall-ball unbroken = 40; air squats = 43.
