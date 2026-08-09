@@ -227,6 +227,15 @@ Confirmed across BOTH races from the Singapore AG 50-54 **top-5 medians** (Nov-2
   - **Simulations:** 1 full is the floor, **2 the sweet spot** (an early *diagnostic* ~W24–25 + a W29 *dress rehearsal*); **do NOT exceed 2** (recovery limiter). Lean on cheaper **half-sims** for the bulk.
   - **No Hyrox event within reach Sep–Oct** → sims must be self-run/split using his equipment (sled/row/ski only ~2 days/wk); likely "sim across a week" rather than one session.
 
+### 6a. Block 3 pre-build brief (drafted 2026-08-09 — read before building W21+)
+1. **The pivot = capacity → DURABILITY.** Blocks 1-2 built fresh capacity; Block 3 trains expressing it under fatigue (his real gap: fresh 100 WB beats a 1:15 athlete; races 5:43/km off 4:20 fresh). Marquee work: **compromised wall balls** (after the engine), **sandbag broken across runs**, **sled singles inside sims** (race weight = stations 2/3), **coupled run→station→run**, half/full sims, and the **Friday slot → compromised running** (train the fade, not the top end — fresh intervals are polishing a strength [[hyrox-injury-guardrails]]). Matches the @dailyhyrox "stations that matter damage your next run" logic.
+2. **Leg-load sequencing is a HARD design rule.** W17 proved stacking Thu legs before Fri running kills the running; Block 3's compromised work is even MORE leg-dominant → never put the hardest coupled/leg day the day before the key running/sim day. Single most likely thing to quietly wreck the block.
+3. **Recovery gets MORE conservative, not less.** Compromised/sim work is more systemically taxing than capacity work + masters + post-flu + recovery is #1 limiter → ONE true hard day (the sim), deload every ~3-4wk, protect Sat, gate hard days on HRV/RHR (the flu proved that gate works). Do NOT let "race specificity" become daily grinding.
+4. **Bake in the free wins:** roxzone <0:45 transitions in EVERY sim (his 2-yr leak: Farmers-in 1:33 / Sandbag-in 1:40 ≈ 2min free, zero fitness/injury cost); even pacing off the opener (his runs drift 38s vs a reference 9s).
+5. **Carry-forward guardrails** (see §0-B standing prefs + §4): sandbag 22.5 + build distance; knee = no step-ups; back-governed sled at **competition weight** (overload chase OFF this cycle); Smith FS; lean accessories; Copenhagen ~3/wk; running = maintain floor, do not chase.
+6. **Settle BEFORE building:** (a) **re-test clean baselines once 100%** (fresh WB100, sandbag distance, sled singles) — the flu scrambled the W17 compromised tests, so current calibration numbers are unreliable; W20 test week gives some. (b) **TRAVEL SCHEDULE (Sep-Nov) is the open dependency** — sim placement/equipment access depends on it; cannot design without it.
+7. **Do NOT pre-build now** — calibrate at the W20 boundary off W18-20 execution + W20 test + post-flu recovery trend + travel dates.
+
 ## 7. The continuity / calibration loop (how we work each week)
 
 > **REQUIRED OUTPUT FORMAT (agreed 2026-07-14).** Every **Sunday**, when the athlete sends the weekly logs, the FIRST deliverable is a **3-column table**, one row per exercise he logged:
