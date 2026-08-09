@@ -244,6 +244,10 @@ Confirmed across BOTH races from the Singapore AG 50-54 **top-5 medians** (Nov-2
      - Enter SCALED, auto-regulate UP week to week.
    - **PART 1 (threshold intervals 5×6min) = OPTIONAL / lower-yield** — polishes his already-strong engine [[hyrox-injury-guardrails]]. Use only on an occasional "run-bias" week, keep short (3×5min). **Do NOT stack Part 1 + Part 2 in one session** (recovery limiter) — one part per session.
    - **Placement:** ONE hard day (Wed half-sim or the converted-Friday slot); protect the day after (leg-load sequencing, item 2). **Bias the MOVEMENTS side** (his gap = stations + durability, not runs), within the joint gates.
+10. **Compromised TESTS re-oriented (2026-08-09, v115).** Single-station tests are too SHALLOW for him — his fade is **CUMULATIVE** (minute 94, 8 stations deep), not acute-off-one-station, so they read "pass" and hide the real weakness.
+    - **Test A** (1km→50WB→1km): **PASSED repeatedly & comfortably** — 4:24/km off WB vs a ~5:10-5:15 durability gate (WB adds only ~10s/km). No longer diagnostic → keep as an occasional benchmark / fold into the coupled session; do NOT treat as a weekly KPI.
+    - **Test B RE-ORIENTED ski→run → Sled Push 152kg → 1km run** (shipped W18-20 v115). Ski→run was early/B-tier/low-run-damage and rewarded the anti-race behaviour of pushing the ski (his W17 fail). Sled→run = highest run-damage transition = his real fade. **Targets:** sled ~2:45-3:00; post-sled 1km ~4:30-4:45 (≤4:45 = 1:35 pace, ≤4:30 = 1:25); REAL metric = shrink the post-sled km toward his clean threshold km (~4:15), within ~10s = durability win. Do NOT sandbag the sled to protect the run (hides the damage).
+    - **Expect Test B to also read "easy"** (cumulative, not acute) → the TRUE durability driver is the coupled compromised session (item 9), NOT single-station tests; A/B are periodic diagnostics only. Block 3: evolve both into the coupled session; a **sandbag→run** diagnostic is also high-value (his #2 weakness) but watch the adductor if it lands near the Thu sandbag day.
 
 ## 7. The continuity / calibration loop (how we work each week)
 
