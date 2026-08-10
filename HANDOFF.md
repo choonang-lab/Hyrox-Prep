@@ -306,7 +306,7 @@ Equipment constraint drives the week: he has **sled/row/ski only ~2 days** → m
 **Key progressions (verify in code):**
 - **Sled Push** 130→141→**152 (race by W15)**→[106 DL]→**152×3 HELD W17-19** (progress by TIMES / tighter rest, NOT sets — Option B v116; both the overload 160 AND the 4th set cancelled)→**W20 1× for-time test**.
 - **Sled Pull** 87.5→95→**102 (race)**→[72 DL]→**102×3 HELD W17-19** (same — quality not sets; set-3 back-governed auto-reg)→**W20 1× test**.
-- **RDL** 90→92.5→95→[DL]→95→97.5→100.
+- **RDL** 90→92.5→95→[DL]→**95 HOLD W18 (FORM-GATED — form is the limiter at the top per his W17 log; earn the next jump only when all 5 top reps are clean)**→97.5 W19 (if 95 clean)→**[100 DROPPED v117 — no max-chase, W20 is light taper]**.
 - **Smith Front Squat** AUTO-REGULATED: W13 = *calibrate* a clean 5-rep top (start ~50kg, LOG it); W14+ = "W13-top +2.5/+5/+7.5/+10kg". *He front-squatted free bar all of W12 and never set a Smith number — the top is genuinely unknown until W13.*
 - **Wall Ball EMOM** W14–19: 6→8→[5 DL]→9→10→10 min. **Tempo** 25→35 min @5:00/km. **800m intervals** 4→6 reps, 3:24→3:18 (calibrated rebuild — he FAILED 6×800 in W12).
 - **Long run FLAT 90 min** all weeks (deload/taper 60) — deliberate: maintenance, not chase (validated by his 07-04 long run: 90min/13k/143bpm).
