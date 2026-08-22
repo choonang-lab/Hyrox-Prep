@@ -198,6 +198,21 @@ Confirmed across BOTH races from the Singapore AG 50-54 **top-5 medians** (Nov-2
 
 **The fresh number is the DIAGNOSTIC — it settles capacity vs durability per station:** fresh close to his in-race time → **capacity-dominant** (barely better fresh than wrecked); fresh much faster than in-race → **durability-dominant**. Build W17-20 off these four numbers, per station — do NOT pre-decide the capacity/durability split by theory.
 
+### 3f. AG-50-54 TOP-5 per-athlete splits (pulled 2026-08-17 from hyresult — full dispersion, supplements the §3e medians)
+
+**S8 2025 Singapore Expo** (his 2025 race; he was #29, 1:45:55). Times in mm:ss.
+| # | Athlete | Time | Runs (tot / pace) | Ski | S.Push | S.Pull | BBJ | Row | Farmers | Sandbag | Wall Balls |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Leighton Matheson | 1:10:09 | 32:27 / ~4:03 | 4:15 | 2:15 | 3:42 | 4:20 | 4:17 | 1:46 | 3:40 | 8:12 |
+| 2 | Raymond Cheng | 1:20:56* | ~4:37 (run2 penalty) | 4:09 | 2:37 | 4:19 | 4:38 | 4:34 | 1:34 | 4:22 | 5:48 |
+| 3 | Mark Hawkins | 1:21:18 | 38:45 / ~4:50 | 4:49 | 1:51 | 4:07 | 5:08 | 5:09 | 1:31 | 3:51 | 8:22 |
+| 4 | Patrick Metharam | 1:21:52 | 36:00 / ~4:30 | 4:56 | 3:55 | 5:20 | 4:48 | 4:57 | 1:57 | 5:32 | 7:36 |
+| 5 | James Cameron | 1:22:54 | 37:26 / ~4:41 | 4:40 | 2:56 | 4:43 | 5:35 | 4:32 | 1:33 | 4:52 | 9:40 |
+
+*Raymond had a +420s (7:00) RUN-2 penalty → run total corrupted; stations valid.
+
+**KEY READS (2025 top-5):** RUNNING is the tightest cluster + the ticket (~4:03–4:50/km; these are RUNNERS with mediocre stations). **WALL BALLS = the WIDEST dispersion (5:48–9:40, ~4min spread) → WB does NOT decide ranking** (you can win #1 AG with 8:12 WB) → do NOT chase elite WB; his 12:49 → ~8:00 is enough. **SANDBAG = his biggest isolated gap** (top-5 3:40–5:32 vs his 10:34) → target ~5–6min, not sub-4. His **1:25 stretch ≈ #6–7** (just behind this top-5); **1:35 ≈ #16–17**. (2026 top-5 to be added below — user notes they look faster.)
+
 ## 4. Injury guardrails (also in CLAUDE.md — apply to ANY change)
 - **Right adductor (recovering — GOOD progress as of 2026-07-17):** gates sandbag lunges, lunge/wall-ball combos, BBJ landings, lunge-to-run. Scale/skip if it flares.
   - **Status 2026-07-17:** long-lever Copenhagen = only a **slight, very mild twinge** (≈ GATE 2, but not yet silent/"pain-free"); dynamic version more strain (but that exercise is hard regardless). Close to recovered, NOT cleared.
