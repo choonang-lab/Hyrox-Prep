@@ -260,6 +260,15 @@ Confirmed across BOTH races from the Singapore AG 50-54 **top-5 medians** (Nov-2
   - **No Hyrox event within reach Sep–Oct** → sims must be self-run/split using his equipment (sled/row/ski only ~2 days/wk); likely "sim across a week" rather than one session.
 
 ### 6a. Block 3 pre-build brief (drafted 2026-08-09 — read before building W21+)
+
+**★ HEADLINE — PRIORITY ORDER (highest return-on-effort first, from AG top-5 data §3f; 2026-08-17):**
+1. **ROXZONE walk-ins (~3:00 reclaim) — #1 ROI: FREE** (no fitness, no injury, not knee/adductor/back-gated, available NOW via execution). Leak is the LATE entries (BBJ/Farmers/Sandbag) — "no stopping when wrecked, walk in and START, every entry <0:45"; rehearse in every sim.
+2. **RUN DURABILITY / the fade (~2-3min)** — biggest raw gap AND his relative strength → accessible. Train the run-off-station + late fade via the coupled sim. **Do NOT chase fresh running speed (he has it).**
+3. **SANDBAG (~3min)** — his declared focus, real fresh-capacity gap, BUT **adductor-gated → capped rate. It is #3, NOT #1** — keep it in proportion; do not over-index sandbag VOLUME at the expense of #1/#2.
+4. **WALL BALLS (~2:30)** — durability to ~8:00 ADEQUATE (not elite — #2 AG went 8:51 WB); knee-gated.
+5. Sleds pull/push (~2min) — technique-first (pull), back-gated. PACE-don't-train: Ski/Row/Farmers/BBJ (already in the top-5 band).
+- **KEY LEVERAGE:** the Wed compromised SIM trains #1-#4 SIMULTANEOUSLY = single highest-value session; the durability pivot is the SPINE, not 4 separate projects (+ the one sandbag focus day). **Stacked realistic reclaim ~13min → 1:46:34 to ~1:33 (inside the 1:35 goal).** TRAP: roxzone (free) + the sim outrank grinding a gated station.
+
 1. **The pivot = capacity → DURABILITY.** Blocks 1-2 built fresh capacity; Block 3 trains expressing it under fatigue (his real gap: fresh 100 WB beats a 1:15 athlete; races 5:43/km off 4:20 fresh). Marquee work: **compromised wall balls** (after the engine), **sandbag broken across runs**, **sled singles inside sims** (race weight = stations 2/3), **coupled run→station→run**, half/full sims, and the **Friday slot → compromised running** (train the fade, not the top end — fresh intervals are polishing a strength [[hyrox-injury-guardrails]]). Matches the @dailyhyrox "stations that matter damage your next run" logic.
 2. **Leg-load sequencing is a HARD design rule.** W17 proved stacking Thu legs before Fri running kills the running; Block 3's compromised work is even MORE leg-dominant → never put the hardest coupled/leg day the day before the key running/sim day. Single most likely thing to quietly wreck the block.
 3. **Recovery gets MORE conservative, not less.** Compromised/sim work is more systemically taxing than capacity work + masters + post-flu + recovery is #1 limiter → ONE true hard day (the sim), deload every ~3-4wk, protect Sat, gate hard days on HRV/RHR (the flu proved that gate works). Do NOT let "race specificity" become daily grinding.
