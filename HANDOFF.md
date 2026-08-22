@@ -211,7 +211,20 @@ Confirmed across BOTH races from the Singapore AG 50-54 **top-5 medians** (Nov-2
 
 *Raymond had a +420s (7:00) RUN-2 penalty → run total corrupted; stations valid.
 
-**KEY READS (2025 top-5):** RUNNING is the tightest cluster + the ticket (~4:03–4:50/km; these are RUNNERS with mediocre stations). **WALL BALLS = the WIDEST dispersion (5:48–9:40, ~4min spread) → WB does NOT decide ranking** (you can win #1 AG with 8:12 WB) → do NOT chase elite WB; his 12:49 → ~8:00 is enough. **SANDBAG = his biggest isolated gap** (top-5 3:40–5:32 vs his 10:34) → target ~5–6min, not sub-4. His **1:25 stretch ≈ #6–7** (just behind this top-5); **1:35 ≈ #16–17**. (2026 top-5 to be added below — user notes they look faster.)
+**KEY READS (2025 top-5):** RUNNING is the tightest cluster + the ticket (~4:03–4:50/km; these are RUNNERS with mediocre stations). **WALL BALLS = the WIDEST dispersion (5:48–9:40, ~4min spread) → WB does NOT decide ranking** (you can win #1 AG with 8:12 WB) → do NOT chase elite WB; his 12:49 → ~8:00 is enough. **SANDBAG = his biggest isolated gap** (top-5 3:40–5:32 vs his 10:34) → target ~5–6min, not sub-4. His **1:25 stretch ≈ #6–7** (just behind this top-5); **1:35 ≈ #16–17**.
+
+**S8 2026 Singapore** (his 2026 race; he was #24, 1:46:34; field deeper — 1,561 finishers vs 1,182 in 2025). Times mm:ss.
+| # | Athlete | Time | Runs (tot / pace) | Ski | S.Push | S.Pull | BBJ | Row | Farmers | Sandbag | Wall Balls |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Phil Pomford | 1:16:18 | 36:44 / ~4:35 | 4:28 | 3:37 | 4:06 | 4:04 | 4:44 | 1:28 | 4:15 | 7:04 |
+| 2 | Nathan Raward | 1:16:48 | 34:33 / ~4:19 | 4:53 | 3:29 | 3:59 | 4:14 | 4:56 | 2:26 | 4:23 | 8:51 |
+| 3 | Damien Babb | 1:16:56 | 38:44 / ~4:50 | 4:18 | 2:25 | 4:04 | 4:05 | 4:27 | 1:52 | 4:19 | 6:57 |
+| 4 | Kritsada Chansathit | 1:18:55 | 36:46 / ~4:36 | 4:39 | 3:16 | 4:33 | 5:23 | 4:39 | 2:17 | 4:26 | 6:41 |
+| 5 | Raymond Cheng | 1:19:14† | 38:15 / ~4:47 | 4:15 | 2:50 | 4:13 | 4:40 | 4:37 | 1:59 | ~4:47 | 6:49 |
+
+†Raymond 15s lunge penalty (sandbag ~4:47 clean). Same Raymond as 2025 #2.
+
+**2025→2026 SHIFT:** top got faster AND more complete — #2–5 tightened to **1:16–1:19** (2025 was a scattered 1:20–1:23 behind Leighton's 1:10 outlier); **#5 cutoff 1:22:54 → 1:19:14 (~3:40 faster)**; **WB improved** (2026 three of five sub-7, vs 2025's multiple 8–9min). **STILL TRUE:** running is the ticket (top-5 ~4:19–4:50/km, tightest segment); WB still the widest station dispersion (~2:10) and you can go **#2 with 8:51 WB (Nathan)** → elite WB NOT required, but the "enough" bar rose (his 12:16 → ~8:00 now the floor of competitive). Sandbag tight at the top (4:15–5:02) vs his 9:59 → focus justified, target ~5–6min. Deeper field → his 1:25/1:35 rank a notch lower than 2025 equivalents (plan unchanged, placing shifts).
 
 ## 4. Injury guardrails (also in CLAUDE.md — apply to ANY change)
 - **Right adductor (recovering — GOOD progress as of 2026-07-17):** gates sandbag lunges, lunge/wall-ball combos, BBJ landings, lunge-to-run. Scale/skip if it flares.
