@@ -66,7 +66,7 @@ These override any instruction to simply "increase the load":
 - **Right adductor (recovering):** gates sandbag lunges, lunge/wall-ball combos, burpee-broad-jump landings, and lunge-to-run tests. If it flares, scale or skip — never push through.
 - **Knee:** gates wall balls and burpee broad jumps.
 - **Thoracic kyphosis:** the athlete cannot hold a free-bar front rack under load. The front squat is on the **Smith machine** (fixed bar path, shelf the bar); the free bar stays light for rack-position skill only. Do not "progress" the free front squat.
-- **Tempo runs are HR-governed** (target 158–165 bpm, upper Z4) at 0% incline — never a Z5 grind. Progress tempo by DURATION, not pace/intensity.
+- **Tempo runs are HR-governed** (target ~152–161 bpm, **hard ceiling 161** — his watch puts Z4 at 151–161 and **Z5 at 162+**; the old "158–165" band was miscalibrated and authorised the Z5 grind it forbade, corrected 2026-08-30 from his 5K HR file) at 0% incline — never a Z5 grind. **Tempo is now INTERVALS (5×1km @ 5:00/km) and progresses by CUTTING THE REST (60→45→30s), NOT by pace** (the old "progress by duration" note predates the switch).
 - **Sleep/recovery is the athlete's #1 limiter.** Do not add training volume/intensity to "fix" underperformance that is really under-recovery.
 
 ## What NOT to record here
