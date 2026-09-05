@@ -598,8 +598,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="header-inner">
     <div class="logo">
       <h1>Hyrox <span>Training</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 152</div>
-      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 152</strong></p>
+      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 153</div>
+      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 153</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -3246,7 +3246,7 @@ return '<div class="bench-header"><h2>Performance Benchmarks &mdash; 72kg Men&rs
 +'</div></div>';
 }
 
-(function(){const today=new Date();today.setHours(0,0,0,0);activeWeek=2;for(let w=20;w>=2;w--){const start=getDate(w,'Monday');start.setHours(0,0,0,0);if(today>=start){activeWeek=w;break;}}})();
+(function(){const today=new Date();today.setHours(0,0,0,0);const nums=WEEKS_META.map(function(m){return m.num;}).sort(function(a,b){return a-b;});activeWeek=nums[0];for(let i=nums.length-1;i>=0;i--){const start=getDate(nums[i],'Monday');start.setHours(0,0,0,0);if(today>=start){activeWeek=nums[i];break;}}})();
 render();
 showStorageWarning();
 if('serviceWorker' in navigator){navigator.serviceWorker.register('/Hyrox-Prep/sw.js');}
