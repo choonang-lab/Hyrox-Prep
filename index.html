@@ -598,8 +598,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="header-inner">
     <div class="logo">
       <h1>Hyrox <span>Training</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 173</div>
-      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 173</strong></p>
+      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 174</div>
+      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 174</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -702,6 +702,7 @@ function fmtDate(d){return d.toLocaleDateString('en-GB',{day:'numeric',month:'sh
 function isToday(d){const t=new Date();return d.getFullYear()===t.getFullYear()&&d.getMonth()===t.getMonth()&&d.getDate()===t.getDate();}
 function isPast(d){const t=new Date();t.setHours(0,0,0,0);return d<t;}
 const WEEKS_META=[{num:2,label:'Week 2',sub:'DVSN Block'},{num:3,label:'Week 3',sub:'Solo Return'},{num:4,label:'Week 4',sub:'Benchmark'},{num:5,label:'Week 5',sub:'Ski & Engine'},{num:6,label:'Week 6',sub:'Solo Block Begins'},{num:7,label:'Week 7',sub:'Strength Build 1'},{num:8,label:'Week 8',sub:'Strength Build 2'},{num:9,label:'Week 9',sub:'Strength Build 3'},{num:10,label:'Week 10',sub:'Strength Build 4'},{num:11,label:'Week 11',sub:'Block 1 Peak'},{num:12,label:'Week 12',sub:'Block 1 Exit Test'},{num:13,label:'Week 13',sub:'Sled Introduction'},{num:14,label:'Week 14',sub:'Sled Build 1'},{num:15,label:'Week 15',sub:'Sled Build 2'},{num:16,label:'Week 16',sub:'Sled Build 3'},{num:17,label:'Week 17',sub:'Race Spec + Compromised Run'},{num:18,label:'Week 18',sub:'Race Spec Peak'},{num:19,label:'Week 19',sub:'Block 2 Deload'},{num:20,label:'Week 20',sub:'Block 2 Exit Test'},{num:21,label:'Week 21',sub:'Block 3 Entry'},{num:22,label:'Week 22',sub:'Block 3A Peak'}];
+const MAXWK=Math.max.apply(null,WEEKS_META.map(function(m){return m.num;}));
 function getPhaseColor(phase){const p=(phase||'').toLowerCase().trim();const map={'unilateral fix':'#1A6B45','total rest':'#6B6860','aerobic base':'#0D6E6E','quarantine':'#B45309','bilateral armor':'#1D4E89','pull & engine':'#6B3FA0','5k speed':'#92560A','active flush':'#0D6E6E','bilateral & ski base':'#1D4E89','unilateral & ski power':'#1A6B45','core & ski engine':'#1E40AF','transit recovery':'#6B6860','dvsn upper':'#2563EB','dvsn lower':'#1E40AF','dvsn hybrid':'#6B3FA0','bilateral & engine':'#1D4E89'};if(p.startsWith('dvsn'))return'#2563EB';return map[p]||'#6B6860';}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
 
@@ -2546,7 +2547,7 @@ function getDayLoadScore(dateStr){
   const dayName=dayNames[d.getDay()];
   // Find week number for this date
   let wk=2;
-  for(let w=20;w>=2;w--){
+  for(let w=MAXWK;w>=2;w--){
     const start=getDate(w,'Monday');
     start.setHours(0,0,0,0);
     const check=new Date(dateStr);check.setHours(0,0,0,0);
@@ -2569,7 +2570,7 @@ function getDayLoadScore(dateStr){
 function getWeekContext(dateStr){
   const d=new Date(dateStr);d.setHours(0,0,0,0);
   let wk=2;
-  for(let w=20;w>=2;w--){
+  for(let w=MAXWK;w>=2;w--){
     const start=getDate(w,'Monday');start.setHours(0,0,0,0);
     if(d>=start){wk=w;break;}
   }
@@ -2584,7 +2585,7 @@ function getTodaySession(dateStr){
   const dayNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const dayName=dayNames[d.getDay()];
   let wk=2;
-  for(let w=20;w>=2;w--){
+  for(let w=MAXWK;w>=2;w--){
     const start=getDate(w,'Monday');start.setHours(0,0,0,0);
     const check=new Date(dateStr);check.setHours(0,0,0,0);
     if(check>=start){wk=w;break;}
@@ -2945,7 +2946,7 @@ function vitalsLogToday(){
   const today2=todayStr();
   // Find today's week
   let todayWk=activeWeek;
-  for(let w=20;w>=2;w--){
+  for(let w=MAXWK;w>=2;w--){
     const start=getDate(w,'Monday');start.setHours(0,0,0,0);
     const now=new Date();now.setHours(0,0,0,0);
     if(now>=start){todayWk=w;break;}
@@ -2961,7 +2962,7 @@ function vitalsLogToday(){
 function goToTraining(){
   // Find today's week
   let todayWk=2;
-  for(let w=20;w>=2;w--){
+  for(let w=MAXWK;w>=2;w--){
     const start=getDate(w,'Monday');start.setHours(0,0,0,0);
     const now=new Date();now.setHours(0,0,0,0);
     if(now>=start){todayWk=w;break;}
