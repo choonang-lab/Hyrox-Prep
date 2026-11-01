@@ -1,5 +1,26 @@
 # HANDOFF.md — Session Continuity & Project State
 
+> # ⛔ STATUS CHANGE (2026-11-01): HYROX PREP IS OVER — THE APP IS NOW A REHAB TOOL
+>
+> **The 27 Nov 2026 race is OFF. The athlete is injured.** Everything below about Block 3, Block 4, the 31 Oct sim, race pacing, station targets and load ramps is **HISTORY, NOT A PLAN**. Do not build Hyrox training from it. It is kept for the record and for the eventual return-to-sport conversation.
+>
+> **DIAGNOSIS (MRI, via his claude.ai chat "Knee pain when bending and lifting leg", 2026-11-01):**
+> - **KNEE: grade 4 patellofemoral chondral lesion** (full-thickness cartilage loss), **bone marrow lesions in TWO locations** (active bone stress response), **joint effusion** driving quadriceps inhibition. ITB normal. **Quad capacity is the single most important rehab variable; glute med is the named weak link.** Onset approx mid-to-late Sept; ~6 weeks offloaded as of 1 Nov.
+> - **LUMBAR: L5-S1 annular tear** (flexion-sensitive), multi-level facet hypertrophy, left foraminal narrowing.
+> - Managed by a **physio**. Training is currently bike + upper body. Considering a brace. On collagen.
+>
+> **⚠ THE OLD GUARDRAILS IN §0 AND §4 ARE NOW WRONG AND DANGEROUS.** In particular the wall-ball knee gate I LIFTED on 2026-09-06 (v170) — the reasoning was sound on the evidence then, but it is void now. **REPLACED BY:**
+> 1. **The physio leads. I do not prescribe knee rehab.** The app is a CONTAINER for their programme, plus tracking. Structural joint injury is a clinical call.
+> 2. **HARD AVOIDS until the physio clears them:** deep loaded knee flexion · kneeling · aggressive quad stretching · **end-range lumbar FLEXION** (the flexion-sensitive L5-S1 tear) · loaded spinal hinging (**no barbell bent-over rows — use chest-supported**) · end-range lumbar extension · impact.
+> 3. **Effusion trend is the primary signal** — it is what suppresses the quad. The Daily Knee Check (swelling / rest pain / stairs) is the most valuable entry in the app.
+> 4. **NUTRITION: 2000 kcal, protein 170g — NOT 160g.** Protein needs RISE during injury; energy restriction worsens anabolic resistance and impairs bone remodelling, and he has an active bone stress response. Revisit any cut ~8 weeks after the effusion settles.
+>
+> **LOAD HISTORY BEFORE ONSET — relevant to the physio and to my own calibration.** Grade 4 cartilage loss is long-standing and did not come from this block. But **bone marrow lesions are load-responsive**, and in the three weeks before he stopped training I: ramped **sandbag 100m -> 285m/week**; restored the sled push to 50m six days after he reported **lower-back strain at 35m on both reps** (W21, 31 Aug — he also opened a separate claude.ai chat about it that day); **lifted the wall-ball knee gate and added a DAILY NEAR-MAX set** (v170). Each step was individually argued and evidence-backed at the time. Collectively I relaxed several guardrails at once while volume climbed steeply. **LESSON: when multiple guardrails are being relaxed in the same block, the cumulative trajectory needs its own review — no single decision looked wrong.**
+>
+> **APP STATE (v178):** race countdown replaced by a rehab-week chip; **Week 30 (Mon 2 Nov) = Rehab Week 1**, 30 entries. W2-W21 logs fully preserved; W22 was built but never trained. Weeks 23-29 do not exist — he stopped training mid-Sept.
+
+---
+
 **Purpose:** This file carries the full working context for the Hyrox-Prep project so any new Claude Code session (e.g. moving from Windows to the Mac desktop app) can pick up exactly where we left off. Read this together with `CLAUDE.md` (architecture + non-negotiable conventions). Treat this file as the source of truth for *session state, decisions, and rationale*; treat the code as the source of truth for *current numbers*. **Verify volatile details (version, loads) against the actual code — this doc can lag.**
 
 > New machine setup: `git clone https://github.com/choonang-lab/Hyrox-Prep.git`, open in Claude Code, and (optionally) tell it "read HANDOFF.md and save the key facts to memory" so continuity persists across sessions on that machine. Re-connect the **Google Drive** connector (claude.ai connectors / `/mcp`) to resume the log-review loop.
