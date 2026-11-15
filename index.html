@@ -9,7 +9,7 @@
 <link rel="manifest" href="manifest.json">
 <meta name="apple-mobile-web-app-title" content="Rebuild">
 <title>The Rebuild</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Archivo:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:#F4F4F1;--surface:#FFFFFF;--surface2:#F0F0EB;--border:#E4E4DE;--border2:#CFCFC8;
@@ -592,15 +592,119 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 /* No accidental text selection from the long-press-to-close gesture */
 .day-log-overlay{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
 .day-log-overlay input,.day-log-overlay textarea{-webkit-user-select:text;user-select:text;}
+
+/* ═══ THE REBUILD refresh (v211): eucalyptus palette, Archivo display type, Today screen, bottom tabs ═══ */
+:root{--bg:#ECEEEA;--surface:#FFFFFF;--surface2:#F5F6F3;--border:#DCE0DB;--border2:#C9CFC9;--text:#15191B;--text2:#3A4246;--muted:#61696E;
+  --accent:#2C6A5A;--accent-bg:#DCEAE4;--t-amber:#A86A16;--t-amber-soft:#F5E6CF;--f-display:'Archivo','Helvetica Neue',Arial,sans-serif;}
+body{background:var(--bg);}
+.site-header{padding:10px 16px 8px;padding-top:max(10px,env(safe-area-inset-top));}
+.logo h1{font-family:var(--f-display);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text);}
+.logo h1 span{background:none;color:var(--accent);padding:0;border-radius:0;}
+.logo .ver{font-size:10.5px;font-weight:600;color:var(--muted);letter-spacing:.06em;margin-top:2px;}
+.logo p{display:none;}
+.race-chip{background:var(--accent-bg);color:var(--accent);border-color:transparent;}
+.hbtn.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+.hbtn.primary:hover,.hbtn.primary:active{background:#245a4c;border-color:#245a4c;color:#fff;}
+.wtab.active{border-bottom-color:var(--accent);}
+.wtab-archive .wtab-name{color:var(--muted);}
+.chip.weight{background:var(--accent-bg);border-color:transparent;color:var(--accent);font-weight:700;}
+.day-log-btn:hover,.day-log-btn:active{background:var(--accent-bg);border-color:var(--accent);color:var(--accent);}
+.day-log-btn.all-done{background:var(--accent);border-color:var(--accent);color:#fff;}
+body:not([data-view="week"]) .week-nav-wrap{display:none;}
+#mainContent{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px));}
+
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:180;display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-top:1px solid var(--border);
+  padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px));}
+@media (min-width:700px){.tabbar{left:50%;right:auto;transform:translateX(-50%);width:480px;bottom:14px;border:1px solid var(--border);border-radius:18px;box-shadow:0 10px 30px -14px rgba(0,0,0,.28);padding-bottom:6px;}}
+.tabbar .tab{background:none;border:0;padding:6px 0;font-family:inherit;font-size:11.5px;font-weight:600;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
+.tabbar .tab svg{width:22px;height:22px;}
+.tabbar .tab[aria-current="page"]{color:var(--accent);}
+.tabbar .tab:focus-visible,.tdy button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+.tdy{max-width:560px;margin:0 auto;padding:16px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px;color:var(--text);}
+.tdy button{font-family:inherit;color:inherit;}
+.tdy-banner{font-size:13px;color:var(--muted);background:var(--surface2);border-radius:10px;padding:9px 12px;}
+.tdy-day{font-family:var(--f-display);font-weight:800;font-size:36px;line-height:1;margin:0 0 6px;letter-spacing:-.01em;}
+.tdy-sub{color:var(--muted);font-size:14px;}
+.tdy-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.tdy-chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:5px 11px;border-radius:999px;background:var(--surface);border:1px solid var(--border);}
+.tdy-chip b{font-family:var(--f-display);font-size:15px;font-variant-numeric:tabular-nums;}
+.tdy-chip.streak{background:var(--t-amber-soft);border-color:transparent;}
+.tdy-chip.streak b{color:var(--t-amber);}
+.tdy-chip.link{cursor:pointer;color:var(--accent);border-color:var(--accent);background:var(--surface);}
+.tdy-weekbar{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted);}
+.tdy-arrow{width:34px;height:34px;border-radius:9px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:18px;line-height:1;}
+.tdy-arrow:disabled{opacity:.35;cursor:default;}
+.tdy-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;}
+.tdy-dbtn{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:8px 0 7px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;}
+.tdy-dbtn .dl{font-size:10.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;}
+.tdy-dbtn .dn{font-family:var(--f-display);font-weight:700;font-size:17px;font-variant-numeric:tabular-nums;}
+.tdy-dbtn .dot{width:6px;height:6px;border-radius:50%;background:var(--border);}
+.tdy-dbtn.done .dot{background:var(--accent);}
+.tdy-dbtn.sel{border-color:var(--text);box-shadow:inset 0 0 0 1px var(--text);}
+.tdy-dbtn[aria-current="date"]{background:var(--text);border-color:var(--text);color:var(--surface);}
+.tdy-dbtn[aria-current="date"] .dl{color:var(--surface);opacity:.7;}
+.tdy-dbtn[aria-current="date"].done .dot{background:var(--accent-bg);}
+.tdy-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:4px 14px 6px;}
+.tdy-floor{border:1.5px solid var(--accent);}
+.tdy-floor.complete{background:var(--accent-bg);}
+.tdy-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:10px 0 4px;}
+.tdy-head h2{font-family:var(--f-display);font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:0;}
+.tdy-floor .tdy-head h2{color:var(--accent);}
+.tdy-head>span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;}
+.tdy-link{background:none;border:0;padding:0;font-size:13px;font-weight:600;color:var(--accent) !important;cursor:pointer;}
+.tdy-row{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:start;padding:10px 0;border-top:1px solid var(--border);}
+.tdy-head + .tdy-row{border-top:0;}
+.tdy-tick{width:36px;height:36px;margin:2px 0 0 2px;border-radius:50%;border:2px solid var(--border2);background:transparent;cursor:pointer;display:grid;place-items:center;padding:0;}
+.tdy-tick svg{width:18px;height:18px;opacity:0;}
+.tdy-tick[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);}
+.tdy-tick[aria-pressed="true"] svg{opacity:1;}
+.tdy-row.big .tdy-tick{width:40px;height:40px;margin:0;}
+.tdy-body{min-width:0;}
+.tdy-name{font-weight:600;font-size:15.5px;line-height:1.3;background:none;border:0;padding:0;text-align:left;cursor:pointer;display:block;width:100%;}
+.tdy-row.big .tdy-name{font-family:var(--f-display);font-size:18px;font-weight:700;}
+.tdy-row.is-done .tdy-name{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px;}
+.tdy-st{display:inline-block;margin-left:8px;font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;background:var(--surface2);color:var(--muted);text-decoration:none;vertical-align:2px;}
+.tdy-dose{color:var(--muted);font-size:13.5px;margin-top:2px;}
+.tdy-note{font-size:13px;margin-top:6px;padding:7px 10px;border-radius:9px;background:var(--surface2);border-left:3px solid var(--accent);}
+.tdy-parts{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
+.tdy-parts span{font-size:12px;padding:3px 8px;border-radius:6px;background:var(--surface2);color:var(--muted);}
+.tdy-more{margin-top:8px;display:grid;gap:8px;}
+.tdy-more[hidden]{display:none;}
+.tdy-meta{font-size:12.5px;color:var(--muted);}
+.tdy-cue{font-size:13.5px;line-height:1.5;background:var(--surface2);border-radius:10px;padding:10px 12px;overflow-wrap:anywhere;}
+.tdy-log{justify-self:start;border:1.5px solid var(--accent);background:var(--surface);color:var(--accent) !important;border-radius:9px;padding:7px 12px;font-size:13px;font-weight:600;cursor:pointer;}
+.tdy-check{margin-top:10px;display:grid;gap:9px;}
+.tdy-lab{font-size:12px;color:var(--muted);letter-spacing:.03em;margin-bottom:4px;}
+.tdy-seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surface2);border-radius:10px;padding:3px;gap:3px;}
+.tdy-seg button{border:0;background:transparent;border-radius:8px;padding:8px 0;font-size:13px;cursor:pointer;color:var(--muted) !important;}
+.tdy-seg button[aria-pressed="true"]{background:var(--surface);color:var(--text) !important;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.12);}
+.tdy-step{display:flex;align-items:center;gap:10px;}
+.tdy-step button{width:34px;height:34px;border-radius:9px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:18px;line-height:1;}
+.tdy-step output{font-family:var(--f-display);font-weight:700;font-size:20px;min-width:40px;text-align:center;font-variant-numeric:tabular-nums;}
+.tdy-step small{color:var(--muted);font-size:12px;}
+.tdy-rest{padding:12px 0 14px;color:var(--muted);font-size:14px;}
+.tdy-rest b{display:block;color:var(--text);font-family:var(--f-display);font-size:18px;margin-bottom:3px;}
+.tdy-btoggle{width:100%;display:flex;justify-content:space-between;align-items:center;background:transparent;border:1px dashed var(--border2);border-radius:16px;padding:13px 14px;cursor:pointer;font-size:14px;color:var(--muted) !important;}
+.tdy-btoggle svg{transition:transform .2s;}
+.tdy-btoggle[aria-expanded="true"] svg{transform:rotate(180deg);}
+.tdy-bonus .tdy-card{margin-top:8px;}
+.tdy-bar{display:grid;gap:5px;padding:9px 0;border-top:1px solid var(--border);}
+.tdy-head + .tdy-bar{border-top:0;}
+.tdy-bl{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;}
+.tdy-bl span:last-child{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;}
+.tdy-track{height:7px;border-radius:5px;background:var(--surface2);overflow:hidden;}
+.tdy-fill{height:100%;border-radius:5px;background:var(--accent);}
+@media (prefers-reduced-motion:reduce){.tdy-btoggle svg{transition:none;}}
 </style>
 </head>
-<body>
+<body data-view="today">
 <header class="site-header">
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 210</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 210</strong></p>
+      <div class="ver">VERSION 211</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 211</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -693,6 +797,7 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   </div>
 </div>
 <div class="toast" id="toast"></div>
+<nav class="tabbar" id="tabbar" aria-label="App sections"><button class="tab" type="button" data-view="today" onclick="showToday(true)"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Today</button><button class="tab" type="button" data-view="week" onclick="goWeekTab()"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Week</button><button class="tab" type="button" data-view="progress" onclick="showProgress()"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V11M10 19V6M16 19v-5M21 19H3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Progress</button><button class="tab" type="button" data-view="vitals" onclick="showVitals()"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Vitals</button></nav>
 <div class="card-overlay" id="cardOverlay" onclick="collapseCard()"></div>
 <script>
 const WEEK2_MON=new Date(2026,3,20);
@@ -1919,8 +2024,20 @@ function showStorageWarning(){if(_storageOk)return;const b=document.getElementBy
 
 let activeWeek=0,editingId=null,copyingWid=null,dayLogState=null;
 
-function render(){renderNav();renderMain();}
-function renderNav(){const nav=document.getElementById('weekNav');nav.innerHTML=WEEKS_META.map(wm=>{const mon=getDate(wm.num,'Monday');const sun=getDate(wm.num,'Sunday');const dateStr=`${fmtDate(mon)} – ${fmtDate(sun)}`;return`<button class="wtab ${activeWeek===wm.num?'active':''}" onclick="switchWeek(${wm.num})"><span class="wtab-name">${wm.label}</span><span class="wtab-dates">${dateStr}</span></button>`;}).join('') + '<button class="wtab ' + (activeWeek==="bench" ? "active" : "") + '" onclick="showBench()"><span class="wtab-name" style="color:var(--accent)">&#128202; Benchmarks</span><span class="wtab-dates">Standards &amp; Testing</span></button>' + '<button class="wtab ' + (activeWeek==="vitals" ? "active" : "") + '" onclick="showVitals()"><span class="wtab-name" style="color:#6B3FA0">&#10084; Vitals</span><span class="wtab-dates">Daily Readiness</span></button>' + '<button class="wtab ' + (activeWeek==="progress" ? "active" : "") + '" onclick="showProgress()"><span class="wtab-name" style="color:#4ade80">&#128200; Progress</span><span class="wtab-dates">Milestones</span></button>';
+function render(){renderNav();if(activeWeek==='today'){renderToday();return;}renderMain();}
+function renderNav(){
+  var nav=document.getElementById('weekNav'); if(!nav)return;
+  var ctx=todayCtx(); var cur=ctx?ctx.week:null;
+  var activeIsArc=(typeof activeWeek==='number')&&activeWeek<30;
+  var showArc=!!_showArchive||activeIsArc;
+  var html='<button class="wtab wtab-archive" onclick="toggleArchive()"><span class="wtab-name">'+(showArc?'Hide':'Show')+' 2026 Hyrox</span><span class="wtab-dates">Weeks 2 to 29</span></button>';
+  html+=WEEKS_META.filter(function(wm){return showArc||wm.num>=30;}).map(function(wm){var mon=getDate(wm.num,'Monday');var sun=getDate(wm.num,'Sunday');
+    return '<button class="wtab '+(activeWeek===wm.num?'active':'')+'" onclick="switchWeek('+wm.num+')"><span class="wtab-name">'+wm.label+(wm.num===cur?' · now':'')+'</span><span class="wtab-dates">'+fmtDate(mon)+' – '+fmtDate(sun)+'</span></button>';}).join('');
+  html+='<button class="wtab '+(activeWeek==='bench'?'active':'')+'" onclick="showBench()"><span class="wtab-name">Benchmarks</span><span class="wtab-dates">Standards &amp; testing</span></button>';
+  nav.innerHTML=html;
+  updateTabbar();
+  var a=nav.querySelector('.wtab.active'), wrap=nav.parentElement;
+  if(a&&wrap) wrap.scrollLeft=Math.max(0,a.offsetLeft-wrap.clientWidth/2+a.offsetWidth/2);
 }
 function estimateMins(w){
   const mv=(w.movement||'').toLowerCase();
@@ -2211,7 +2328,7 @@ function renderCard(w,dim,dateStr){const ds=dateStr||(new Date().toISOString().s
 
 
 
-function switchWeek(n){activeWeek=n;var vv=document.getElementById('vitalsView');if(vv)vv.style.display='none';var bv=document.getElementById('benchView');if(bv)bv.style.display='none';var pv=document.getElementById('progressView');if(pv)pv.style.display='none';render();window.scrollTo({top:0,behavior:'instant'});}
+function switchWeek(n){activeWeek=n;_lastWeek=n;setView('week');var vv=document.getElementById('vitalsView');if(vv)vv.style.display='none';var bv=document.getElementById('benchView');if(bv)bv.style.display='none';var pv=document.getElementById('progressView');if(pv)pv.style.display='none';render();window.scrollTo({top:0,behavior:'instant'});}
 
 
 function openDayLog(week,dayName){
@@ -2643,6 +2760,7 @@ function showToast(msg){const t=document.getElementById('toast');t.textContent=m
 
 
 function showBench(){
+  setView('week');
   var _pv=document.getElementById('progressView');if(_pv)_pv.style.display='none';
   activeWeek='bench';
   renderNav();
@@ -2829,6 +2947,7 @@ function calcReadiness(entry,vitals){
 }
 
 function showVitals(){
+  setView('vitals');
   var _pv=document.getElementById('progressView');if(_pv)_pv.style.display='none';
   activeWeek='vitals';
   renderNav();
@@ -3377,6 +3496,144 @@ return '<div class="bench-header"><h2>Performance Benchmarks &mdash; 72kg Men&rs
 +'</div></div>';
 }
 
+/* ═══ Today screen (v211 redesign) ═══
+   Ticks write EXACTLY what the week view writes: checks[getDate(week,day).toISOString().slice(0,10)] = {status,done,...}
+   then persist(). The knee check is stored on the morning FLOOR entry as checks[ds].knee = {sw, stairs}. */
+var _tSel, _tOpen, _tBonusOpen, _showArchive, _lastWeek;
+var T_CHECK='<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 6.8" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var T_DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+function setView(v){document.body.dataset.view=v;updateTabbar();setTimeout(function(){if(typeof syncHeaderOffsets==='function')syncHeaderOffsets();},0);}
+function updateTabbar(){var v=document.body.dataset.view||'week';document.querySelectorAll('#tabbar .tab').forEach(function(t){var tv=t.getAttribute('data-view');if(tv===v||(tv==='week'&&v==='bench'))t.setAttribute('aria-current','page');else t.removeAttribute('aria-current');});}
+function toggleArchive(){_showArchive=!_showArchive;renderNav();}
+function todayCtx(){var now=new Date();now.setHours(0,0,0,0);var names=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  for(var i=0;i<WEEKS_META.length;i++){var m=WEEKS_META[i];var mon=getDate(m.num,'Monday');mon.setHours(0,0,0,0);var diff=Math.round((now-mon)/86400000);if(diff>=0&&diff<7)return{week:m.num,day:names[now.getDay()]};}
+  return null;}
+function goWeekTab(){var c=todayCtx();switchWeek(_lastWeek||(c?c.week:MAXWK));}
+function showToday(reset){
+  ['vitalsView','benchView','progressView'].forEach(function(id){var e=document.getElementById(id);if(e)e.style.display='none';});
+  if(reset||!_tSel){var c=todayCtx();_tSel=c?{week:c.week,day:c.day}:{week:MAXWK,day:'Monday'};}
+  activeWeek='today';setView('today');renderNav();renderToday();window.scrollTo({top:0,behavior:'instant'});
+}
+function tEsc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function tTier(mv){var m=(mv||'').match(/^(FLOOR|GOAL|BONUS)\b/);return m?m[1]:'GOAL';}
+function tName(mv){return (mv||'').replace(/^(FLOOR|GOAL|BONUS)\s*[—–-]\s*/,'');}
+function tKey(week,day){return getDate(week,day).toISOString().slice(0,10);}
+function tStatus(w,ds){var c=(w.checks||{})[ds];return c?(c.status||(c.done?'done':'none')):'none';}
+function tFloorDone(week,day){var f=workouts.filter(function(x){return x.week===week&&x.day===day&&/^FLOOR/.test(x.movement||'');});var k=tKey(week,day);return f.length>0&&f.every(function(x){return tStatus(x,k)==='done';});}
+function todayToggle(id){
+  var w=workouts.find(function(x){return x.id===id;}); if(!w)return;
+  var ds=tKey(w.week,w.day);
+  if(!w.checks)w.checks={};
+  if(!w.checks[ds])w.checks[ds]={done:false,notes:'',status:'none'};
+  var cur=w.checks[ds].status||(w.checks[ds].done?'done':'none');
+  w.checks[ds].status=(cur==='done')?'none':'done';
+  w.checks[ds].done=w.checks[ds].status==='done';
+  if(w.checks[ds].status!=='skip')w.checks[ds].skipReason='';
+  if(w.checks[ds].status!=='deferred')w.checks[ds].deferredTo='';
+  persist(); if(navigator.vibrate)navigator.vibrate(15); renderToday();
+}
+function todayKnee(id,field,val){
+  var w=workouts.find(function(x){return x.id===id;}); if(!w)return;
+  var ds=tKey(w.week,w.day);
+  if(!w.checks)w.checks={};
+  if(!w.checks[ds])w.checks[ds]={done:false,notes:'',status:'none'};
+  var k=w.checks[ds].knee||{};
+  if(field==='sw'){ if(k.sw===val) delete k.sw; else k.sw=val; }
+  if(field==='st'){ var b=(typeof k.stairs==='number')?k.stairs:0; k.stairs=Math.max(0,Math.min(10,b+val)); }
+  w.checks[ds].knee=k; persist(); renderToday();
+}
+function todayExpand(id){_tOpen=_tOpen||{};_tOpen[id]=!_tOpen[id];var el=document.getElementById('tmore-'+id);if(el)el.hidden=!_tOpen[id];}
+function todayPick(day){_tSel.day=day;renderToday();}
+function todayShiftWeek(d){var nums=WEEKS_META.map(function(m){return m.num;});var j=nums.indexOf(_tSel.week)+d;if(j<0||j>=nums.length)return;_tSel.week=nums[j];renderToday();}
+function todayBonus(){_tBonusOpen=!_tBonusOpen;renderToday();}
+function kneeTrend(){var recs=[];workouts.forEach(function(w){if(!/^FLOOR/.test(w.movement||''))return;Object.keys(w.checks||{}).forEach(function(d){var c=w.checks[d];if(c&&c.knee&&c.knee.sw)recs.push({d:d,sw:c.knee.sw});});});
+  if(!recs.length)return null;recs.sort(function(a,b){return a.d<b.d?1:-1;});return {better:'settling',same:'steady',worse:'flaring'}[recs[0].sw]||null;}
+function vitalsLoggedToday(){try{var d=new Date();var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');return loadVitals().some(function(v){return v.date===k&&(v.sleep||v.hrv||v.rhr);});}catch(e){return false;}}
+function tKneeHTML(w,ds){
+  var k=(((w.checks||{})[ds]||{}).knee)||{};
+  var b=function(v){return '<button type="button" aria-pressed="'+(k.sw===v)+'" onclick="todayKnee(\''+w.id+'\',\'sw\',\''+v+'\')">'+v.charAt(0).toUpperCase()+v.slice(1)+'</button>';};
+  var st=(typeof k.stairs==='number')?k.stairs:'–';
+  return '<div class="tdy-check"><div><div class="tdy-lab">Knee swelling vs yesterday</div><div class="tdy-seg">'+b('better')+b('same')+b('worse')+'</div></div>'
+    +'<div><div class="tdy-lab">Stairs down, pain 0–10</div><div class="tdy-step"><button type="button" aria-label="Lower" onclick="todayKnee(\''+w.id+'\',\'st\',-1)">−</button><output>'+st+'</output><button type="button" aria-label="Higher" onclick="todayKnee(\''+w.id+'\',\'st\',1)">+</button><small>0 is pain-free</small></div></div></div>';
+}
+function tRow(w,ds,big){
+  var st=tStatus(w,ds), done=st==='done', nm=tName(w.movement);
+  var morning=/^FLOOR/.test(w.movement||'')&&/(Daily 15 min|Rest Day Check)/.test(w.movement||'');
+  var tag=st==='skip'?'<span class="tdy-st">Skipped</span>':st==='partial'?'<span class="tdy-st">Partial</span>':st==='deferred'?'<span class="tdy-st">Deferred</span>':'';
+  var skip={'N/A':1,'Bodyweight':1,'Bodyweight / none':1,'As needed':1,'As Needed':1};
+  var meta=[w.weight,w.tempo,w.rest].filter(function(x){return x&&!skip[x];}).map(tEsc).join(' · ');
+  var note=((w.checks||{})[ds]||{}).notes;
+  var open=!!(_tOpen&&_tOpen[w.id]);
+  var dose=morning?'<div class="tdy-parts">'+String(w.sets||'').split('·').map(function(p){return '<span>'+tEsc(p.trim())+'</span>';}).join('')+'</div>'+tKneeHTML(w,ds)
+                  :'<div class="tdy-dose">'+tEsc(w.sets)+'</div>';
+  return '<div class="tdy-row'+(big?' big':'')+(done?' is-done':'')+'">'
+    +'<button class="tdy-tick" type="button" aria-pressed="'+done+'" aria-label="Mark '+tEsc(nm)+' done" onclick="todayToggle(\''+w.id+'\')">'+T_CHECK+'</button>'
+    +'<div class="tdy-body"><button class="tdy-name" type="button" aria-expanded="'+open+'" onclick="todayExpand(\''+w.id+'\')">'+tEsc(nm)+tag+'</button>'
+    +dose+(note?'<div class="tdy-note">'+tEsc(note)+'</div>':'')
+    +'<div class="tdy-more" id="tmore-'+w.id+'"'+(open?'':' hidden')+'>'
+    +(meta?'<div class="tdy-meta">'+meta+'</div>':'')+(w.cue?'<div class="tdy-cue">'+tEsc(w.cue)+'</div>':'')
+    +'<button class="tdy-log" type="button" onclick="openExLog(\''+w.id+'\')">Log sets and notes</button></div></div></div>';
+}
+function tProgressHTML(){
+  var p=(typeof loadProgress==='function')?loadProgress():{}; var defs=[];
+  if(typeof PROG_DEFS!=='undefined')PROG_DEFS.forEach(function(g){g.items.forEach(function(it){defs.push(it);});});
+  var label={wpu:'Weighted pull-up',wdip:'Weighted dip',hswrist:'Handstand, wrist to wall'};
+  var rows=['wpu','wdip','hswrist'].map(function(k){return defs.find(function(d){return d.k===k;});}).filter(Boolean).map(function(it){
+    var set=p[it.k]!==undefined&&p[it.k]!==null, v=set?p[it.k]:0, pct=set?progPct(it,v):0, u=it.unit||'';
+    var val=set?((it.invert?v:'+'+v)+u+' / '+(it.invert?it.target:'+'+it.target)+u):'not set';
+    return '<div class="tdy-bar"><div class="tdy-bl"><span>'+label[it.k]+'</span><span>'+val+'</span></div><div class="tdy-track"><div class="tdy-fill" style="width:'+pct.toFixed(0)+'%"></div></div></div>';
+  }).join('');
+  return '<section class="tdy-card"><div class="tdy-head"><h2>Progress</h2><button class="tdy-link" type="button" onclick="showProgress()">All milestones</button></div>'+rows+'</section>';
+}
+function renderToday(){
+  var main=document.getElementById('mainContent'); if(!main||!_tSel)return;
+  var W=_tSel.week, D=_tSel.day, ds=tKey(W,D), date=getDate(W,D);
+  var ctx=todayCtx(), isToday=!!(ctx&&ctx.week===W&&ctx.day===D);
+  var BO={'Morning Protocol':0,'Warm-Up':1,'Main Session':2,'Finisher':3,'Mobility':4};
+  var dw=workouts.filter(function(x){return x.week===W&&x.day===D;}).sort(function(a,b){return (BO[a.block]!=null?BO[a.block]:9)-(BO[b.block]!=null?BO[b.block]:9);});
+  var floor=dw.filter(function(w){return tTier(w.movement)==='FLOOR';}), goal=dw.filter(function(w){return tTier(w.movement)==='GOAL';}), bonus=dw.filter(function(w){return tTier(w.movement)==='BONUS';});
+  var ph=((goal[0]||bonus[0]||dw[0]||{}).phase)||'';
+  var focus=ph.replace(/^(Goal|Rehab|B3)\s*[—–-]\s*/,'');
+  var t0=new Date(); t0.setHours(0,0,0,0);
+  var rel=isToday?'':(date<t0?' · past':' · upcoming');
+  var nums=WEEKS_META.map(function(m){return m.num;}), wi=nums.indexOf(W), meta=WEEKS_META[wi]||{};
+  var kt=kneeTrend(), streak=floorStreak();
+  var h='';
+  if(!ctx) h+='<div class="tdy-banner">Today falls outside the plan, so this shows Week '+W+'.</div>';
+  h+='<section><h1 class="tdy-day">'+tEsc(D)+'</h1><div class="tdy-sub">'+fmtDate(date)+' · Week '+W+(focus?' · '+tEsc(focus):'')+rel+'</div>'
+    +'<div class="tdy-chips"><span class="tdy-chip streak">Floor streak <b>'+streak+'</b> '+(streak===1?'day':'days')+'</span>'
+    +(kt?'<span class="tdy-chip">Knee <b style="font-family:inherit;font-size:13px">'+kt+'</b></span>':'')
+    +((isToday&&!vitalsLoggedToday())?'<button class="tdy-chip link" type="button" onclick="showVitals()">Log today\'s vitals</button>':'')
+    +'</div></section>';
+  h+='<div class="tdy-weekbar"><button class="tdy-arrow" type="button" aria-label="Previous week" onclick="todayShiftWeek(-1)"'+(wi<=0?' disabled':'')+'>‹</button>'
+    +'<span>Week '+W+(meta.sub?' · '+tEsc(meta.sub):'')+'</span>'
+    +'<button class="tdy-arrow" type="button" aria-label="Next week" onclick="todayShiftWeek(1)"'+(wi>=nums.length-1?' disabled':'')+'>›</button></div>';
+  h+='<nav class="tdy-days" aria-label="Days of the week">'+T_DAYS.map(function(dn){var dd=getDate(W,dn);
+      var cur=(ctx&&ctx.week===W&&ctx.day===dn);
+      return '<button class="tdy-dbtn'+(dn===D?' sel':'')+(tFloorDone(W,dn)?' done':'')+'" type="button" onclick="todayPick(\''+dn+'\')"'+(cur?' aria-current="date"':'')+'><span class="dl">'+dn.slice(0,3)+'</span><span class="dn">'+dd.getDate()+'</span><span class="dot"></span></button>';}).join('')+'</nav>';
+  if(floor.length){
+    var nd=floor.filter(function(w){return tStatus(w,ds)==='done';}).length, all=nd===floor.length;
+    h+='<section class="tdy-card tdy-floor'+(all?' complete':'')+'" aria-label="Must do"><div class="tdy-head"><h2>Must do</h2><span>'+(all?'Done. The day counts.':nd+' of '+floor.length)+'</span></div>'
+      +floor.map(function(w){return tRow(w,ds,true);}).join('')+'</section>';
+  }
+  if(goal.length){
+    h+='<section class="tdy-card" aria-label="Session"><div class="tdy-head"><h2>'+tEsc(focus||'Session')+'</h2></div>'+goal.map(function(w){return tRow(w,ds,false);}).join('')+'</section>';
+  } else if(/rest/i.test(ph)){
+    h+='<section class="tdy-card"><div class="tdy-rest"><b>Rest day.</b>Healing happens today. The knee check and your steps are all there is.</div></section>';
+  } else if(!dw.length){
+    h+='<section class="tdy-card"><div class="tdy-rest"><b>Nothing planned.</b>This day has no entries yet.</div></section>';
+  }
+  if(bonus.length){
+    var bd=bonus.filter(function(w){return tStatus(w,ds)==='done';}).length;
+    h+='<section class="tdy-bonus"><button class="tdy-btoggle" type="button" aria-expanded="'+(!!_tBonusOpen)+'" onclick="todayBonus()"><span>If you have time · '+bonus.length+(bd?' · '+bd+' done':'')+'</span>'
+      +'<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
+      +(_tBonusOpen?'<div class="tdy-card">'+bonus.map(function(w){return tRow(w,ds,false);}).join('')+'</div>':'')+'</section>';
+  }
+  h+=tProgressHTML();
+  main.innerHTML='<div class="tdy" id="todayView">'+h+'</div>';
+}
+
+
 (function(){const today=new Date();today.setHours(0,0,0,0);const nums=WEEKS_META.map(function(m){return m.num;}).sort(function(a,b){return a-b;});activeWeek=nums[0];for(let i=nums.length-1;i>=0;i--){const start=getDate(nums[i],'Monday');start.setHours(0,0,0,0);if(today>=start){activeWeek=nums[i];break;}}})();
 render();
 showStorageWarning();
@@ -3384,35 +3641,11 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/Hyrox-Prep/s
 
 // ── Smart startup: vitals-first if not logged today ──────────────
 (function smartStart(){
-  const d=new Date();
-  const today = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  let vitalsLogged = false;
-  try {
-    const vitals = JSON.parse(localStorage.getItem('hyrox_vitals') || '[]');
-    vitalsLogged = vitals.some(v => v.date === today);
-  } catch(e) {}
-
-  if (!vitalsLogged) {
-    // Vitals not logged — open vitals tab immediately
-    setTimeout(function(){
-      showVitals();
-    }, 100);
-    return;
-  }
-
-  // Vitals logged — open today's training day as normal
-  const activeTab = document.querySelector('.wtab.active');
-  if(activeTab){
-    activeTab.scrollIntoView({behavior:'instant', block:'nearest', inline:'center'});
-  }
-  setTimeout(function(){
-    const todayCol = document.querySelector('.day-col.is-today');
-    if(todayCol){
-      const offset = 120;
-      const top = todayCol.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({top: Math.max(0, top), behavior:'instant'});
-    }
-  }, 300);
+  // v211: the app opens on Today. The vitals nudge is a chip on the Today screen instead of a redirect.
+  // Deferred to DOMContentLoaded: Today borrows floorStreak/PROG_DEFS from the SECOND <script> block,
+  // which has not executed yet when this first block runs.
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){showToday(true);});}
+  else{showToday(true);}
 })();
 </script>
 <script>
@@ -3426,21 +3659,24 @@ function loadProgress(){try{return JSON.parse(localStorage.getItem('hyrox_progre
 function saveProgress(p){try{localStorage.setItem('hyrox_progress',JSON.stringify(p));}catch(e){}}
 function setProg(k,v){var p=loadProgress();var n=parseFloat(v);p[k]=isNaN(n)?0:n;saveProgress(p);renderProgressTab();}
 function floorStreak(){
-  var floors=workouts.filter(function(w){return /^FLOOR/.test(w.movement||'');});
-  var items=floors.map(function(w){
-    var d=getDate(w.week,w.day); d.setHours(0,0,0,0);
-    var key=d.toISOString().slice(0,10);
+  var byDay={};
+  workouts.forEach(function(w){
+    if(!/^FLOOR/.test(w.movement||''))return;
+    var key=getDate(w.week,w.day).toISOString().slice(0,10);
+    var d=getDate(w.week,w.day); d.setHours(0,0,0,0); var t=d.getTime();
     var c=(w.checks||{})[key];
-    return {d:d.getTime(),done:!!(c&&c.done)};
+    if(!byDay[t]) byDay[t]={all:true};
+    if(!(c&&c.done)) byDay[t].all=false;
   });
-  items.sort(function(a,b){return b.d-a.d;});
-  var today=new Date(); today.setHours(0,0,0,0); var t=today.getTime();
-  var streak=0;
-  for(var i=0;i<items.length;i++){
-    if(items[i].d>t) continue;
-    if(items[i].done) streak++; else break;
+  var today=new Date(); today.setHours(0,0,0,0); var tt=today.getTime();
+  var days=Object.keys(byDay).map(Number).filter(function(t){return t<=tt;}).sort(function(a,b){return b-a;});
+  var s=0;
+  for(var i=0;i<days.length;i++){
+    if(byDay[days[i]].all) s++;
+    else if(days[i]===tt) continue;   // today still in progress: do not reset the streak
+    else break;
   }
-  return streak;
+  return s;
 }
 var PROG_DEFS=[
  {grp:'INJURY RECOVERY',sub:'left knee - the gate on everything else',items:[
@@ -3473,6 +3709,7 @@ function progPct(it,v){
   return Math.max(0,Math.min(100,v/tgt*100));
 }
 function showProgress(){
+  setView('progress');
   activeWeek='progress'; renderNav(); window.scrollTo({top:0,behavior:'instant'});
   document.getElementById('mainContent').innerHTML='';
   var bv=document.getElementById('benchView'); if(bv)bv.style.display='none';
@@ -3528,6 +3765,7 @@ function renderProgressTab(){
      +'FLOOR streak is counted automatically from your ticked FLOOR entries.</p>';
   pv.innerHTML=html;
 }
+
 
 /* Race-day countdown chip */
 function updateRaceCountdown(){var el=document.getElementById('raceCountdown');if(!el)return;var rehabStart=new Date('2026-11-02T00:00:00');var now=new Date();var days=Math.floor((now-rehabStart)/86400000);if(days<0){el.textContent='\u{1FA79} rehab starts 2 Nov';return;}var wk=Math.floor(days/7)+1;el.textContent='\u{1FA79} rehab \u2014 week '+wk;}

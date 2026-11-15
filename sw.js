@@ -1,4 +1,4 @@
-const CACHE = 'hyrox-v210';
+const CACHE = 'hyrox-v211';
 
 // On install — skip waiting so new SW activates immediately
 self.addEventListener('install', () => self.skipWaiting());
