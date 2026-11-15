@@ -1,7 +1,7 @@
 {
-  "name": "Hyrox Training Plan",
-  "short_name": "Hyrox",
-  "description": "Blocks 1 & 2 Training Plan — Weeks 2–20",
+  "name": "The Rebuild",
+  "short_name": "Rebuild",
+  "description": "Rehab and skill training — knee rehab, handstand, bar muscle-up. Hyrox returns in 2027.",
   "start_url": "/Hyrox-Prep/",
   "scope": "/Hyrox-Prep/",
   "display": "standalone",

@@ -7,12 +7,12 @@ Project context and working conventions for Claude Code. **Read this fully befor
 > **Before running a weekly log review or building/calibrating a training block, work through the PRE-FLIGHT CHECKLIST at the top of `HANDOFF.md` (§0).** It is the enforcement layer for the guardrails and design principles — the doc is long, so §0 is what actually gets applied. Do not skip it.
 
 ## What this is
-A single-page Progressive Web App that delivers a personalized Hyrox training plan and logs sessions. Hosted on GitHub Pages at `choonang-lab.github.io/Hyrox-Prep`. It supports one athlete's race: Hyrox Men's Open, target sub-1:15, **Friday 27 November 2026**.
+A single-page Progressive Web App that delivers one athlete's training plan and logs sessions. Hosted on GitHub Pages at `choonang-lab.github.io/Hyrox-Prep`. **⛔ As of Nov 2026 the 27 Nov 2026 Hyrox race is OFF (injury).** The app currently runs as **"The Rebuild"** — knee rehab + handstand + bar muscle-up — with Hyrox returning as a **Nov 2027** target (decision point ~April 2027); restore the Hyrox name then. See `HANDOFF.md` status banner.
 
 No framework, no build step, no dependencies. Vanilla HTML + CSS + JS.
 
 ## Files
-- `index.html` — the entire app (HTML, CSS, and JS in one file, ~3,200 lines). Authoritative for plan structure.
+- `index.html` — the entire app (HTML, CSS, and JS in one file, ~3,500 lines). Authoritative for plan structure.
 - `sw.js` — service worker (offline cache). Its cache name MUST be bumped on every release (see Versioning).
 - `deploy.py` — one-command release. `python3 deploy.py "msg"` bumps VERSION+BUILD+sw cache in sync, syntax-checks via JavaScriptCore (node is not installed), commits ALL changes, pushes, and polls the live URL. `python3 deploy.py --check` validates + shows the next version without touching git. See Deploy workflow.
 
@@ -34,7 +34,7 @@ Result: structure comes from the HTML; the athlete's logs are always preserved. 
 ## Non-negotiable conventions
 1. **Anchor edits by `week|day|movement`**, never by `id`/`uid()`.
 2. **Cue and string fields are single-quoted JS** — do NOT put apostrophes/contractions in them (write "do not", not "don't"). One unescaped `'` breaks the entire array.
-3. **Version bump on EVERY release — three places, kept in sync:**
+3. **Version bump on EVERY release — three places, kept in sync** (`deploy.py` matches the literal tokens `VERSION NNN</div>` and `BUILD NNN</strong>` — never restyle those):
    - `VERSION NN` — the visible tag under the title in `index.html`
    - `BUILD NN` — the subtitle line in `index.html`
    - `hyrox-vNN` — the CACHE name in `sw.js`
@@ -62,6 +62,7 @@ Then verify: (a) the header shows the NEW VERSION number, (b) the change renders
 
 ## Training-context guardrails (apply to ANY programming change)
 These override any instruction to simply "increase the load":
+- **⛔ CURRENT INJURY (Sep 2026, supersedes the older knee/adductor gates below where they conflict):** LEFT knee grade 4 patellofemoral chondral lesion + bone marrow lesions ×2 + effusion — the **physio leads knee rehab**; no deep loaded knee flexion, no kneeling, no left-side terminal open-chain extension, no impact. LUMBAR L5-S1 annular tear (flexion-sensitive) + facet hypertrophy + LEFT foraminal narrowing (extension-sensitive) → **mid-range bracing only**; no loaded spinal hinging, no barbell on the back. Right leg is uninjured but historically weaker. Full detail in `HANDOFF.md`.
 - **Loads must track ACTUAL working weights.** Re-baseline from the athlete's logged loads; do not let prescribed loads outrun what they actually lift. When recalibrating a block, use a conservative ramp and let weekly logs drive increases.
 - **Right adductor (recovering):** gates sandbag lunges, lunge/wall-ball combos, burpee-broad-jump landings, and lunge-to-run tests. If it flares, scale or skip — never push through.
 - **Knee:** gates wall balls and burpee broad jumps.
