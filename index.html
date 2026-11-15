@@ -598,8 +598,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="header-inner">
     <div class="logo">
       <h1>Hyrox <span>Training</span></h1>
-      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 201</div>
-      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 201</strong></p>
+      <div style="font-size:0.8rem;font-weight:800;color:var(--accent);letter-spacing:0.08em;margin:2px 0 3px;">VERSION 202</div>
+      <p>Blocks 1 & 2 · Weeks 2–20 · Starting Mon 20 Apr 2026 · <strong style="color:var(--accent)">BUILD 202</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -1919,7 +1919,7 @@ function showStorageWarning(){if(_storageOk)return;const b=document.getElementBy
 let activeWeek=0,editingId=null,copyingWid=null,dayLogState=null;
 
 function render(){renderNav();renderMain();}
-function renderNav(){const nav=document.getElementById('weekNav');nav.innerHTML=WEEKS_META.map(wm=>{const mon=getDate(wm.num,'Monday');const sun=getDate(wm.num,'Sunday');const dateStr=`${fmtDate(mon)} – ${fmtDate(sun)}`;return`<button class="wtab ${activeWeek===wm.num?'active':''}" onclick="switchWeek(${wm.num})"><span class="wtab-name">${wm.label}</span><span class="wtab-dates">${dateStr}</span></button>`;}).join('') + '<button class="wtab ' + (activeWeek==="bench" ? "active" : "") + '" onclick="showBench()"><span class="wtab-name" style="color:var(--accent)">&#128202; Benchmarks</span><span class="wtab-dates">Standards &amp; Testing</span></button>' + '<button class="wtab ' + (activeWeek==="vitals" ? "active" : "") + '" onclick="showVitals()"><span class="wtab-name" style="color:#6B3FA0">&#10084; Vitals</span><span class="wtab-dates">Daily Readiness</span></button>';
+function renderNav(){const nav=document.getElementById('weekNav');nav.innerHTML=WEEKS_META.map(wm=>{const mon=getDate(wm.num,'Monday');const sun=getDate(wm.num,'Sunday');const dateStr=`${fmtDate(mon)} – ${fmtDate(sun)}`;return`<button class="wtab ${activeWeek===wm.num?'active':''}" onclick="switchWeek(${wm.num})"><span class="wtab-name">${wm.label}</span><span class="wtab-dates">${dateStr}</span></button>`;}).join('') + '<button class="wtab ' + (activeWeek==="bench" ? "active" : "") + '" onclick="showBench()"><span class="wtab-name" style="color:var(--accent)">&#128202; Benchmarks</span><span class="wtab-dates">Standards &amp; Testing</span></button>' + '<button class="wtab ' + (activeWeek==="vitals" ? "active" : "") + '" onclick="showVitals()"><span class="wtab-name" style="color:#6B3FA0">&#10084; Vitals</span><span class="wtab-dates">Daily Readiness</span></button>' + '<button class="wtab ' + (activeWeek==="progress" ? "active" : "") + '" onclick="showProgress()"><span class="wtab-name" style="color:#4ade80">&#128200; Progress</span><span class="wtab-dates">Milestones</span></button>';
 }
 function estimateMins(w){
   const mv=(w.movement||'').toLowerCase();
@@ -2210,7 +2210,7 @@ function renderCard(w,dim,dateStr){const ds=dateStr||(new Date().toISOString().s
 
 
 
-function switchWeek(n){activeWeek=n;var vv=document.getElementById('vitalsView');if(vv)vv.style.display='none';var bv=document.getElementById('benchView');if(bv)bv.style.display='none';render();window.scrollTo({top:0,behavior:'instant'});}
+function switchWeek(n){activeWeek=n;var vv=document.getElementById('vitalsView');if(vv)vv.style.display='none';var bv=document.getElementById('benchView');if(bv)bv.style.display='none';var pv=document.getElementById('progressView');if(pv)pv.style.display='none';render();window.scrollTo({top:0,behavior:'instant'});}
 
 
 function openDayLog(week,dayName){
@@ -2642,6 +2642,7 @@ function showToast(msg){const t=document.getElementById('toast');t.textContent=m
 
 
 function showBench(){
+  var _pv=document.getElementById('progressView');if(_pv)_pv.style.display='none';
   activeWeek='bench';
   renderNav();
   window.scrollTo({top:0,behavior:'instant'});
@@ -2827,6 +2828,7 @@ function calcReadiness(entry,vitals){
 }
 
 function showVitals(){
+  var _pv=document.getElementById('progressView');if(_pv)_pv.style.display='none';
   activeWeek='vitals';
   renderNav();
   window.scrollTo({top:0,behavior:'instant'});
@@ -3417,6 +3419,115 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/Hyrox-Prep/s
 function toggleHMenu(e){e.stopPropagation();var m=document.getElementById('hMenu');if(m)m.style.display=(m.style.display==='none'||!m.style.display)?'block':'none';}
 function closeHMenu(){var m=document.getElementById('hMenu');if(m)m.style.display='none';}
 document.addEventListener('click',function(e){var w=document.querySelector('.hmenu-wrap');if(w&&!w.contains(e.target))closeHMenu();});
+
+/* ---- Progress / milestones tab ---- */
+function loadProgress(){try{return JSON.parse(localStorage.getItem('hyrox_progress')||'{}');}catch(e){return {};}}
+function saveProgress(p){try{localStorage.setItem('hyrox_progress',JSON.stringify(p));}catch(e){}}
+function setProg(k,v){var p=loadProgress();var n=parseFloat(v);p[k]=isNaN(n)?0:n;saveProgress(p);renderProgressTab();}
+function floorStreak(){
+  var floors=workouts.filter(function(w){return /^FLOOR/.test(w.movement||'');});
+  var items=floors.map(function(w){
+    var d=getDate(w.week,w.day); d.setHours(0,0,0,0);
+    var key=d.toISOString().slice(0,10);
+    var c=(w.checks||{})[key];
+    return {d:d.getTime(),done:!!(c&&c.done)};
+  });
+  items.sort(function(a,b){return b.d-a.d;});
+  var today=new Date(); today.setHours(0,0,0,0); var t=today.getTime();
+  var streak=0;
+  for(var i=0;i<items.length;i++){
+    if(items[i].d>t) continue;
+    if(items[i].done) streak++; else break;
+  }
+  return streak;
+}
+var PROG_DEFS=[
+ {grp:'INJURY RECOVERY',sub:'left knee - the gate on everything else',items:[
+   {k:'swell',label:'Knee swelling (0 none to 10 worst)',max:10,invert:true,target:0},
+   {k:'stairs',label:'Stairs DOWN pain (0-10)',max:10,invert:true,target:0},
+   {k:'lag',label:'SLR lag gone (0 = still lagging, 1 = gone)',max:1,target:1},
+   {k:'thigh',label:'Thigh circumference deficit vs right (cm)',max:4,invert:true,target:0,unit:'cm'}
+ ]},
+ {grp:'HANDSTAND',sub:'goal: free-standing 10s hold',items:[
+   {k:'hswrist',label:'Wrist crease to wall (target 18cm)',max:60,invert:true,target:18,unit:'cm'},
+   {k:'hshold',label:'Chest-to-wall hold (target 45s)',max:45,target:45,unit:'s'},
+   {k:'hsfree',label:'Free-standing hold (target 10s)',max:10,target:10,unit:'s'}
+ ]},
+ {grp:'BAR MUSCLE-UP',sub:'goal: one strict rep',items:[
+   {k:'cp',label:'Checkpoint reached (1-5)',max:5,target:5},
+   {k:'pu',label:'Max strict pull-ups (target 12)',max:12,target:12},
+   {k:'dip',label:'Max strict dips (target 10)',max:10,target:10},
+   {k:'wpu',label:'Weighted pull-up (target +18kg)',max:18,target:18,unit:'kg'},
+   {k:'wdip',label:'Weighted dip (target +25kg)',max:25,target:25,unit:'kg'}
+ ]},
+ {grp:'CONSISTENCY',sub:'the one that rebuilds the habit',items:[
+   {k:'__streak',label:'FLOOR streak (target 30 days)',max:30,target:30,unit:'d',auto:true},
+   {k:'steps',label:'Daily step average (target 10,000)',max:10000,target:10000}
+ ]}
+];
+function progPct(it,v){
+  var tgt=it.target,max=it.max;
+  if(it.invert){ if(v<=tgt) return 100; if(max<=tgt) return 0; return Math.max(0,Math.min(100,(max-v)/(max-tgt)*100)); }
+  if(tgt<=0) return 0;
+  return Math.max(0,Math.min(100,v/tgt*100));
+}
+function showProgress(){
+  activeWeek='progress'; renderNav(); window.scrollTo({top:0,behavior:'instant'});
+  document.getElementById('mainContent').innerHTML='';
+  var bv=document.getElementById('benchView'); if(bv)bv.style.display='none';
+  var vv=document.getElementById('vitalsView'); if(vv)vv.style.display='none';
+  var pv=document.getElementById('progressView');
+  if(pv){pv.style.display='block';renderProgressTab();}
+  else{
+    var main=document.getElementById('mainContent');
+    var div=document.createElement('div'); div.id='progressView';
+    div.style.cssText='max-width:680px;margin:0 auto;padding:20px 16px 40px;';
+    main.appendChild(div); renderProgressTab();
+  }
+}
+function renderProgressTab(){
+  var pv=document.getElementById('progressView'); if(!pv)return;
+  var p=loadProgress();
+  var today=new Date(); today.setHours(0,0,0,0);
+  var hyrox=new Date('2027-11-01T00:00:00');
+  var decision=new Date('2027-04-01T00:00:00');
+  var onset=new Date('2026-09-15T00:00:00');
+  var dH=Math.max(0,Math.ceil((hyrox-today)/86400000));
+  var dD=Math.max(0,Math.ceil((decision-today)/86400000));
+  var dO=Math.max(0,Math.floor((today-onset)/86400000));
+  var html='<div style="margin-bottom:18px"><h2 style="margin:0 0 4px">Progress</h2>'
+    +'<p style="margin:0;opacity:.7;font-size:13px">Update a number and the bar moves. Rehab gives you almost no feedback - this is the feedback.</p></div>';
+  html+='<div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">'
+    +'<div style="flex:1;min-width:120px;background:rgba(127,127,127,.12);border-radius:10px;padding:12px"><div style="font-size:22px;font-weight:700">'+dO+'</div><div style="font-size:11px;opacity:.65">days since injury</div></div>'
+    +'<div style="flex:1;min-width:120px;background:rgba(127,127,127,.12);border-radius:10px;padding:12px"><div style="font-size:22px;font-weight:700">'+dD+'</div><div style="font-size:11px;opacity:.65">days to Apr decision</div></div>'
+    +'<div style="flex:1;min-width:120px;background:rgba(127,127,127,.12);border-radius:10px;padding:12px"><div style="font-size:22px;font-weight:700">'+dH+'</div><div style="font-size:11px;opacity:.65">days to Hyrox Nov 27</div></div>'
+    +'</div>';
+  PROG_DEFS.forEach(function(g){
+    html+='<div style="margin:0 0 6px"><div style="font-size:13px;font-weight:700;letter-spacing:.04em">'+g.grp+'</div>'
+       +'<div style="font-size:11px;opacity:.6;margin-bottom:10px">'+g.sub+'</div></div>';
+    g.items.forEach(function(it){
+      var isSet = it.auto || (p[it.k]!==undefined && p[it.k]!==null);
+      var v = it.auto ? floorStreak() : (isSet ? p[it.k] : 0);
+      var pct = isSet ? progPct(it,v) : 0;
+      var col = !isSet?'rgba(127,127,127,.35)':(pct>=100?'#4ade80':(pct>=50?'var(--accent,#d4f24a)':'#8b8b8b'));
+      var unit=it.unit||'';
+      var input = it.auto
+        ? '<span style="font-variant-numeric:tabular-nums;opacity:.85">'+v+unit+'</span>'
+        : '<input type="number" step="any" placeholder="set" value="'+(isSet?v:'')+'" onchange="setProg(\''+it.k+'\',this.value)" style="width:72px;text-align:right;background:transparent;border:1px solid rgba(255,255,255,.18);border-radius:6px;padding:3px 6px;color:inherit;font-variant-numeric:tabular-nums">';
+      html+='<div style="margin-bottom:14px">'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:5px">'
+        +'<span style="font-size:13px;opacity:'+(isSet?'1':'.55')+'">'+it.label+(isSet?'':' \u2014 not set')+'</span>'+input+'</div>'
+        +'<div style="height:8px;background:rgba(255,255,255,.08);border-radius:5px;overflow:hidden">'
+        +'<div style="height:100%;width:'+pct.toFixed(0)+'%;background:'+col+';border-radius:5px;transition:width .3s"></div></div>'
+        +'</div>';
+    });
+    html+='<div style="height:16px"></div>';
+  });
+  html+='<p style="font-size:11px;opacity:.55;margin-top:6px">Swelling, stairs pain and thigh deficit count DOWN to zero - the bar fills as they fall. '
+     +'FLOOR streak is counted automatically from your ticked FLOOR entries.</p>';
+  pv.innerHTML=html;
+}
+
 /* Race-day countdown chip */
 function updateRaceCountdown(){var el=document.getElementById('raceCountdown');if(!el)return;var rehabStart=new Date('2026-11-02T00:00:00');var now=new Date();var days=Math.floor((now-rehabStart)/86400000);if(days<0){el.textContent='\u{1FA79} rehab starts 2 Nov';return;}var wk=Math.floor(days/7)+1;el.textContent='\u{1FA79} rehab \u2014 week '+wk;}
 updateRaceCountdown();
