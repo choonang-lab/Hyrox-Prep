@@ -1067,6 +1067,8 @@ body{background:var(--bg);}
 .dl-header.compact .dl-header-progress{margin-top:1px;}
 .dl-hlink:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 @media (prefers-reduced-motion:reduce){.dl-header .dl-header-title{transition:none;}}
+.exp-scope{margin:10px 20px 0;grid-template-columns:repeat(2,1fr) !important;flex-shrink:0;}
+.exp-scope button{font-family:inherit;}
 /* ═══ Dark mode (v216) ═══
    Tokens first, then the few places that hard-code light colours. Accent fills use dark ink (--on-accent)
    because the dark-mode accent is light enough to read as text on the dark surfaces. Inline light tints
@@ -1138,8 +1140,8 @@ body{background:var(--bg);}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 221</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 221</strong></p>
+      <div class="ver">VERSION 222</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 222</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -1148,10 +1150,9 @@ body{background:var(--bg);}
         <div class="hmenu" id="hMenu" style="display:none">
           <button onclick="loadFile();closeHMenu()">&#8593; Load JSON</button>
           <button onclick="saveFile();closeHMenu()">&#8595; Save JSON</button>
-          <button onclick="openExport();closeHMenu()">Export for LLM</button>
+          <button onclick="openExport();closeHMenu()">Export for review</button>
           <button onclick="closeHMenu();showBench()">Benchmarks</button>
           <button id="themeBtn" onclick="cycleTheme()">Appearance: Auto</button>
-          <button class="hmenu-danger" onclick="closeHMenu();wipeAndReset()">&#9888; Reset all data</button>
         </div>
       </div>
     </div>
@@ -1227,7 +1228,8 @@ body{background:var(--bg);}
 </div>
 <div class="export-scrim" id="exportScrim" onclick="closeExportBg(event)">
   <div class="export-box">
-    <div class="export-head"><h3>Export for LLM Review</h3><button class="drawer-close" style="position:static;" onclick="closeExport()">✕</button></div>
+    <div class="export-head"><h3>Export for review</h3><button class="drawer-close" style="position:static;" onclick="closeExport()">✕</button></div>
+    <div class="exp-scope tdy-seg" role="group" aria-label="Export range"><button type="button" id="expRecent" aria-pressed="true" onclick="expScope(false)">Last 2 weeks</button><button type="button" id="expAll" aria-pressed="false" onclick="expScope(true)">Everything</button></div>
     <div class="export-body"><pre id="exportPre"></pre></div>
     <div class="export-foot">
       <button class="mabtn" onclick="downloadExport()">↓ Download .txt</button>
@@ -3197,10 +3199,94 @@ function closeModalBg(e){if(e.target.id==='editModal')closeModal();}
 function saveWorkout(){const movement=document.getElementById('mMovement').value.trim();if(!movement){showToast('Movement name is required');return;}const data={week:parseInt(document.getElementById('mWeek').value),day:document.getElementById('mDay').value,phase:document.getElementById('mPhase').value.trim()||'Main Session',block:document.getElementById('mBlock').value,movement,weight:document.getElementById('mWeight').value.trim()||'N/A',sets:document.getElementById('mSets').value.trim()||'N/A',tempo:document.getElementById('mTempo').value.trim()||'N/A',rest:document.getElementById('mRest').value.trim()||'N/A',cue:document.getElementById('mCue').value.trim()};if(editingId){const idx=workouts.findIndex(x=>x.id===editingId);workouts[idx]={...workouts[idx],...data};showToast('Updated');}else{workouts.push({id:uid(),log:[],...data});showToast('Movement added');}activeWeek=data.week;closeModal();render();persist();}
 function delW(id){if(!confirm('Remove this movement?'))return;workouts=workouts.filter(x=>x.id!==id);render();persist();showToast('Removed');}
 
-function openExport(){document.getElementById('exportPre').textContent=buildExport();document.getElementById('exportScrim').classList.add('open');}
+var _expAll=false;
+function expScope(all){_expAll=!!all;var a=document.getElementById('expRecent'),b=document.getElementById('expAll');if(a)a.setAttribute('aria-pressed',String(!_expAll));if(b)b.setAttribute('aria-pressed',String(_expAll));document.getElementById('exportPre').textContent=buildExport();}
+function openExport(){expScope(false);document.getElementById('exportScrim').classList.add('open');}
 function closeExport(){document.getElementById('exportScrim').classList.remove('open');}
 function closeExportBg(e){if(e.target.id==='exportScrim')closeExport();}
-function buildExport(){const now=new Date();const logged=workouts.filter(w=>w.log?.length>0||Object.keys(w.checks||{}).length>0);const totalEntries=logged.reduce((s,w)=>s+(w.log?.length||0),0);if(logged.length===0){return`HYROX TRAINING LOG — LLM REVIEW EXPORT\nGenerated: ${now.toLocaleString('en-SG')}\n\nNo sessions logged yet.\n`;}let out=`HYROX TRAINING LOG — LLM REVIEW EXPORT\n`;out+=`Generated: ${now.toLocaleString('en-SG')}\n`;out+=`Programme: Weeks 2–5, starting Monday 21 April 2026 (v9)\n`;out+=`${'═'.repeat(62)}\n\nSUMMARY\n${'─'.repeat(40)}\n`;out+=`Movements logged: ${logged.length}\nTotal log entries: ${totalEntries}\n\n`;WEEKS_META.forEach(wm=>{const ww=logged.filter(x=>x.week===wm.num);if(!ww.length)return;out+=`\n${'═'.repeat(62)}\nWEEK ${wm.num} — ${wm.sub.toUpperCase()}\n${'═'.repeat(62)}\n`;DAYS.forEach(day=>{const dw=ww.filter(x=>x.day===day);if(!dw.length)return;const date=getDate(wm.num,day);out+=`\n${day.toUpperCase()} ${fmtDate(date)}\nPhase: ${dw[0]?.phase||'—'}\n${'─'.repeat(32)}\n`;const BLOCKS=['Morning Protocol','Warm-Up','Main Session','Finisher','Mobility'];BLOCKS.forEach(block=>{const bw=dw.filter(x=>x.block===block);if(!bw.length)return;out+=`\n  [${block.toUpperCase()}]\n`;bw.forEach(w=>{out+=`  • ${w.movement}  (${w.log.length} log entr${w.log.length===1?'y':'ies'})\n`;out+=`    Prescribed — `;if(w.weight!=='N/A')out+=`Weight: ${w.weight}  `;if(w.sets!=='N/A')out+=`Sets: ${w.sets}  `;if(w.tempo!=='N/A')out+=`Tempo: ${w.tempo}  `;if(w.rest!=='N/A')out+=`Rest: ${w.rest}`;out+='\n';if(w.cue)out+=`    Cue: ${w.cue}\n`;out+=`\n    SESSION LOG:\n`;w.log.forEach(e=>{const colLabel=e.inputType==='time'?'Time/Pace':'Reps';out+=`    ┌ ${e.timestamp}  [${e.type.toUpperCase()}]\n`;if(e.tempo)out+=`    │ Tempo used:   ${e.tempo}\n`;if(e.rest)out+=`    │ Rest used:    ${e.rest}\n`;if(e.sets?.length){out+=`    │ Per-set (${colLabel} / Weight):\n`;e.sets.forEach(s=>{out+=`    │   Set ${s.set}: ${s.value||'—'} ${s.weight?'@ '+s.weight:''}\n`;});}if(e.rpe)out+=`    │ Overall RPE:  ${e.rpe}/10\n`;if(e.duration)out+=`    │ Duration:     ${e.duration}\n`;if(e.notes)out+=`    │ Notes: "${e.notes}"\n`;out+=`    └──\n`;});if(Object.keys(w.checks||{}).length){out+=`\n    DAILY CHECKS:\n`;Object.entries(w.checks).forEach(([dt,v])=>{out+=`    ${dt}: ${v.done?'DONE':'not done'}${v.notes?` — "${v.notes}"`:''  }\n`;});}});});});});out+=`\n\n${'═'.repeat(62)}\nEND OF EXPORT\n`;return out;}
+// v222: rebuilt for the weekly review. Per day: day status, knee check, then each exercise by tier with its
+// status (done/partial/skipped/moved), skip reason and notes. Then vitals and Progress. Cues are left out (they live in the source).
+function buildExport(){
+  const now=new Date(),t0=new Date(now);t0.setHours(0,0,0,0);
+  const from=new Date(t0);from.setDate(from.getDate()-13);
+  const L=[],ln=x=>L.push(x),hr=()=>'─'.repeat(34);
+  const loc=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const ver=((document.querySelector('.ver')||{}).textContent||'').trim();
+  const RS={};(typeof SKIP_REASONS_DAY!=='undefined'?SKIP_REASONS_DAY:[]).forEach(r=>{RS[r.id]=r.label;});
+  const MARK={done:'[x]',partial:'[~]',skip:'[skip]',deferred:'[moved]',none:'[ ]'};
+  // days to include
+  const days=[];
+  WEEKS_META.forEach(m=>DAYS.forEach(day=>{
+    const d=getDate(m.num,day);d.setHours(0,0,0,0);if(d>t0)return;
+    const ds=tKey(m.num,day),items=workouts.filter(x=>x.week===m.num&&x.day===day);
+    if(!_expAll){if(d<from)return;}
+    else{const any=items.some(x=>(x.checks&&x.checks[ds])||(x.log&&x.log.length))||(daySkips[ds]&&daySkips[ds].skipped);if(!any)return;}
+    days.push({m,day,d,ds,items,tiered:workouts.some(x=>x.week===m.num&&/^(FLOOR|GOAL|BONUS)\b/.test(x.movement||''))});
+  }));
+  days.sort((x,y)=>x.d-y.d);
+  // summary over tiered days
+  let tdays=0,mustOK=0,gd=0,gt=0,bd=0,bt=0,nSkip=0,nPart=0,nMoved=0,dayOff=[];
+  days.forEach(i=>{
+    i.items.forEach(w=>{const st=getExStatus(w,i.ds);if(st==='skip')nSkip++;if(st==='partial')nPart++;if(st==='deferred')nMoved++;});
+    const ds=daySkips[i.ds];if(ds&&ds.skipped)dayOff.push(fmtDate(i.d)+' '+(RS[ds.reason]||ds.reason||'skipped'));
+    if(!i.tiered)return;tdays++;
+    const f=i.items.filter(w=>tTier(w.movement)==='FLOOR'),g=i.items.filter(w=>tTier(w.movement)==='GOAL'),b=i.items.filter(w=>tTier(w.movement)==='BONUS');
+    const dn=w=>getExStatus(w,i.ds)==='done';
+    if(f.length&&f.every(dn))mustOK++;gd+=g.filter(dn).length;gt+=g.length;bd+=b.filter(dn).length;bt+=b.length;
+  });
+  ln('THE REBUILD — TRAINING LOG EXPORT');
+  ln('Generated: '+now.toLocaleString('en-SG')+(ver?' · '+ver:''));
+  ln('Range: '+(_expAll?'everything logged':'last 14 days, '+fmtDate(from)+' to '+fmtDate(t0))+' · '+days.length+(days.length===1?' day':' days'));
+  ln('Status marks: [x] done · [~] partial · [skip] skipped · [moved] moved to another day · [ ] not done');
+  ln('');ln('SUMMARY');ln(hr());
+  if(tdays){ln('Must-do complete: '+mustOK+' of '+tdays+' days');ln('Goal items done: '+gd+' of '+gt);ln('Extras done: '+bd+' of '+bt);}
+  ln('Skipped items: '+nSkip+' · Partial: '+nPart+' · Moved: '+nMoved);
+  if(dayOff.length)ln('Days marked off: '+dayOff.join('; '));
+  if(typeof floorStreak==='function'){const fs=floorStreak();ln('Floor streak today: '+fs+(fs===1?' day':' days'));}
+  // days
+  days.forEach(i=>{
+    const ph=(i.items.find(w=>/^GOAL/.test(w.movement||''))||i.items[0]||{}).phase||'';
+    ln('');ln(i.d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}).toUpperCase()+' · W'+i.m.num+(ph?' · '+ph.replace(/^(Goal|Rehab|B3)\s*[—–-]\s*/,''):''));ln(hr());
+    const dsk=daySkips[i.ds];if(dsk&&dsk.skipped)ln('Day: OFF — '+(RS[dsk.reason]||dsk.reason||'skipped'));
+    let knee=null;i.items.forEach(w=>{const c=(w.checks||{})[i.ds];if(c&&c.knee)knee=c.knee;});
+    if(knee)ln('Knee: swelling '+(knee.sw||'–')+' · stairs pain '+(typeof knee.stairs==='number'?knee.stairs+'/10':'–'));
+    const groups=i.tiered?[['FLOOR','MUST DO'],['GOAL','GOAL'],['BONUS','EXTRAS'],['OTHER','OTHER']]:null;
+    const put=w=>{
+      const c=(w.checks||{})[i.ds]||{},st=getExStatus(w,i.ds);
+      const dose=[w.weight,w.sets].filter(x=>x&&x!=='N/A'&&x!=='Bodyweight').join(' · ');
+      ln('  '+MARK[st]+' '+(i.tiered?tName(w.movement):w.movement)+(dose?'  ('+dose+')':''));
+      if(st==='skip'&&c.skipReason)ln('      reason: '+c.skipReason);
+      if(st==='deferred'&&c.deferredTo)ln('      moved to: '+c.deferredTo);
+      if(c.notes)ln('      notes: "'+String(c.notes).replace(/\s+/g,' ').trim()+'"');
+      (w.log||[]).forEach(e=>{const sets=(e.sets||[]).map(x=>(x.value||'–')+(x.weight?'@'+x.weight:'')).join(', ');
+        ln('      log '+(e.timestamp||'')+(sets?' · sets '+sets:'')+(e.rpe?' · RPE '+e.rpe:'')+(e.duration?' · '+e.duration:'')+(e.notes?' · "'+e.notes+'"':''));});
+    };
+    if(!i.items.length){ln('  Nothing planned');return;}
+    if(groups)groups.forEach(([k,lab])=>{const ws=i.items.filter(w=>{const t=tTier(w.movement);return k==='OTHER'?!/^(FLOOR|GOAL|BONUS)$/.test(t):t===k;});if(!ws.length)return;ln(' '+lab);ws.forEach(put);});
+    else i.items.forEach(put);
+  });
+  // vitals
+  const V=(typeof loadVitals==='function'?loadVitals():[]).filter(v=>_expAll||v.date>=loc(from));
+  ln('');ln('VITALS (morning)');ln(hr());
+  if(!V.length)ln('None logged in this range.');
+  else{ln('date        RHR  HRV  sleep  weight  energy  sore');
+    V.forEach(v=>{const sl=v.sleep!=null?(Math.floor(v.sleep)+'h'+String(Math.round((v.sleep%1)*60)).padStart(2,'0')):'–';
+      ln(v.date+'  '+String(v.rhr??'–').padEnd(4)+' '+String(v.hrv??'–').padEnd(4)+' '+sl.padEnd(6)+' '+String(v.weight??'–').padEnd(7)+' '+String(v.energy??'–').padEnd(7)+' '+String(v.soreness??'–')+(v.travel?'  travel':''));});
+    const avg=f=>{const a=V.filter(v=>v[f]!=null&&!v.travel).map(v=>+v[f]);return a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length*10)/10:'–';};
+    ln('averages: RHR '+avg('rhr')+' · HRV '+avg('hrv')+' · sleep '+avg('sleep')+'h · weight '+avg('weight'));}
+  // progress
+  if(typeof loadProgress==='function'&&typeof PROG_DEFS!=='undefined'){
+    const p=loadProgress(),H=(typeof loadProgHist==='function')?loadProgHist():{};
+    ln('');ln('PROGRESS (milestones)');ln(hr());
+    PROG_DEFS.forEach(g=>{g.items.forEach(it=>{
+      if(it.auto||it.k==='lag')return;const set=p[it.k]!==undefined&&p[it.k]!==null;const u=it.unit||'';
+      const hist=(H[it.k]||[]).map(r=>r.d.slice(5)+' '+r.v).join(', ');
+      ln((it.n||it.label)+': '+(set?p[it.k]+u:'not set')+' (target '+it.target+u+')'+(hist?'  history: '+hist:''));});});
+    if(p.lag!==undefined)ln('Straight leg raise lag: '+(p.lag===1?'gone':'still lagging'));
+  }
+  ln('');ln('END OF EXPORT');
+  return L.join('\n');
+}
 function copyExport(){
   const text=document.getElementById('exportPre').textContent;
   if(navigator.clipboard&&navigator.clipboard.writeText){
