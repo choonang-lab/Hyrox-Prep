@@ -986,6 +986,64 @@ body{background:var(--bg);}
 .vt-hv small{display:block;font-size:12px;color:var(--muted);}
 .vt-empty{font-size:13.5px;color:var(--muted);background:var(--surface2);border-radius:10px;padding:12px;line-height:1.4;}
 .vt button:focus-visible,.vt-in:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+/* ═══ Benchmarks page (v219) ═══
+   The 2026 Hyrox content is unchanged (getBenchHTML); buildBenchView re-lays it out: summary cards on top,
+   every .bench-section folded into a <details>, and readable type sizes for the old .bench-* markup. */
+.bn .tdy-card{padding-bottom:12px;}
+.bn-status{font-size:14.5px;line-height:1.45;margin:2px 0 12px;}
+.bn-status b{font-weight:700;}
+.bn-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:4px 0 10px;}
+.bn-stats>div{background:var(--surface2);border-radius:12px;padding:9px 11px;display:grid;gap:2px;}
+.bn-stats b{font-family:var(--f-display);font-weight:800;font-size:21px;line-height:1.1;font-variant-numeric:tabular-nums;}
+.bn-stats small{font-size:12px;color:var(--muted);line-height:1.3;}
+.bn-stats .good b{color:var(--accent);}
+.bn-stats .weak b{color:var(--t-amber);}
+.bn-pri{display:grid;grid-template-columns:30px minmax(0,1fr);gap:4px 10px;padding:10px 0;border-top:1px solid var(--border);}
+.tdy-head + .bn-pri{border-top:0;}
+.bn-pri>b{font-family:var(--f-display);font-weight:800;font-size:20px;color:var(--t-amber);line-height:1.2;}
+.bn-pri .pg-n{margin-bottom:2px;}
+.bn-pri p{margin:0;font-size:13.5px;line-height:1.45;color:var(--text2);}
+.bn-why{margin-top:6px;}
+.bn-why>summary,.bn-sec>summary{list-style:none;cursor:pointer;}
+.bn-why>summary::-webkit-details-marker,.bn-sec>summary::-webkit-details-marker{display:none;}
+.bn-why>summary{font-size:13.5px;font-weight:600;color:var(--accent);padding:6px 0;}
+.bn-why>div{font-size:13.5px;line-height:1.5;color:var(--text2);background:var(--surface2);border-radius:10px;padding:10px 12px;}
+.bn-dh{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;}
+.bn-dh h2{font-family:var(--f-display);font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:0;color:var(--muted);}
+.bn-secs{display:flex;flex-direction:column;gap:8px;}
+.bn-sec{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.bn-sec>summary{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 14px;min-height:52px;box-sizing:border-box;}
+.bn-sec>summary span{font-size:15px;font-weight:600;line-height:1.3;}
+.bn-sec>summary small{display:block;font-size:12px;font-weight:400;color:var(--muted);margin-top:2px;}
+.bn-sec>summary svg{flex-shrink:0;color:var(--muted);transition:transform .2s;}
+.bn-sec[open]>summary svg{transform:rotate(180deg);}
+.bn-sec[open]>summary{border-bottom:1px solid var(--border);}
+.bn-body{padding:12px 14px 4px;}
+.bn .bench-section{margin:0;}
+.bn .bench-section-title{display:none;}
+.bn .bench-grid{grid-template-columns:minmax(0,1fr);gap:10px;}
+@media (min-width:700px){.bn .bench-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.bn .bench-card{border-radius:12px;padding:12px 12px 12px 16px;background:var(--surface2);border:0;overflow:visible;}
+.bn .bench-card-title{font-size:15px;}
+.bn .bench-card-station{font-size:11px;}
+.bn .bench-tag{font-size:11px;}
+.bn .bench-table{font-size:13px;}
+.bn .bench-table th{font-size:10.5px;}
+.bn .bench-table td{padding:6px 6px;border-color:var(--border);}
+.bn .bench-table .val{font-size:13.5px;}
+.bn .bench-table .note{font-size:12px;}
+.bn .bench-note{font-size:13px;line-height:1.5;background:var(--surface);border-radius:0 10px 10px 0;}
+.bn .bench-body>.bench-note,.bn .bn-body>.bench-section>.bench-note{background:var(--surface2);}
+.bn .bench-gate{background:var(--surface2);border:0;border-left:3px solid var(--t-amber);border-radius:0 10px 10px 0;}
+.bn .bench-gate-title{font-size:13px;color:var(--t-amber);}
+.bn .bench-gate-body{font-size:13.5px;}
+.bn .bench-testing-table{font-size:12.5px;min-width:560px;}
+.bn .bench-testing-table th{font-size:11px;background:var(--surface2) !important;color:var(--muted) !important;}
+:root[data-theme="dark"] .bn .bench-testing-table th{background:var(--surface2) !important;color:var(--muted) !important;}
+.bn-x{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 10px;}
+.bn .bench-card .bn-x{margin:0;}
+.bn button:focus-visible,.bn summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+@media (prefers-reduced-motion:reduce){.bn-sec>summary svg{transition:none;}}
 /* ═══ Dark mode (v216) ═══
    Tokens first, then the few places that hard-code light colours. Accent fills use dark ink (--on-accent)
    because the dark-mode accent is light enough to read as text on the dark surfaces. Inline light tints
@@ -1057,8 +1115,8 @@ body{background:var(--bg);}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 218</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 218</strong></p>
+      <div class="ver">VERSION 219</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 219</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -3672,10 +3730,40 @@ function buildBenchView(){
   var main=document.getElementById('mainContent');
   var div=document.createElement('div');
   div.id='benchView';
-  div.style.maxWidth='1400px';
-  div.style.margin='0 auto';
-  div.style.padding='20px';
-  div.innerHTML=getBenchHTML();
+  div.className='tdy bn';
+  // v219: same 2026 content, re-laid out. Parse the old markup, lift out the header note and the top-3, fold every section.
+  var src=document.createElement('div');src.innerHTML=getBenchHTML();
+  var hdrNote=src.querySelector('.bench-header > div');
+  var pri=[].slice.call(src.querySelectorAll('.bench-priority-item')).map(function(it){
+    var t=it.querySelector('.bench-priority-title'),d=it.querySelector('.bench-priority-desc');return {t:t?t.textContent:'',d:d?d.innerHTML:''};});
+  var chev='<svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var h='<section><h1 class="tdy-day">Benchmarks</h1><div class="tdy-sub">Hyrox reference · on hold until the April 2027 decision</div></section>'
+    +'<section class="tdy-card" aria-label="Status"><div class="tdy-head"><h2>Where this stands</h2></div>'
+    +'<p class="bn-status">These are your <b>Hyrox 2026</b> numbers and the targets built from them. Nothing here is live during rehab. They come back into play if April says go. Your rehab numbers are in Progress.</p>'
+    +'<div class="vt-btns" style="margin-top:0"><button class="wk-btn" type="button" onclick="showProgress()">Open Progress</button></div></section>'
+    +'<section class="tdy-card" aria-label="2026 race"><div class="tdy-head"><h2>2026 race</h2><span>Singapore · AG 50-54</span></div>'
+    +'<div class="bn-stats"><div><b>1:46:34</b><small>Finish · #24 in age group</small></div><div class="good"><b>43:57</b><small>Running, 8 km · already 1:35-ready</small></div>'
+    +'<div class="weak"><b>52:50</b><small>Stations · about 10 min of the gap</small></div><div class="weak"><b>9:47</b><small>Roxzone · about 1:45 of the gap</small></div></div>'
+    +'<div class="vt-meta">Targets were 1:35 probable and 1:25 stretch.</div></section>';
+  if(pri.length){
+    h+='<section class="tdy-card" aria-label="Priority stations"><div class="tdy-head"><h2>The three stations that matter</h2></div>'
+      +pri.map(function(p,i){return '<div class="bn-pri"><b>'+(i+1)+'</b><div><div class="pg-n">'+tEsc(p.t)+'</div><p>'+p.d+'</p></div></div>';}).join('')
+      +(hdrNote?'<details class="bn-why"><summary>Why stations, not running</summary><div>'+hdrNote.innerHTML+'</div></details>':'')+'</section>';
+  }
+  var secs=[].slice.call(src.querySelectorAll('.bench-section'));
+  h+='<div class="bn-dh"><h2>Full reference</h2><span class="tdy-lab">'+secs.length+' sections</span></div><div class="bn-secs" id="bnSecs"></div>';
+  div.innerHTML=h;
+  var box=div.querySelector('#bnSecs');
+  secs.forEach(function(sec){
+    var tEl=sec.querySelector('.bench-section-title'),title=tEl?tEl.textContent.trim():'Section';
+    var parts=title.split(/\s+[—–]\s+/),main1=parts.shift(),sub=parts.join(' · ');
+    var n=sec.querySelectorAll('.bench-card,.bench-gate').length;
+    if(!sub&&n)sub=n+(sec.querySelector('.bench-gate')&&!sec.querySelector('.bench-card')?' items':' cards');
+    [].slice.call(sec.querySelectorAll('table')).forEach(function(t){var w=document.createElement('div');w.className='bn-x';t.parentNode.insertBefore(w,t);w.appendChild(t);});
+    var d=document.createElement('details');d.className='bn-sec';
+    d.innerHTML='<summary><span>'+tEsc(main1)+(sub?'<small>'+tEsc(sub)+'</small>':'')+'</span>'+chev+'</summary>';
+    var body=document.createElement('div');body.className='bn-body';body.appendChild(sec);d.appendChild(body);box.appendChild(d);
+  });
   main.appendChild(div);
 }
 
