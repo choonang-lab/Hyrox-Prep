@@ -1108,6 +1108,12 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
 .sh-btns .wk-btn.pri{flex:2;}
 .sh button:focus-visible,.sh-in:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 @media (prefers-reduced-motion:reduce){.sh,.sh-scrim{transition:none;}}
+/* ═══ Header chip (v224) ═══ */
+.race-chip{display:inline-flex;align-items:center;gap:7px;margin-top:7px;font-family:inherit;font-size:12.5px;font-weight:400;letter-spacing:0;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px 11px 4px 9px;min-height:28px;cursor:pointer;line-height:1.2;white-space:nowrap;}
+.race-chip b{font-weight:700;color:var(--accent);}
+.race-chip .rc-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-bg);flex-shrink:0;}
+.race-chip .rc-sub{color:var(--muted);padding-left:7px;border-left:1px solid var(--border);}
+.race-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 /* ═══ Dark mode (v216) ═══
    Tokens first, then the few places that hard-code light colours. Accent fills use dark ink (--on-accent)
    because the dark-mode accent is light enough to read as text on the dark surfaces. Inline light tints
@@ -1179,9 +1185,9 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 223</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 223</strong></p>
-      <span id="raceCountdown" class="race-chip"></span>
+      <div class="ver">VERSION 224</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 224</strong></p>
+      <button type="button" id="raceCountdown" class="race-chip" onclick="showProgress()" aria-label="Rehab progress"></button>
     </div>
     <div class="header-btns">
       <div class="hmenu-wrap">
@@ -4628,7 +4634,15 @@ function renderProgressTab(){
 
 
 /* Race-day countdown chip */
-function updateRaceCountdown(){var el=document.getElementById('raceCountdown');if(!el)return;var rehabStart=new Date('2026-11-02T00:00:00');var now=new Date();var days=Math.floor((now-rehabStart)/86400000);if(days<0){el.textContent='\u{1FA79} rehab starts 2 Nov';return;}var wk=Math.floor(days/7)+1;el.textContent='\u{1FA79} rehab \u2014 week '+wk;}
+// v224: a tappable pill that opens Progress. Rehab week, plus the countdown to the next milestone (April decision, then Hyrox).
+function updateRaceCountdown(){var el=document.getElementById('raceCountdown');if(!el)return;
+  var t=new Date();t.setHours(0,0,0,0);var rehab=new Date('2026-11-02T00:00:00'),dec=new Date('2027-04-01T00:00:00'),hy=new Date('2027-11-01T00:00:00');
+  var days=Math.floor((t-rehab)/86400000),wk=Math.floor(days/7)+1;
+  var main=days<0?'Rehab starts 2 Nov':'Rehab week '+wk;
+  var nx=t<dec?{d:Math.ceil((dec-t)/86400000),l:'to April'}:t<hy?{d:Math.ceil((hy-t)/86400000),l:'to Hyrox'}:null;
+  el.innerHTML='<span class="rc-dot" aria-hidden="true"></span><b>'+main+'</b>'+(nx?'<span class="rc-sub">'+nx.d+' days '+nx.l+'</span>':'');
+  el.setAttribute('aria-label',main+(nx?', '+nx.d+' days '+nx.l:'')+'. Open Progress');}
+document.addEventListener('visibilitychange',function(){if(!document.hidden)updateRaceCountdown();});
 updateRaceCountdown();
 /* Pin the week-nav bar (and main content) to the header's ACTUAL height, so a
    taller header — e.g. with the race pill, or a device notch — never overlaps
