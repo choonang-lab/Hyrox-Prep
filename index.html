@@ -1207,8 +1207,8 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 227</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 227</strong></p>
+      <div class="ver">VERSION 228</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 228</strong></p>
       <button type="button" id="raceCountdown" class="race-chip" onclick="showProgress()" aria-label="Rehab progress"></button>
     </div>
     <div class="header-btns">
@@ -2464,6 +2464,15 @@ var HC_ORIG={};workouts.forEach(function(w){HC_ORIG[w.week+'|'+w.day+'|'+w.movem
     const hasData=(w.checks&&Object.keys(w.checks).length>0)||(w.log&&w.log.length>0);
     if(hasData||w.user)merged.push(w); // v223: copies the athlete made are kept even before they are logged
   });
+  // v228 repair: a pre-v228 Move left its "moved" record on the relocated (orphan) entry, so the plan entry came
+  // back on the original day looking not done. Copy that record back onto the plan entry for that date.
+  (function(){let fixed=0;merged.forEach(o=>{if(hcKeys.has(o.week+'|'+o.day+'|'+o.movement))return;
+    Object.keys(o.checks||{}).forEach(k=>{const c=o.checks[k];if(!c||c.status!=='deferred')return;
+      const h=merged.find(x=>x!==o&&x.movement===o.movement&&hcKeys.has(x.week+'|'+x.day+'|'+x.movement)&&getDate(x.week,x.day).toISOString().slice(0,10)===k);
+      if(!h)return;h.checks=h.checks||{};const hc=h.checks[k];
+      if(!hc||!(hc.done||(hc.status&&hc.status!=='none'))){h.checks[k]=Object.assign({},c);}
+      delete o.checks[k];o.user=true;o.movedFrom=k;fixed++;});});
+    if(fixed)console.log('[init] repaired '+fixed+' moved entries');})();
   workouts=merged;
 }}}catch(e){_storageOk=false;}})();
 function persist(){if(!_storageOk)return;try{localStorage.setItem('hyrox_plan',JSON.stringify(workouts));}catch(e){}}
@@ -3141,11 +3150,12 @@ function confirmDefer(wid,dateStr,targetWk,targetDay,targetLabel){
   const w=workouts.find(x=>x.id===wid);
   if(!w)return;
 
-  // Actually move the exercise to the target day/week
-  const origWeek=w.week;
-  const origDay=w.day;
-  w.week=targetWk;
-  w.day=targetDay;
+  // v228: the plan entry STAYS on its day (marked Moved); a copy goes to the target day. Moving the plan entry
+  // itself changed its week|day key, so on the next load the merge restored it on the original day as not done.
+  if(!workouts.some(x=>x.week===targetWk&&x.day===targetDay&&x.movement===w.movement)){
+    const c=Object.assign({},w,{id:uid(),week:targetWk,day:targetDay,log:[],checks:{},user:true,movedFrom:dateStr});delete c.edits;
+    workouts.push(c);
+  }
 
   // Mark as deferred on original date
   if(!w.checks)w.checks={};

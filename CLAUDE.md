@@ -45,7 +45,7 @@ Result: structure comes from the HTML; the athlete's logs are always preserved. 
    - `BUILD NN` — the subtitle line in `index.html`
    - `hyrox-vNN` — the CACHE name in `sw.js`
    The athlete reads the visible VERSION to confirm a fresh build loaded; this is how stale-cache bugs get caught. Increment all three by 1 each release.
-4. **Never destroy logs.** The athlete's training history lives in localStorage. Do not advise clearing site data. Refresh is hard-refresh only (Cmd+Shift+R).
+4. **Never destroy logs.** The athlete's training history lives in localStorage. Do not advise clearing site data. Refresh is hard-refresh only (Cmd+Shift+R). **Never advise deleting the home-screen app either:** on iOS it has its own storage, so removing the icon deletes every log. To reinstall: backup → add a second copy → Restore from backup → verify → then delete the old one.
 5. **Validate before committing:** run `node --check` on the extracted `<script>` for syntax, AND serve the app locally and load it in a browser to confirm behavior. Syntax-checking alone is NOT enough — a past logic bug (a bad localStorage merge) passed `node --check` and shipped broken. Always preview.
 
 ## Local preview (the step that catches logic bugs)
