@@ -16,13 +16,16 @@ No framework, no build step, no dependencies. Vanilla HTML + CSS + JS.
 - `sw.js` — service worker (offline cache). Its cache name MUST be bumped on every release (see Versioning).
 - `deploy.py` — one-command release. `python3 deploy.py "msg"` bumps VERSION+BUILD+sw cache in sync, syntax-checks via JavaScriptCore (node is not installed), commits ALL changes, pushes, and polls the live URL. `python3 deploy.py --check` validates + shows the next version without touching git. See Deploy workflow.
 
+## Theming
+- Light/dark: a small `<head>` script sets `<html data-theme>`; all dark CSS is one block keyed on `:root[data-theme="dark"]` at the end of the stylesheet. Use the CSS tokens for any new UI; filled accent buttons need `var(--on-accent)` text in dark mode, not white.
+
 ## Data model
 - The plan is a hardcoded JS array: `let workouts=[ {…}, {…} ]`.
 - Each entry: `{id:uid(), week, day, phase, block, movement, weight, sets, tempo, rest, cue, superset?, log:[], checks:{}}`.
   - Optional `brief:'line|line|⚠ safety line'` — the concise how-to shown in the UI (v213+); the full `cue` stays behind "Full notes". Write one for every new entry: 3-7 short lines, keep every stop rule and ⚠ gate.
   - `id:uid()` is generated at runtime — it does NOT exist in source, so **never anchor edits on it**.
   - `checks` is keyed by date: `{ "YYYY-MM-DD": { done, notes, status, skipReason, deferredTo } }`. This holds the athlete's logs.
-- localStorage keys: `hyrox_plan` (plan + logs), `hyrox_vitals` (sleep/HRV/etc.), `hyrox_dayskips`.
+- localStorage keys: `hyrox_plan` (plan + logs), `hyrox_vitals` (sleep/HRV/etc.), `hyrox_dayskips`, `hyrox_progress` (current milestone numbers) + `hyrox_progress_hist` (dated history, v217). All five belong in the Save backup bundle.
 
 ## The merge (critical — how logs survive code updates)
 `init()` runs an **HTML-authoritative** merge:
