@@ -1115,12 +1115,11 @@ body{background:var(--bg);}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 219</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 219</strong></p>
+      <div class="ver">VERSION 220</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 220</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
-      <button class="hbtn primary" onclick="openAddModal(null,null)">+ Add</button>
       <div class="hmenu-wrap">
         <button class="hbtn" aria-label="More actions" onclick="toggleHMenu(event)">&#8943;</button>
         <div class="hmenu" id="hMenu" style="display:none">
@@ -4122,7 +4121,7 @@ function renderWeekEdit(days,week){
   var open=_wkOpen;if(open===null){var t=days.find(function(i){return i.when==='today';});open=t?t.day:'Monday';}
   var BL={'Morning Protocol':'Morning','AM Wall Balls':'AM wall balls','Warm-Up':'Warm-up','Main Session':'Session','Finisher':'End of day and extras','Mobility':'Mobility'};
   var ORDER=['Morning Protocol','AM Wall Balls','Warm-Up','Main Session','Finisher','Mobility'];
-  var h='<div class="tdy-banner wk-ebanner">Edit or copy any exercise, or add your own. Plan exercises cannot be deleted (mark them Skipped instead); ones you added can.</div>';
+  var h='<div class="tdy-banner wk-ebanner">Edit or copy any exercise. Plan exercises cannot be deleted; mark them Skipped instead.</div>';
   days.forEach(function(i){
     var isOpen=open===i.day;
     h+='<section class="tdy-card wk-eday'+(isOpen?' open':'')+'" aria-label="'+i.day+'"><button class="wk-eh" type="button" aria-expanded="'+isOpen+'" onclick="wkOpenEditDay(\''+i.day+'\')"><span><b>'+wkShort(i.day)+' '+i.date.getDate()+'</b> <span class="tdy-lab">· '+tEsc(wkFocus(i))+' · '+i.items.length+'</span></span>'+WK_IC.down+'</button>';
@@ -4134,7 +4133,6 @@ function renderWeekEdit(days,week){
           h+='<div class="wk-erow"><div class="wk-ib"><div class="wk-en"><span class="dl-tier t-'+tr.toLowerCase()+'">'+WK_TIER[tr]+'</span> '+nm+'</div><div class="wk-id">'+tEsc(w.sets&&w.sets!=='N/A'?w.sets:'')+'</div></div>'
             +'<div class="wk-tools"><button class="wk-ic" type="button" aria-label="Edit '+nm+'" onclick="openEditModal(\''+w.id+'\')">'+WK_IC.edit+'</button><button class="wk-ic" type="button" aria-label="Copy '+nm+'" onclick="openCopyModal(\''+w.id+'\')">'+WK_IC.copy+'</button>'
             +(plan?'':'<button class="wk-ic del" type="button" aria-label="Delete '+nm+'" onclick="wkDelete(\''+w.id+'\')">'+WK_IC.del+'</button>')+'</div></div>';});});
-      h+='<button class="wk-add" type="button" onclick="openAddModal('+week+',\''+i.day+'\')">+ Add exercise to '+i.day+'</button>';
     }
     h+='</section>';
   });
