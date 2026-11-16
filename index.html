@@ -1044,6 +1044,29 @@ body{background:var(--bg);}
 .bn .bench-card .bn-x{margin:0;}
 .bn button:focus-visible,.bn summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 @media (prefers-reduced-motion:reduce){.bn-sec>summary svg{transition:none;}}
+/* ═══ Log screen header (v221) ═══ */
+.dl-header{flex-direction:column;align-items:stretch;gap:4px;padding:8px 16px 12px;padding-top:max(8px,env(safe-area-inset-top));background:var(--bg);}
+.dl-hrow{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:40px;}
+.dl-header .dl-back{background:var(--surface);border:1px solid var(--border);border-radius:999px;min-height:38px;padding:0 14px 0 8px;font-size:14.5px;}
+.dl-hact{display:flex;align-items:center;gap:8px;}
+.dl-hlink{background:none;border:0;color:var(--accent) !important;font-family:inherit;font-weight:600;font-size:14px;min-height:38px;padding:0 4px;cursor:pointer;}
+.dl-header .dl-check-all{border-radius:999px;min-height:38px;padding:0 16px;}
+.dl-header-info{padding:4px 2px 0;}
+.dl-header .dl-header-title{font-family:var(--f-display);font-size:28px;font-weight:800;line-height:1.05;letter-spacing:-.01em;white-space:normal;transition:font-size .18s;}
+.dl-header .dl-header-progress{font-size:14px;margin-top:4px;}
+.dl-hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.dl-hchips:empty{display:none;}
+.dl-chip{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;padding:4px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--border);color:var(--muted);}
+.dl-chip b{color:var(--text);font-variant-numeric:tabular-nums;}
+.dl-chip.ok{background:var(--accent-bg);border-color:transparent;color:var(--accent);font-weight:600;}
+.dl-chip.ok b{color:var(--accent);}
+.dl-chip.miss{background:var(--t-amber-soft);border-color:transparent;color:var(--t-amber);font-weight:600;}
+.dl-chip.miss b{color:var(--t-amber);}
+.dl-header.compact .dl-header-title{font-size:19px;}
+.dl-header.compact .dl-hchips{display:none;}
+.dl-header.compact .dl-header-progress{margin-top:1px;}
+.dl-hlink:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+@media (prefers-reduced-motion:reduce){.dl-header .dl-header-title{transition:none;}}
 /* ═══ Dark mode (v216) ═══
    Tokens first, then the few places that hard-code light colours. Accent fills use dark ink (--on-accent)
    because the dark-mode accent is light enough to read as text on the dark surfaces. Inline light tints
@@ -1115,8 +1138,8 @@ body{background:var(--bg);}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 220</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 220</strong></p>
+      <div class="ver">VERSION 221</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 221</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -1143,13 +1166,16 @@ body{background:var(--bg);}
 <div class="drawer-scrim" id="drawerScrim" style="display:none"></div>
 
 <div class="day-log-overlay" id="dayLogOverlay" onpointerdown="dlPressStart(event)">
-  <div class="dl-header">
+  <div class="dl-header" id="dlHeader">
+    <div class="dl-hrow">
     <button class="dl-back" onclick="closeDayLog()" aria-label="Back"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>Back</span></button>
-    <div class="dl-header-info">
-      <div class="dl-header-title" id="dlTitle">—</div>
-      <div class="dl-header-progress" id="dlProgress">0 of 0 done</div>
+    <div class="dl-hact"><button class="dl-hlink" id="dlWholeDay" type="button" onclick="dlWholeDay()" style="display:none">Whole day</button><button class="dl-check-all" id="dlCheckAll" onclick="checkAllDone()">All done</button></div>
     </div>
-    <button class="dl-check-all" id="dlCheckAll" onclick="checkAllDone()">All done</button>
+    <div class="dl-header-info">
+      <h1 class="dl-header-title" id="dlTitle">—</h1>
+      <div class="dl-header-progress" id="dlProgress"></div>
+      <div class="dl-hchips" id="dlChips"></div>
+    </div>
   </div>
   <div class="dl-body" id="dlBody"></div>
 </div>
@@ -2777,8 +2803,10 @@ function openDayLog(week,dayName){
   const dateStr=date.toISOString().slice(0,10);
   dayLogState={week,day:dayName,dateStr};
   const dw=workouts.filter(x=>x.week===week&&x.day===dayName);
-  document.getElementById('dlTitle').textContent=`${dayName} · ${fmtDate(date)}`;
+  document.getElementById('dlTitle').textContent=dayName;
   const ca=document.getElementById('dlCheckAll');if(ca)ca.style.display='';
+  const wd=document.getElementById('dlWholeDay');if(wd)wd.style.display='none';
+  dlResetHeader();
   renderDayLogBody(dw,dateStr);
   updateDayLogProgress(dw,dateStr);
   document.getElementById('dayLogOverlay').classList.add('open');
@@ -2793,14 +2821,20 @@ function openExLog(wid){
   const date=getDate(w.week,w.day);
   const dateStr=date.toISOString().slice(0,10);
   dayLogState={week:w.week,day:w.day,dateStr,focusId:wid};
-  document.getElementById('dlTitle').textContent=`${w.day} · ${fmtDate(date)}`;
+  document.getElementById('dlTitle').textContent=w.day;
   const ca=document.getElementById('dlCheckAll');if(ca)ca.style.display='none';
+  const wd=document.getElementById('dlWholeDay');if(wd)wd.style.display='';
+  dlResetHeader();
   const dw=[w];
   renderDayLogBody(dw,dateStr);
   updateDayLogProgress(dw,dateStr);
   document.getElementById('dayLogOverlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
+function dlResetHeader(){var h=document.getElementById('dlHeader');if(h)h.classList.remove('compact');var b=document.getElementById('dlBody');if(b)b.scrollTop=0;}
+function dlWholeDay(){var st=dayLogState;if(!st)return;var ae=document.activeElement;if(ae&&ae.classList&&ae.classList.contains('dl-notes'))ae.blur();openDayLog(st.week,st.day);}
+(function(){var b=document.getElementById('dlBody'),h=document.getElementById('dlHeader');if(!b||!h)return;
+  b.addEventListener('scroll',function(){var c=b.scrollTop>40;if(c!==h.classList.contains('compact'))h.classList.toggle('compact',c);},{passive:true});})();
 function closeDayLog(){
   var ae=document.activeElement;if(ae&&ae.classList&&ae.classList.contains('dl-notes'))ae.blur(); // fire onchange so the note saves
   document.getElementById('dayLogOverlay').classList.remove('open');
@@ -2949,9 +2983,20 @@ function updateDayLogProgress(dw,dateStr){
   const total=dw?dw.length:(dayLogState?workouts.filter(x=>x.week===dayLogState.week&&x.day===dayLogState.day).length:0);
   const ds=dateStr||dayLogState?.dateStr||'';
   const done=workouts.filter(x=>x.checks?.[ds]?.done&&(dw?dw.some(d=>d.id===x.id):(x.week===dayLogState?.week&&x.day===dayLogState?.day))).length;
+  const _base=dayLogState?`${fmtDate(getDate(dayLogState.week,dayLogState.day))} · Week ${dayLogState.week}`:'';
+  const chips=document.getElementById('dlChips');
   if(focusId&&dayLogState){var _fw=workouts.find(x=>x.id===focusId);var _st=_fw?getExStatus(_fw,ds):'none';
-    document.getElementById('dlProgress').textContent=`Week ${dayLogState.week} · ${{done:'Done',partial:'Partial',skip:'Skipped',deferred:'Moved',none:'Not done yet'}[_st]||''}`;return;}
-  document.getElementById('dlProgress').textContent=`${done} of ${total} done`;
+    document.getElementById('dlProgress').textContent=_base;
+    if(chips)chips.innerHTML=`<span class="dl-chip${_st==='done'?' ok':''}">${{done:'Done ✓',partial:'Partial',skip:'Skipped',deferred:'Moved',none:'Not done yet'}[_st]||''}</span>`;return;}
+  document.getElementById('dlProgress').textContent=_base;
+  if(!chips||!dayLogState)return;
+  const _wk=dayLogState.week,_tiered=workouts.some(x=>x.week===_wk&&/^(FLOOR|GOAL|BONUS)\b/.test(x.movement||''));
+  if(_tiered&&typeof wkDay==='function'){const i=wkDay(_wk,dayLogState.day,true);
+    const fOK=i.floor.length&&i.fd===i.floor.length,gOK=i.goal.length&&i.gd===i.goal.length;
+    chips.innerHTML=(i.floor.length?`<span class="dl-chip${fOK?' ok':(i.when==='past'?' miss':'')}">Must do <b>${fOK?'✓':i.fd+'/'+i.floor.length}</b></span>`:'')
+      +(i.goal.length?`<span class="dl-chip${gOK?' ok':''}">Goal <b>${i.gd}/${i.goal.length}</b></span>`:'')
+      +(i.bonus.length?`<span class="dl-chip">Extras <b>${i.bd}/${i.bonus.length}</b></span>`:'');}
+  else chips.innerHTML=`<span class="dl-chip${total&&done===total?' ok':''}"><b>${done}/${total}</b> done</span>`;
 }
 function cycleExStatus(wid,dateStr,newStatus){
   const w=workouts.find(x=>x.id===wid);
