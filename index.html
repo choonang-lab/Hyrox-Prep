@@ -1136,6 +1136,22 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
 .tdy-chipsel button[aria-pressed="true"]{background:var(--t-amber-soft);border-color:var(--t-amber);color:var(--t-amber) !important;font-weight:600;}
 .tdy-seg.three-n button[aria-pressed="true"].warn{color:var(--t-amber) !important;}
 .tdy-eodnote{font-size:12.5px;color:var(--t-amber);background:var(--t-amber-soft);border-radius:9px;padding:8px 10px;line-height:1.4;}
+/* ═══ Move with make-up rules (v229) ═══ */
+.mv-rule{font-size:13.5px;line-height:1.45;border-radius:10px;padding:10px 12px;background:var(--surface2);color:var(--text2);}
+.mv-rule.warn{background:var(--t-amber-soft);color:var(--text);}
+.mv-rule.warn b{color:var(--t-amber);}
+.mv-rule.ok b{color:var(--accent);}
+.mv-list{display:grid;gap:6px;}
+.mv-slot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;text-align:left;border:1.5px solid var(--border);background:var(--surface);border-radius:12px;padding:10px 12px;cursor:pointer;width:100%;}
+.mv-slot b{font-size:15px;}
+.mv-slot small{grid-column:1/-1;font-size:12.5px;color:var(--muted);}
+.mv-slot .mv-tag{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap;}
+.mv-slot .mv-tag.ok{background:var(--accent-bg);color:var(--accent);}
+.mv-slot .mv-tag.w{background:var(--t-amber-soft);color:var(--t-amber);}
+.mv-slot .mv-why{grid-column:1/-1;font-size:12.5px;color:var(--t-amber);line-height:1.35;}
+.mv-slot.good{border-color:var(--accent);}
+.mv-slot:disabled{opacity:.45;cursor:default;border-style:dashed;}
+.wk-rule{font-size:12.5px;color:var(--muted);line-height:1.4;padding:0 0 8px;}
 /* ═══ Dark mode (v216) ═══
    Tokens first, then the few places that hard-code light colours. Accent fills use dark ink (--on-accent)
    because the dark-mode accent is light enough to read as text on the dark surfaces. Inline light tints
@@ -1207,8 +1223,8 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 228</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 228</strong></p>
+      <div class="ver">VERSION 229</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 229</strong></p>
       <button type="button" id="raceCountdown" class="race-chip" onclick="showProgress()" aria-label="Rehab progress"></button>
     </div>
     <div class="header-btns">
@@ -1263,6 +1279,11 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
   <div class="sh-head"><div class="sh-ht"><div class="sh-kick">Restore from backup</div><h2 id="rsTitle">Check before restoring</h2></div><button class="sh-x" type="button" onclick="rsCancel()" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="sh-body" id="rsBody"></div>
   <div class="sh-btns"><button class="wk-btn" type="button" onclick="rsCancel()">Cancel</button><button class="wk-btn pri" type="button" onclick="rsApply()">Restore</button></div>
+</div>
+<div class="sh" id="moveSheet" role="dialog" aria-modal="true" aria-labelledby="mvTitle" aria-hidden="true">
+  <div class="sh-head"><div class="sh-ht"><div class="sh-kick">Make it up on another day?</div><h2 id="mvTitle">Move</h2></div><button class="sh-x" type="button" onclick="shClose()" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="sh-body" id="mvBody"></div>
+  <div class="sh-btns"><button class="wk-btn" type="button" onclick="shClose()">Cancel</button><button class="wk-btn" type="button" id="mvLetGo" onclick="mvLetGo()">Let it go</button></div>
 </div>
 <div class="export-scrim" id="exportScrim" onclick="closeExportBg(event)">
   <div class="export-box">
@@ -3021,6 +3042,7 @@ function renderDayLogBody(dw,dateStr){
           <button class="s-skip" aria-pressed="${isSkipped}" onclick="${isSkipped?`cycleExStatus('${id}','${dateStr}','skip')`:`openExSkip('${id}','${dateStr}')`}"><i>–</i>Skipped</button>
           <button class="s-move" aria-pressed="${isDeferred}" onclick="openExDefer('${id}','${dateStr}')"><i>→</i>Move</button>
         </div>
+        ${isSkipped&&/fatigue|pain|injury/i.test(skipReason||'')?`<div class="dl-hint">Good call. This one is not made up later.</div>`:''}
         ${isSkipped?`<div class="dl-sub"><div class="dl-lab">Why?</div><div class="dl-pills" id="ex-skip-${id}">${SKIP_REASONS_EX.map(r=>`<button class="dl-pill amb${skipReason===r.label?' on':''}" aria-pressed="${skipReason===r.label}" onclick="setExSkipReason('${id}','${dateStr}','${r.label}')">${r.label}</button>`).join('')}</div></div>`:''}
         ${isDeferred&&deferredTo?`<div class="dl-hint blue">Moved to ${tEsc(deferredTo)}</div>`:''}
         ${showNotes?`<div class="dl-sub"><label class="dl-lab" for="dln-${id}">Sets and notes</label>
@@ -3089,61 +3111,69 @@ function setExSkipReason(wid,dateStr,reason){
   const dw=dayLogState?workouts.filter(x=>x.week===dayLogState.week&&x.day===dayLogState.day):[];
   renderDayLogBody(dw,dateStr);
 }
+// v229: the make-up rules live here, where the decision is made.
+//  Never made up: must-do (daily), anything skipped for pain or fatigue (warned), extras (optional, warned).
+//  Goal work: no muscle-up/pulling work on back-to-back days (coached Friday counts as pulling), no doubling a
+//  muscle-up day, never a rest day; a handstand item added to another goal day is allowed but flagged "keep both short";
+//  Friday or later, or next week, is flagged "fine to let it go". Days that break nothing are tagged Good fit.
+var _mv=null;
+function mvPhase(wk,day){var it=workouts.filter(function(x){return x.week===wk&&x.day===day;});
+  var g=it.find(function(x){return /^GOAL/.test(x.movement||'');});return ((g||it[0]||{}).phase)||'';}
+function mvSlotAt(d){var t=new Date(d);t.setHours(0,0,0,0);for(var i=0;i<WEEKS_META.length;i++){var n=WEEKS_META[i].num,mon=getDate(n,'Monday');mon.setHours(0,0,0,0);
+  var diff=Math.round((t-mon)/86400000);if(diff>=0&&diff<7)return {wk:n,day:DAYS[diff]};}return null;}
+function mvIsPull(ph){return /muscle-up|coached/i.test(ph||'');}
+function mvFocus(ph){return String(ph||'').replace(/^(Goal|Rehab)\s*[—–-]\s*/,'')||'Nothing planned';}
 function openExDefer(wid,dateStr){
-  const w=workouts.find(x=>x.id===wid);
-  if(!w)return;
-
-  // Build day picker modal
-  const DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-  const currentWeek=dayLogState?dayLogState.week:w.week;
-
-  // Build list of available target slots (current week + next week, excluding current day)
-  const slots=[];
-  [currentWeek, currentWeek+1].forEach(wk=>{
-    if(!WEEKS_META.some(function(m){return m.num===wk;}))return; // v212: was wk>20, which left no slots in the rehab weeks
-    DAYS.forEach(day=>{
-      // Skip the exercise's current day in current week
-      if(wk===w.week&&day===w.day)return;
-      const d=getDate(wk,day);
-      const dStr=d.toISOString().slice(0,10);
-      const now=new Date();now.setHours(0,0,0,0);
-      // Only future days
-      if(d<now)return;
-      slots.push({wk,day,date:dStr,label:`W${wk} ${day} · ${fmtDate(d)}`});
-    });
-  });
-
-  // Create modal overlay
-  const overlay=document.createElement('div');
-  overlay.id='defer-overlay';
-  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;display:flex;align-items:flex-end;justify-content:center;';
-
-  const panel=document.createElement('div');
-  panel.style.cssText='background:var(--surface);border-radius:16px 16px 0 0;width:100%;max-width:600px;padding:20px 20px calc(20px + env(safe-area-inset-bottom));max-height:70vh;overflow-y:auto;';
-
-  panel.innerHTML=`
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <div>
-        <div style="font-family:var(--f-display);font-size:18px;font-weight:700;color:var(--text)">Move to another day</div>
-        <div style="font-size:13px;color:var(--muted);margin-top:2px">${tName(w.movement)}</div>
-      </div>
-      <button onclick="document.getElementById('defer-overlay').remove()" style="background:none;border:none;font-size:1.2rem;color:var(--muted);cursor:pointer">✕</button>
-    </div>
-    <div style="font-size:0.65rem;color:var(--muted);margin-bottom:10px">Move to which day?</div>
-    <div style="display:flex;flex-direction:column;gap:6px">
-      ${slots.map(s=>`
-        <button onclick="confirmDefer('${wid}','${dateStr}',${s.wk},'${s.day}','${s.label}')"
-          style="text-align:left;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);cursor:pointer;font-family:inherit">
-          <div style="font-size:0.78rem;font-weight:600;color:var(--text)">${s.day}</div>
-          <div style="font-size:0.62rem;color:var(--muted);margin-top:2px">${s.label}</div>
-        </button>`).join('')}
-    </div>
-    ${slots.length===0?'<div style="font-size:0.72rem;color:var(--muted);text-align:center;padding:20px">No future days available in current or next week.</div>':''}
-  `;
-
-  overlay.appendChild(panel);
-  overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove();});
-  document.body.appendChild(overlay);
+  var w=workouts.find(function(x){return x.id===wid;});if(!w)return;
+  var tier=/^(FLOOR|GOAL|BONUS)\b/.test(w.movement||'')?tTier(w.movement):'GOAL';
+  var src=w.phase||mvPhase(w.week,w.day),pull=mvIsPull(src)||/pull-up|dip|muscle-up|row/i.test(w.movement||'');
+  var c=(w.checks||{})[dateStr]||{},why=c.skipReason||'';
+  _mv={wid:wid,ds:dateStr};
+  document.getElementById('mvTitle').innerHTML=shTitle(w);
+  var h='';
+  if(tier==='FLOOR'){
+    h='<div class="mv-rule warn"><b>Daily must-do is not made up.</b> It is a habit, not a session. Just do today’s.</div>';
+    document.getElementById('mvBody').innerHTML=h;document.getElementById('mvLetGo').textContent='Mark skipped';shOpen('moveSheet');return;
+  }
+  document.getElementById('mvLetGo').textContent='Let it go';
+  if(/fatigue|pain|injury/i.test(why))h+='<div class="mv-rule warn"><b>You skipped this for '+tEsc(why.toLowerCase())+'.</b> That was the right call. Do not make it up; recovery comes first.</div>';
+  else if(tier==='BONUS')h+='<div class="mv-rule warn"><b>This is an extra.</b> Extras are optional, so letting it go is the normal choice.</div>';
+  else h+='<div class="mv-rule">'+(pull?'<b>Muscle-up work needs about 48 hours.</b> No pulling two days in a row, and Friday’s coached session counts.':'<b>Handstand work is light skill practice,</b> so it moves easily. Keep a doubled day short.')+' Never on a rest day. Late in the week, let it go.</div>';
+  var now=new Date();now.setHours(0,0,0,0);var slots=[];
+  [w.week,w.week+1].forEach(function(wk){if(!WEEKS_META.some(function(m){return m.num===wk;}))return;
+    DAYS.forEach(function(day){if(wk===w.week&&day===w.day)return;var d=getDate(wk,day);d.setHours(0,0,0,0);if(d<now)return;
+      var ph=mvPhase(wk,day),warns=[],notes=[],rest=/rest/i.test(ph),dup=workouts.some(function(x){return x.week===wk&&x.day===day&&x.movement===w.movement;});
+      if(!rest){
+        if(pull){
+          if(/muscle-up/i.test(ph))warns.push('Already a muscle-up day. This doubles it.');
+          else if(/coached/i.test(ph))warns.push('The coached session already works pulling.');
+          [-1,1].forEach(function(o){var nd=new Date(d);nd.setDate(nd.getDate()+o);var sl=mvSlotAt(nd);if(!sl)return;
+            if(sl.wk===w.week&&sl.day===w.day)return; // the skipped session itself does not count
+            var nph=mvPhase(sl.wk,sl.day);if(mvIsPull(nph))warns.push('Pulling '+(o<0?'the day before':'the day after')+': '+sl.day.slice(0,3)+' is '+mvFocus(nph).toLowerCase()+'.');});
+        }else if(workouts.some(function(x){return x.week===wk&&x.day===day&&/^GOAL/.test(x.movement||'');}))notes.push('Adds to the '+mvFocus(ph).toLowerCase()+' day. Keep both short.');
+        if(wk>w.week||DAYS.indexOf(day)>=4)warns.push('Late in the week. Fine to let it go.');
+      }
+      slots.push({wk:wk,day:day,d:d,ph:ph,warns:warns,notes:notes,rest:rest||dup,dup:dup});});});
+  var anyGood=slots.some(function(sl){return !sl.rest&&!sl.warns.length;});
+  if(slots.length&&!anyGood)h+='<div class="mv-rule ok"><b>No day fits cleanly this week.</b> Letting it go is the better choice. If you still move it, pick the day with the fewest warnings.</div>';
+  h+='<div class="mv-list">'+slots.map(function(sl){var good=!sl.rest&&!sl.warns.length,lbl=sl.day.slice(0,3)+' '+fmtDate(sl.d);
+      return '<button class="mv-slot'+(good?' good':'')+'" type="button"'+(sl.rest?' disabled':'')+' onclick="confirmDefer(\''+wid+'\',\''+dateStr+'\','+sl.wk+',\''+sl.day+'\',\''+lbl+'\')">'
+        +'<b>'+sl.day+' '+sl.d.getDate()+'</b>'+(sl.dup?'<span class="mv-tag">Has it</span>':sl.rest?'<span class="mv-tag">Rest day</span>':good?'<span class="mv-tag ok">Good fit</span>':'<span class="mv-tag w">Check</span>')
+        +'<small>'+(sl.wk!==w.week?'Next week · ':'')+tEsc(mvFocus(sl.ph))+'</small>'
+        +(sl.warns.length&&!sl.rest?'<span class="mv-why">'+sl.warns.map(tEsc).join(' ')+'</span>':'')
+        +(sl.notes.length&&!sl.rest?'<small>'+sl.notes.map(tEsc).join(' ')+'</small>':'')+'</button>';}).join('')+'</div>';
+  if(!slots.length)h+='<div class="mv-rule">No days left this week or next. Let it go.</div>';
+  document.getElementById('mvBody').innerHTML=h;
+  shOpen('moveSheet');
+}
+function mvLetGo(){
+  if(!_mv)return;var w=workouts.find(function(x){return x.id===_mv.wid;}),ds=_mv.ds;if(!w){shClose();return;}
+  w.checks=w.checks||{};var c=w.checks[ds]||(w.checks[ds]={done:false,notes:'',status:'none'});
+  c.status='skip';c.done=false;if(!c.skipReason)c.skipReason='Let it go';c.deferredTo='';
+  persist();shClose();
+  if(dayLogState){var dw=dayLogState.focusId?workouts.filter(function(x){return x.id===dayLogState.focusId;}):workouts.filter(function(x){return x.week===dayLogState.week&&x.day===dayLogState.day;});renderDayLogBody(dw,ds);updateDayLogProgress(dw,ds);}
+  else render();
+  showToast('Let go. One session changes nothing.');
 }
 
 function confirmDefer(wid,dateStr,targetWk,targetDay,targetLabel){
@@ -3167,6 +3197,7 @@ function confirmDefer(wid,dateStr,targetWk,targetDay,targetLabel){
   // Close modal
   const overlay=document.getElementById('defer-overlay');
   if(overlay)overlay.remove();
+  if(typeof shClose==='function')shClose();
 
   persist();
   render();
@@ -3178,7 +3209,7 @@ function confirmDefer(wid,dateStr,targetWk,targetDay,targetLabel){
     updateDayLogProgress(dw,dateStr);
   }
 
-  showToast(`${w.movement} moved → ${targetLabel}`);
+  showToast(`${tName(w.movement)} moved to ${targetLabel}`);
 }
 
 function setDayStatus(reason,dateStr){
@@ -3224,7 +3255,7 @@ function checkAllDone(){
 // Copies carry user:true so the merge keeps them; a copy can be fully edited and deleted.
 var _es=null,_cs=null;
 function shOpen(id){document.getElementById('shScrim').classList.add('open');var el=document.getElementById(id);el.classList.add('open');el.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
-function shClose(){document.getElementById('shScrim').classList.remove('open');['editSheet','copySheet','restoreSheet'].forEach(function(id){var el=document.getElementById(id);if(el){el.classList.remove('open');el.setAttribute('aria-hidden','true');}});
+function shClose(){document.getElementById('shScrim').classList.remove('open');['editSheet','copySheet','restoreSheet','moveSheet'].forEach(function(id){var el=document.getElementById(id);if(el){el.classList.remove('open');el.setAttribute('aria-hidden','true');}});
   if(!document.getElementById('dayLogOverlay').classList.contains('open'))document.body.style.overflow='';_es=null;_cs=null;}
 function shVal(v){return (v==null||v==='N/A')?'':String(v);}
 function shKick(w){return w.day.slice(0,3)+' '+fmtDate(getDate(w.week,w.day))+' · Week '+w.week;}
@@ -4405,6 +4436,7 @@ function renderWeekView(wm){
         xb+=i.bonus.filter(function(w){return tStatus(w,i.ds)==='none';}).length;});
       if(todo.length){
         h+='<section class="tdy-card wk-catch" aria-label="Catch up"><div class="tdy-head"><h2>Catch up</h2><span>'+todo.length+' left from earlier days</span></div>'
+          +'<div class="wk-rule">Make up goal work only if it fits: no muscle-up work two days running, no doubling a day, never a rest day. Must-do is never made up. Late in the week, let it go.</div>'
           +todo.map(function(t){var w=t.w,fl=/^FLOOR/.test(w.movement||''),tr=tTier(w.movement);
             return '<div class="wk-crow"><div class="wk-cb"><div class="wk-cn">'+tEsc(tName(w.movement))+'</div><div class="wk-cm">'+(tiered?'<span class="dl-tier t-'+tr.toLowerCase()+'">'+WK_TIER[tr]+'</span> ':'')+wkShort(t.i.day)+' '+t.i.date.getDate()+'</div></div>'
               +'<div class="wk-cbtns"><button class="wk-btn pri sm" type="button" onclick="wkSet(\''+w.id+'\',\'done\')">Done</button>'
