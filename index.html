@@ -931,6 +931,61 @@ body{background:var(--bg);}
 .pg-cp.next b{color:var(--accent);}
 .pg-sub2{font-size:12.5px;color:var(--muted);margin:2px 0 10px;}
 .pg button:focus-visible,.pg-in:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+/* ═══ Vitals tab (v218) ═══ */
+.vt .tdy-card{padding-bottom:12px;}
+.vt-ready{border-width:1.5px;}
+.vt-ready.g{border-color:var(--accent);}
+.vt-ready.a{border-color:var(--t-amber);}
+.vt-ready.r{border-color:var(--red);}
+.vt-sig{display:flex;align-items:center;gap:10px;margin:2px 0 6px;}
+.vt-sig b{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1;}
+.vt-ready.g .vt-sig b{color:var(--accent);}
+.vt-ready.a .vt-sig b{color:var(--t-amber);}
+.vt-ready.r .vt-sig b{color:var(--red);}
+.vt-sig span{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface2);color:var(--muted);font-variant-numeric:tabular-nums;}
+.vt-rec{font-size:15px;line-height:1.4;margin:0 0 8px;}
+.vt-flags{list-style:none;margin:0;padding:0;display:grid;gap:4px;}
+.vt-flags li{font-size:13px;color:var(--muted);padding-left:14px;position:relative;}
+.vt-flags li::before{content:'';position:absolute;left:2px;top:7px;width:6px;height:6px;border-radius:50%;background:var(--border2);}
+.vt-ready.a .vt-flags li::before{background:var(--t-amber);}
+.vt-ready.r .vt-flags li::before{background:var(--red);}
+.vt-foot{font-size:12px;color:var(--muted);margin-top:10px;}
+.vt-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:4px 0 12px;}
+.vt-f{display:grid;gap:5px;font-size:12px;color:var(--muted);}
+.vt-f>div{display:flex;align-items:center;gap:6px;}
+.vt-f small{font-size:12px;color:var(--muted);}
+.vt-in{flex:1;min-width:0;width:100%;min-height:46px;box-sizing:border-box;border:1.5px solid var(--border);border-radius:11px;background:var(--surface2);color:var(--text);font-family:var(--f-display);font-weight:700;font-size:19px;text-align:center;font-variant-numeric:tabular-nums;padding:0 6px;-moz-appearance:textfield;}
+.vt-in::-webkit-outer-spin-button,.vt-in::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.vt-in:focus{outline:none;border-color:var(--accent);background:var(--surface);}
+.vt-in::placeholder{color:var(--muted);font-weight:400;font-size:15px;}
+.vt-lab{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:10px 0 5px;}
+.vt-5{grid-template-columns:repeat(5,1fr) !important;}
+.vt-5 button{font-family:var(--f-display) !important;font-size:15px !important;font-weight:700;}
+.vt-5 button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent,#fff) !important;}
+.vt-row{display:flex;align-items:center;gap:10px;margin-top:12px;}
+.vt-travel{border:1.5px solid var(--border);background:var(--surface);border-radius:10px;min-height:40px;padding:0 12px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.vt-travel[aria-pressed="true"]{border-color:var(--t-amber);background:var(--t-amber-soft);color:var(--t-amber) !important;}
+.vt-row small{font-size:12px;color:var(--muted);line-height:1.3;}
+.vt-btns{display:flex;gap:8px;margin-top:14px;}
+.vt-btns .wk-btn{flex:1;min-height:46px;font-size:15px;}
+.vt-sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:4px 0 8px;}
+.vt-sum>div{background:var(--surface2);border-radius:11px;padding:8px 6px;text-align:center;display:grid;gap:1px;}
+.vt-sum b{font-family:var(--f-display);font-weight:800;font-size:18px;font-variant-numeric:tabular-nums;line-height:1.15;}
+.vt-sum small{font-size:11px;color:var(--muted);}
+.vt-meta{font-size:13px;color:var(--muted);}
+.vt-tr{display:grid;grid-template-columns:minmax(0,1fr) 46%;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--border);}
+.tdy-head + .vt-tr{border-top:0;}
+.vt-tr svg{display:block;width:100%;height:40px;}
+.vt-miss{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--t-amber);background:var(--t-amber-soft);border-radius:10px;padding:9px 10px;margin:4px 0 6px;}
+.vt-miss button{border:1.5px solid var(--t-amber);background:transparent;color:var(--t-amber) !important;border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:600;cursor:pointer;}
+.vt-h{display:grid;grid-template-columns:44px minmax(0,1fr) 40px;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--border);}
+.vt-hd{display:flex;flex-direction:column;align-items:center;background:var(--surface2);border-radius:10px;padding:4px 0;line-height:1.1;}
+.vt-hd small{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.vt-hd b{font-family:var(--f-display);font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;}
+.vt-hv{background:none;border:0;padding:0;text-align:left;cursor:pointer;font-size:14px;line-height:1.35;min-width:0;font-variant-numeric:tabular-nums;}
+.vt-hv small{display:block;font-size:12px;color:var(--muted);}
+.vt-empty{font-size:13.5px;color:var(--muted);background:var(--surface2);border-radius:10px;padding:12px;line-height:1.4;}
+.vt button:focus-visible,.vt-in:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 /* ═══ Dark mode (v216) ═══
    Tokens first, then the few places that hard-code light colours. Accent fills use dark ink (--on-accent)
    because the dark-mode accent is light enough to read as text on the dark surfaces. Inline light tints
@@ -1002,8 +1057,8 @@ body{background:var(--bg);}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 217</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 217</strong></p>
+      <div class="ver">VERSION 218</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 218</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -3124,9 +3179,10 @@ function saveVitals(v){localStorage.setItem(VITALS_KEY,JSON.stringify(v));}
 
 function todayStr(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 
+function vtKey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function rollingAvg(vitals,field,days){
   const cutoff=new Date();cutoff.setDate(cutoff.getDate()-days);
-  const vals=vitals.filter(v=>v.date>=cutoff.toISOString().slice(0,10)&&v[field]!=null&&!v.travel).map(v=>+v[field]);
+  const vals=vitals.filter(v=>v.date>=vtKey(cutoff)&&v[field]!=null&&!v.travel).map(v=>+v[field]);
   return vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*10)/10:null;
 }
 
@@ -3189,9 +3245,11 @@ function getTodaySession(dateStr){
 
 function calcReadiness(entry,vitals){
   if(!entry)return null;
-  const rhrBase=rollingAvg(vitals,'rhr',7);
-  const hrvBase=rollingAvg(vitals,'hrv',7);
-  const sleepBase=rollingAvg(vitals,'sleep',14);
+  // v218: the baseline is the days BEFORE this entry, so today's number is not averaged into its own yardstick
+  const prior=vitals.filter(v=>v.date<entry.date);
+  const rhrBase=rollingAvg(prior,'rhr',7);
+  const hrvBase=rollingAvg(prior,'hrv',7);
+  const sleepBase=rollingAvg(prior,'sleep',14);
   const yest=new Date(entry.date);yest.setDate(yest.getDate()-1);
   const yestStr=yest.toISOString().slice(0,10);
   const yestLoad=getDayLoadScore(yestStr);
@@ -3228,8 +3286,8 @@ function calcReadiness(entry,vitals){
   // Sleep (weight 20%)
   if(entry.sleep!=null){
     let sleepScore=100;
-    if(entry.sleep<5.5){sleepScore=20;flags.push(`Sleep ${entry.sleep}h — insufficient`);}
-    else if(entry.sleep<6.5){sleepScore=55;flags.push(`Sleep ${entry.sleep}h — below average`);}
+    if(entry.sleep<5.5){sleepScore=20;flags.push(`Sleep ${vtSleep(entry.sleep)} — insufficient`);}
+    else if(entry.sleep<6.5){sleepScore=55;flags.push(`Sleep ${vtSleep(entry.sleep)} — below average`);}
     scores.push({score:sleepScore,weight:0.20});
   }else{partialData=true;}
 
@@ -3284,7 +3342,15 @@ function calcReadiness(entry,vitals){
     if(weekCtx==='test')rec+=' Consider postponing test session.';
   }
 
-  if(illnessFlag)rec='⚠ Illness flag: RHR >10 bpm above baseline. Rest is the training today.';
+  // v218: in the tiered rebuild, say it in Must do / Goal / Extras terms
+  const _ed=new Date(entry.date+'T00:00:00');let _wk=null;
+  for(let w=MAXWK;w>=2;w--){const st=getDate(w,'Monday');st.setHours(0,0,0,0);if(_ed>=st){_wk=w;break;}}
+  if(_wk&&workouts.some(x=>x.week===_wk&&/^FLOOR/.test(x.movement||''))){
+    rec=signal==='GREEN'?'Go as planned: must-do first, then the goal work. Extras if you have time.'
+      :signal==='AMBER'?'Do the must-do and the goal work at an easier effort. Skip the extras today.'
+      :'Must-do only: the daily 20 min and the knee check. Rest is the training today.';
+  }
+  if(illnessFlag)rec='⚠ Illness flag: resting HR is more than 10 bpm above your baseline. Rest is the training today.';
 
   return{signal,color,composite:adjComposite,flags,rec,partialData,illnessFlag,yestLoad,weekCtx,todaySess,rhrBase,hrvBase};
 }
@@ -3303,155 +3369,103 @@ function showVitals(){
     var main=document.getElementById('mainContent');
     var div=document.createElement('div');
     div.id='vitalsView';
-    div.style.cssText='max-width:680px;margin:0 auto;padding:20px 16px 40px;';
+    div.className='tdy vt';
     main.appendChild(div);
     renderVitalsTab();
   }
 }
 
+var _vEdit=false;
+function vtSleep(h,c){if(h==null)return '–';var hh=Math.floor(h),mm=Math.round((h%1)*60);if(mm===60){hh++;mm=0;}return hh+'h'+(mm?(c?'':' ')+String(mm).padStart(c?2:1,'0')+(c?'':'m'):'');}
+function vtSpark(vals,avg){
+  var pts=[];vals.forEach(function(v,i){if(v!=null)pts.push([i,v]);});
+  if(!pts.length)return '<svg viewBox="0 0 140 40" aria-hidden="true"><line x1="2" x2="138" y1="20" y2="20" stroke="var(--border)" stroke-dasharray="3 3"/></svg>';
+  var ys=pts.map(function(p){return p[1];});if(avg!=null)ys.push(avg);
+  var lo=Math.min.apply(null,ys),hi=Math.max.apply(null,ys);if(hi-lo<1e-9){lo-=1;hi+=1;}
+  var X=function(i){return 4+i*(132/(vals.length-1));},Y=function(v){return 34-(v-lo)/(hi-lo)*28;};
+  var g=avg!=null?'<line x1="2" x2="138" y1="'+Y(avg).toFixed(1)+'" y2="'+Y(avg).toFixed(1)+'" stroke="var(--muted)" stroke-opacity=".6" stroke-dasharray="3 3"/>':'';
+  var line=pts.length>1?'<polyline points="'+pts.map(function(p){return X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1);}).join(' ')+'" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>':'';
+  var l=pts[pts.length-1];
+  return '<svg viewBox="0 0 140 40" preserveAspectRatio="none" aria-hidden="true">'+g+line+'<circle cx="'+X(l[0]).toFixed(1)+'" cy="'+Y(l[1]).toFixed(1)+'" r="3.2" fill="var(--accent)"/></svg>';
+}
+function vitalsEdit(on){_vEdit=on!==false;renderVitalsTab();if(_vEdit){var e=document.getElementById('v-rhr');if(e)e.scrollIntoView({block:'center'});}}
 function renderVitalsTab(){
   const vv=document.getElementById('vitalsView');
   if(!vv)return;
   const vitals=loadVitals();
   const today=todayStr();
-  const todayEntry=vitals.find(v=>v.date===today);
-  const readiness=vitals.length>=2?calcReadiness(todayEntry||vitals[vitals.length-1],vitals):null;
-  const rhrAvg=rollingAvg(vitals,'rhr',7);
-  const hrvAvg=rollingAvg(vitals,'hrv',7);
-  const wAvg=rollingAvg(vitals,'weight',7);
-  const sleepAvg=rollingAvg(vitals,'sleep',14);
+  const te=vitals.find(v=>v.date===today);
+  const R=(te&&vitals.length>=2)?calcReadiness(te,vitals):null;
+  const now=new Date();
+  const lbl=d=>d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+  let h='<section><h1 class="tdy-day">Vitals</h1><div class="tdy-sub">'+lbl(now)+' · log after waking</div></section>';
 
-  // Chart data — last 14 days
-  const last14=[...Array(14)].map((_,i)=>{
-    const d=new Date();d.setDate(d.getDate()-(13-i));
-    return vitals.find(v=>v.date===d.toISOString().slice(0,10))||{date:d.toISOString().slice(0,10)};
-  });
+  // ---- readiness
+  if(R){
+    const c={GREEN:'g',AMBER:'a',RED:'r'}[R.signal];
+    const word={GREEN:'Green',AMBER:'Amber',RED:'Red'}[R.signal];
+    h+='<section class="tdy-card vt-ready '+c+'" aria-label="Readiness"><div class="tdy-head"><h2>Readiness</h2><span>Today</span></div>'
+      +'<div class="vt-sig"><b>'+word+'</b><span>'+R.composite+'/100</span></div>'
+      +'<p class="vt-rec">'+tEsc(R.rec)+'</p>'
+      +(R.flags.length?'<ul class="vt-flags">'+R.flags.map(f=>'<li>'+tEsc(f.replace(/\s+—\s+/,', '))+'</li>').join('')+'</ul>':'')
+      +'<div class="vt-foot">Compared with your previous 7 days'+(R.partialData?'. Some numbers are missing, so this is a partial read':'')+'.</div></section>';
+  }else{
+    h+='<section class="tdy-card vt-ready" aria-label="Readiness"><div class="tdy-head"><h2>Readiness</h2></div><div class="vt-empty">'
+      +(te?'Log one more morning and this gives you a call for the day.':vitals.length?'Log this morning below to get today’s call: go, easier, or must-do only.':'Log two mornings and this gives you a call each day: go, easier, or must-do only.')+'</div></section>';
+  }
 
-  vv.innerHTML=`
-  <div style="margin-bottom:20px">
-    <h2 style="font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:4px">Daily Readiness</h2>
-    <p style="font-size:0.7rem;color:var(--muted)">Log each morning after waking · 7-day rolling baselines · Integrated with training plan</p>
-  </div>
+  // ---- this morning
+  const editing=!te||_vEdit, e=te||{};
+  if(!editing){
+    h+='<section class="tdy-card" aria-label="This morning"><div class="tdy-head"><h2>This morning</h2><button class="tdy-link" type="button" onclick="vitalsEdit()">Edit</button></div>'
+      +'<div class="vt-sum"><div><b>'+(e.rhr??'–')+'</b><small>RHR bpm</small></div><div><b>'+(e.hrv??'–')+'</b><small>HRV ms</small></div><div><b>'+vtSleep(e.sleep,1)+'</b><small>Sleep</small></div><div><b>'+(e.weight??'–')+'</b><small>Weight kg</small></div></div>'
+      +'<div class="vt-meta">'+['Energy '+(e.energy?e.energy+'/5':'–'),'Soreness '+(e.soreness?e.soreness+'/5':'–')].concat(e.travel?['Travel day, left out of baselines']:[]).join(' · ')+'</div>'
+      +'<div class="vt-btns"><button class="wk-btn" type="button" onclick="showToday(true)">Go to Today</button></div></section>';
+  }else{
+    const seg=(f,cur)=>'<div class="tdy-seg vt-5" id="v-'+f+'" role="group">'+[1,2,3,4,5].map(n=>'<button type="button" aria-pressed="'+(cur===n)+'" onclick="vitalsSetRating(\''+f+'\','+n+')">'+n+'</button>').join('')+'</div>';
+    const inp=(id,lab,val,unit,ph,step)=>'<label class="vt-f"><span>'+lab+'</span><div><input class="vt-in" id="'+id+'" type="number" inputmode="decimal" step="'+(step||'any')+'" placeholder="'+ph+'" value="'+(val??'')+'">'+(unit?'<small>'+unit+'</small>':'')+'</div></label>';
+    h+='<section class="tdy-card" aria-label="This morning"><div class="tdy-head"><h2>This morning</h2><span>'+(te?'Editing':lbl(now))+'</span></div>'
+      +'<div class="vt-grid">'+inp('v-rhr','Resting HR',e.rhr,'bpm','–')+inp('v-hrv','HRV',e.hrv,'ms','–')
+      +'<label class="vt-f"><span>Sleep</span><div><input class="vt-in" id="v-sleep-h" type="number" inputmode="numeric" min="0" max="14" placeholder="h" value="'+(e.sleep!=null?Math.floor(e.sleep):'')+'"><input class="vt-in" id="v-sleep-m" type="number" inputmode="numeric" min="0" max="59" step="5" placeholder="m" value="'+(e.sleep!=null?Math.round((e.sleep%1)*60):'')+'"></div></label>'
+      +inp('v-weight','Weight',e.weight,'kg','–','0.1')+'</div>'
+      +'<div class="vt-lab"><span>Energy</span><span>1 flat · 5 great</span></div>'+seg('energy',e.energy)
+      +'<div class="vt-lab"><span>Soreness</span><span>1 none · 5 very sore</span></div>'+seg('soreness',e.soreness)
+      +'<div class="vt-row"><button class="vt-travel" id="v-travel-btn" type="button" aria-pressed="'+!!e.travel+'" onclick="vitalsToggleTravel()">Travel or red-eye</button><small>Leaves this day out of your baselines.</small></div>'
+      +'<div class="vt-btns">'+(te?'<button class="wk-btn" type="button" onclick="vitalsEdit(false)">Cancel</button>':'')+'<button class="wk-btn pri" type="button" onclick="vitalsLogToday()">Save</button></div></section>';
+  }
 
-  ${readiness?`
-  <div style="background:${readiness.color}14;border:1.5px solid ${readiness.color}40;border-radius:var(--radius);padding:16px;margin-bottom:16px">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-      <span style="font-size:1.4rem;font-weight:800;color:${readiness.color}">${readiness.signal}</span>
-      <span style="font-size:0.65rem;background:${readiness.color};color:white;padding:2px 8px;border-radius:20px;font-weight:700">${readiness.composite}/100</span>
-      ${readiness.partialData?'<span style="font-size:0.6rem;color:var(--muted)">partial data</span>':''}
-    </div>
-    <p style="font-size:0.72rem;color:var(--text2);margin-bottom:8px">${readiness.rec}</p>
-    <p style="font-size:0.65rem;color:var(--muted);margin-bottom:6px">📅 ${readiness.todaySess}</p>
-    ${readiness.flags.length?`<div style="display:flex;flex-direction:column;gap:3px">${readiness.flags.map(f=>`<span style="font-size:0.62rem;color:${readiness.color}">· ${f}</span>`).join('')}</div>`:''}
-    ${readiness.yestLoad>0?`<p style="font-size:0.6rem;color:var(--muted);margin-top:6px">Yesterday load: ${['—','Easy','Tempo/Pull','Intervals/Unilateral','Heavy Lower','Hyrox Day'][readiness.yestLoad]||'—'} · Context: ${readiness.weekCtx}</p>`:''}
-  </div>`:`
-  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;text-align:center">
-    <p style="font-size:0.72rem;color:var(--muted)">${vitals.length<2?'Log at least 2 days to generate a readiness signal.':'Log today\'s vitals to update your readiness score.'}</p>
-  </div>`}
+  // ---- trends
+  const keys=[...Array(14)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-(13-i));return vtKey(d);});
+  const by={};vitals.forEach(v=>{by[v.date]=v;});
+  const M=[
+    {f:'rhr',n:'Resting HR',u:' bpm',days:7,dir:'Lower is better'},
+    {f:'hrv',n:'HRV',u:' ms',days:7,dir:'Higher is better'},
+    {f:'sleep',n:'Sleep',u:'',days:14,dir:'Aim for 7h+'},
+    {f:'weight',n:'Weight',u:' kg',days:7,dir:''}];
+  h+='<section class="tdy-card" aria-label="Trends"><div class="tdy-head"><h2>Last 14 days</h2><span>Dashed line is your average</span></div>'
+    +M.map(m=>{const vals=keys.map(k=>by[k]&&by[k][m.f]!=null?+by[k][m.f]:null);const avg=rollingAvg(vitals,m.f,m.days);
+      const last=[...vals].reverse().find(v=>v!=null);const fmt=v=>m.f==='sleep'?vtSleep(v,1):(m.f==='weight'?Math.round(v*10)/10:Math.round(v))+m.u;
+      const sub=last==null?'No data yet':(vals[13]!=null?'Today ':'Latest ')+fmt(last)+(avg!=null?' · avg '+fmt(avg):'');
+      return '<div class="vt-tr"><div><div class="pg-n">'+m.n+'</div><div class="pg-s">'+sub+'</div></div>'+vtSpark(vals,avg)+'</div>';}).join('')
+    +'</section>';
 
-  <!-- Rolling averages -->
-  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px">
-    ${[
-      {label:'RHR Baseline',val:rhrAvg?rhrAvg+' bpm':'—',sub:'7-day avg'},
-      {label:'HRV Baseline',val:hrvAvg?hrvAvg+' ms':'—',sub:'7-day avg'},
-      {label:'Weight Trend',val:wAvg?wAvg+' kg':'—',sub:'7-day avg · Target 75kg'},
-      {label:'Sleep Avg',val:sleepAvg?sleepAvg+'h':'—',sub:'14-day avg · Target 7h+'},
-    ].map(m=>`
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px">
-      <div style="font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px">${m.label}</div>
-      <div style="font-size:1.1rem;font-weight:700;color:var(--text)">${m.val}</div>
-      <div style="font-size:0.58rem;color:var(--muted2);margin-top:2px">${m.sub}</div>
-    </div>`).join('')}
-  </div>
+  // ---- history
+  const missing=[];for(let i=1;i<=7;i++){const d=new Date();d.setDate(d.getDate()-i);const ds=vtKey(d);if(!by[ds])missing.push({ds,d});}
+  h+='<section class="tdy-card" aria-label="History"><div class="tdy-head"><h2>History</h2><button class="tdy-link" type="button" onclick="openBackfill()">+ Add a past day</button></div>'
+    +(missing.length?'<div class="vt-miss"><span>Missed:</span>'+missing.reverse().map(m=>'<button type="button" onclick="openBackfill(\''+m.ds+'\')">'+m.d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric'})+'</button>').join('')+'</div>':'')
+    +(vitals.length?vitals.slice(-10).reverse().map(v=>{const d=new Date(v.date+'T00:00:00');
+      const top=[v.rhr!=null?'RHR '+v.rhr:null,v.hrv!=null?'HRV '+v.hrv:null,v.sleep!=null?vtSleep(v.sleep,1):null,v.weight!=null?v.weight+'kg':null].filter(Boolean).join(' · ')||'No numbers';
+      const bot=[v.energy?'Energy '+v.energy:null,v.soreness?'Sore '+v.soreness:null,v.travel?'Travel':null].filter(Boolean).join(' · ');
+      const isT=v.date===today;
+      return '<div class="vt-h"><div class="vt-hd"><small>'+d.toLocaleDateString('en-GB',{weekday:'short'})+'</small><b>'+d.getDate()+'</b></div>'
+        +'<button class="vt-hv" type="button" onclick="'+(isT?'vitalsEdit()':'openBackfill(\''+v.date+'\')')+'" aria-label="Edit '+lbl(d)+'">'+top+(bot?'<small>'+bot+'</small>':'')+'</button>'
+        +'<button class="wk-ic del" type="button" aria-label="Delete '+lbl(d)+'" onclick="vitalsDelete(\''+v.date+'\')">'+WK_IC.del+'</button></div>';}).join('')
+     :'<div class="vt-empty">No mornings logged yet.</div>')
+    +'</section>';
 
-  <!-- Log entry form -->
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-      <h3 style="font-size:0.8rem;font-weight:700">Log Today — ${today}</h3>
-      ${todayEntry?`<div style="display:flex;align-items:center;gap:8px"><span style="font-size:0.6rem;color:var(--green);font-weight:600">✓ Logged</span> <button onclick="vitalsClearToday()" style="font-size:0.58rem;color:var(--red);background:none;border:none;cursor:pointer;padding:0;font-weight:600;text-decoration:underline">Clear &amp; re-enter</button></div>`:''}
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px">
-      <div>
-        <label style="font-size:0.62rem;color:var(--muted);display:block;margin-bottom:4px">RHR (bpm)</label>
-        <input id="v-rhr" type="number" placeholder="e.g. 64" value="${todayEntry?.rhr??''}" style="width:100%;border:1.5px solid var(--border2);border-radius:var(--radius-sm);padding:8px 10px;font-size:0.82rem;font-family:inherit;background:var(--surface2)">
-      </div>
-      <div>
-        <label style="font-size:0.62rem;color:var(--muted);display:block;margin-bottom:4px">HRV (ms)</label>
-        <input id="v-hrv" type="number" placeholder="e.g. 50" value="${todayEntry?.hrv??''}" style="width:100%;border:1.5px solid var(--border2);border-radius:var(--radius-sm);padding:8px 10px;font-size:0.82rem;font-family:inherit;background:var(--surface2)">
-      </div>
-      <div>
-        <label style="font-size:0.62rem;color:var(--muted);display:block;margin-bottom:4px">Weight (kg)</label>
-        <input id="v-weight" type="number" step="0.1" placeholder="e.g. 72.5" value="${todayEntry?.weight??''}" style="width:100%;border:1.5px solid var(--border2);border-radius:var(--radius-sm);padding:8px 10px;font-size:0.82rem;font-family:inherit;background:var(--surface2)">
-      </div>
-      <div>
-        <label style="font-size:0.62rem;color:var(--muted);display:block;margin-bottom:4px">Sleep</label>
-        <div style="display:flex;gap:6px;align-items:center">
-          <input id="v-sleep-h" type="number" min="0" max="12" placeholder="hrs" value="${todayEntry?.sleep!=null?Math.floor(todayEntry.sleep):''}" style="flex:1;border:1.5px solid var(--border2);border-radius:var(--radius-sm);padding:8px 10px;font-size:0.82rem;font-family:inherit;background:var(--surface2)">
-          <span style="font-size:0.65rem;color:var(--muted)">h</span>
-          <input id="v-sleep-m" type="number" min="0" max="59" step="5" placeholder="min" value="${todayEntry?.sleep!=null?Math.round((todayEntry.sleep%1)*60):''}" style="flex:1;border:1.5px solid var(--border2);border-radius:var(--radius-sm);padding:8px 10px;font-size:0.82rem;font-family:inherit;background:var(--surface2)">
-          <span style="font-size:0.65rem;color:var(--muted)">m</span>
-        </div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px">
-      <div>
-        <label style="font-size:0.62rem;color:var(--muted);display:block;margin-bottom:6px">Energy (1–5)</label>
-        <div style="display:flex;gap:5px">${[1,2,3,4,5].map(n=>`<button onclick="vitalsSetRating('energy',${n})" id="v-energy-${n}" style="flex:1;padding:7px 0;border:1.5px solid ${todayEntry?.energy===n?'var(--accent)':'var(--border2)'};background:${todayEntry?.energy===n?'var(--accent)':'var(--surface2)'};color:${todayEntry?.energy===n?'white':'var(--text2)'};border-radius:var(--radius-sm);font-size:0.75rem;font-weight:600;cursor:pointer">${n}</button>`).join('')}</div>
-      </div>
-      <div>
-        <label style="font-size:0.62rem;color:var(--muted);display:block;margin-bottom:6px">Soreness (1–5)</label>
-        <div style="display:flex;gap:5px">${[1,2,3,4,5].map(n=>`<button onclick="vitalsSetRating('soreness',${n})" id="v-soreness-${n}" style="flex:1;padding:7px 0;border:1.5px solid ${todayEntry?.soreness===n?'var(--accent)':'var(--border2)'};background:${todayEntry?.soreness===n?'var(--accent)':'var(--surface2)'};color:${todayEntry?.soreness===n?'white':'var(--text2)'};border-radius:var(--radius-sm);font-size:0.75rem;font-weight:600;cursor:pointer">${n}</button>`).join('')}</div>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
-      <button onclick="vitalsToggleTravel()" id="v-travel-btn" style="padding:7px 14px;border:1.5px solid ${todayEntry?.travel?'var(--amber)':'var(--border2)'};background:${todayEntry?.travel?'var(--amber-bg)':'var(--surface2)'};color:${todayEntry?.travel?'var(--amber)':'var(--text2)'};border-radius:var(--radius-sm);font-size:0.7rem;font-weight:600;cursor:pointer">✈ Travel / Red Eye</button>
-      <span style="font-size:0.6rem;color:var(--muted)">Excludes sleep from baseline · Loosens thresholds</span>
-    </div>
-    <button onclick="vitalsLogToday()" style="width:100%;padding:11px;background:var(--accent);color:white;border:none;border-radius:var(--radius-sm);font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit">Save Today's Vitals</button>
-    <button id="vitals-go-training" onclick="goToTraining()" style="display:${todayEntry?'block':'none'};width:100%;padding:11px;background:var(--surface2);color:var(--accent);border:1.5px solid var(--accent);border-radius:var(--radius-sm);font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px">Go to today's training →</button>
-  </div>
-
-  <!-- 14-day mini charts -->
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px">
-    <h3 style="font-size:0.75rem;font-weight:700;margin-bottom:12px;color:var(--text)">14-Day Trends</h3>
-    ${renderMiniChart(last14,'rhr','RHR (bpm)','#9B2C2C',rhrAvg)}
-    ${renderMiniChart(last14,'hrv','HRV (ms)','#6B3FA0',hrvAvg)}
-    ${renderMiniChart(last14,'weight','Weight (kg)','#1A6B45',wAvg)}
-    ${renderMiniChart(last14,'sleep','Sleep (hrs)','#1D4E89',sleepAvg)}
-  </div>
-
-  <!-- History log -->
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-      <h3 style="font-size:0.75rem;font-weight:700;color:var(--text)">Recent Log</h3>
-      <button onclick="openBackfill()" style="font-size:0.62rem;font-weight:600;color:var(--accent);background:none;border:1.5px solid var(--accent);border-radius:var(--radius-sm);padding:4px 10px;cursor:pointer">+ Backfill</button>
-    </div>
-    ${(()=>{
-      // Show missing days in last 7 days
-      const missing=[];
-      for(let i=1;i<=7;i++){const d=new Date();d.setDate(d.getDate()-i);const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;if(!vitals.find(v=>v.date===ds))missing.push({ds,label:d.toLocaleDateString('en-SG',{weekday:'short',day:'numeric',month:'short'})});}
-      return missing.length?`<div style="background:var(--amber-bg);border:1px solid var(--amber);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:10px;font-size:0.62rem;color:var(--amber)"><strong>Missing:</strong> ${missing.map(m=>`<button onclick="openBackfill('${m.ds}')" style="margin-left:6px;font-size:0.6rem;font-weight:600;color:var(--amber);background:none;border:1px solid var(--amber);border-radius:4px;padding:2px 6px;cursor:pointer">${m.label}</button>`).join('')}</div>`:'';
-    })()}
-    ${vitals.length===0?'<p style="font-size:0.7rem;color:var(--muted)">No entries yet.</p>':
-    `<table style="width:100%;font-size:0.65rem;border-collapse:collapse">
-      <thead><tr style="color:var(--muted);text-align:left">${['Date','RHR','HRV','Wt','Sleep','Nrg','Sore',''].map(h=>`<th style="padding:4px 6px;font-weight:600">${h}</th>`).join('')}</tr></thead>
-      <tbody>${vitals.slice(-10).reverse().map(v=>`<tr style="border-top:1px solid var(--border)">
-        <td style="padding:5px 6px;color:var(--text2)">${v.date.slice(5)}${v.travel?' ✈':''}</td>
-        <td style="padding:5px 6px">${v.rhr??'—'}</td>
-        <td style="padding:5px 6px">${v.hrv??'—'}</td>
-        <td style="padding:5px 6px">${v.weight??'—'}</td>
-        <td style="padding:5px 6px">${v.sleep!=null?(Math.floor(v.sleep)+'h'+(Math.round((v.sleep%1)*60)>0?' '+Math.round((v.sleep%1)*60)+'m':'')):'—'}</td>
-        <td style="padding:5px 6px">${v.energy??'—'}</td>
-        <td style="padding:5px 6px">${v.soreness??'—'}</td>
-        <td style="padding:5px 6px"><button onclick="vitalsDelete('${v.date}')" style="font-size:0.75rem;font-weight:700;color:var(--red);background:none;border:1.5px solid var(--red);border-radius:4px;cursor:pointer;padding:2px 6px;line-height:1">✕</button></td>
-      </tr>`).join('')}</tbody>
-    </table>`}
-  </div>`;
-
-  // Store temp ratings from today entry
-  window._vitalsRatings={energy:todayEntry?.energy??null,soreness:todayEntry?.soreness??null,travel:todayEntry?.travel??false};
+  vv.innerHTML=h;
+  window._vitalsRatings={energy:e.energy??null,soreness:e.soreness??null,travel:!!e.travel};
 }
-
 function renderMiniChart(data,field,label,color,avg){
   const vals=data.map(d=>d[field]!=null?+d[field]:null);
   const valid=vals.filter(v=>v!=null);
@@ -3485,28 +3499,16 @@ function renderMiniChart(data,field,label,color,avg){
 
 function vitalsSetRating(field,val){
   if(!window._vitalsRatings)window._vitalsRatings={};
-  window._vitalsRatings[field]=val;
-  // Update button styles
-  [1,2,3,4,5].forEach(n=>{
-    const btn=document.getElementById(`v-${field}-${n}`);
-    if(btn){
-      btn.style.background=n===val?'var(--accent)':'var(--surface2)';
-      btn.style.color=n===val?'white':'var(--text2)';
-      btn.style.borderColor=n===val?'var(--accent)':'var(--border2)';
-    }
-  });
+  const v=window._vitalsRatings[field]===val?null:val;
+  window._vitalsRatings[field]=v;
+  document.querySelectorAll('#v-'+field+' button').forEach((b,i)=>b.setAttribute('aria-pressed',String(i+1===v)));
 }
 
 function vitalsToggleTravel(){
   if(!window._vitalsRatings)window._vitalsRatings={};
   window._vitalsRatings.travel=!window._vitalsRatings.travel;
   const btn=document.getElementById('v-travel-btn');
-  if(btn){
-    const t=window._vitalsRatings.travel;
-    btn.style.background=t?'var(--amber-bg)':'var(--surface2)';
-    btn.style.color=t?'var(--amber)':'var(--text2)';
-    btn.style.borderColor=t?'var(--amber)':'var(--border2)';
-  }
+  if(btn)btn.setAttribute('aria-pressed',String(window._vitalsRatings.travel));
 }
 
 function vitalsLogToday(){
@@ -3534,42 +3536,12 @@ function vitalsLogToday(){
   vitals.sort((a,b)=>a.date.localeCompare(b.date));
   saveVitals(vitals);
   showToast('Vitals saved ✓');
-  // Show go to training button or auto-navigate
-  const today2=todayStr();
-  // Find today's week
-  let todayWk=activeWeek;
-  for(let w=MAXWK;w>=2;w--){
-    const start=getDate(w,'Monday');start.setHours(0,0,0,0);
-    const now=new Date();now.setHours(0,0,0,0);
-    if(now>=start){todayWk=w;break;}
-  }
+  _vEdit=false;
   renderVitalsTab();
-  // Show a toast with a tap-through to training
-  setTimeout(()=>{
-    const goBtn=document.getElementById('vitals-go-training');
-    if(goBtn)goBtn.style.display='block';
-  },100);
+  window.scrollTo({top:0,behavior:'instant'});
 }
 
-function goToTraining(){
-  // Find today's week
-  let todayWk=2;
-  for(let w=MAXWK;w>=2;w--){
-    const start=getDate(w,'Monday');start.setHours(0,0,0,0);
-    const now=new Date();now.setHours(0,0,0,0);
-    if(now>=start){todayWk=w;break;}
-  }
-  switchWeek(todayWk);
-  setTimeout(function(){
-    const activeTab=document.querySelector('.wtab.active');
-    if(activeTab)activeTab.scrollIntoView({behavior:'instant',block:'nearest',inline:'center'});
-    const todayCol=document.querySelector('.day-col.is-today');
-    if(todayCol){
-      const top=todayCol.getBoundingClientRect().top+window.scrollY-120;
-      window.scrollTo({top:Math.max(0,top),behavior:'instant'});
-    }
-  },300);
-}
+function goToTraining(){showToday(true);}
 
 function vitalsClearToday(){
   const today=todayStr();
@@ -3608,12 +3580,12 @@ function openBackfill(preselectedDate){
     const sleepM=entry?.sleep!=null?Math.round((entry.sleep%1)*60):'';
     panel.innerHTML=`
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <div style="font-size:0.85rem;font-weight:700;color:var(--text)">Backfill Vitals</div>
+        <div style="font-size:0.85rem;font-weight:700;color:var(--text)">Add or edit a past day</div>
         <button onclick="document.getElementById('backfill-overlay').remove()" style="background:none;border:none;font-size:1.2rem;color:var(--muted);cursor:pointer">✕</button>
       </div>
       <div style="font-size:0.62rem;color:var(--muted);margin-bottom:8px">Select date</div>
       <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px">
-        ${days.map(d=>`<button onclick="backfillSelectDate('${d.ds}')" style="padding:5px 10px;font-size:0.62rem;font-weight:600;border:1.5px solid ${d.ds===selDate?'var(--accent)':'var(--border2)'};background:${d.ds===selDate?'var(--accent)':d.hasEntry?'var(--green-bg)':'var(--surface2)'};color:${d.ds===selDate?'white':d.hasEntry?'var(--green)':'var(--text2)'};border-radius:20px;cursor:pointer">${d.label}${d.hasEntry?' ✓':''}</button>`).join('')}
+        ${days.map(d=>`<button onclick="backfillSelectDate('${d.ds}')" style="padding:5px 10px;font-size:0.62rem;font-weight:600;border:1.5px solid ${d.ds===selDate?'var(--accent)':'var(--border2)'};background:${d.ds===selDate?'var(--accent)':d.hasEntry?'var(--green-bg)':'var(--surface2)'};color:${d.ds===selDate?'var(--on-accent,#fff)':d.hasEntry?'var(--green)':'var(--text2)'};border-radius:20px;cursor:pointer">${d.label}${d.hasEntry?' ✓':''}</button>`).join('')}
       </div>
       <div style="font-size:0.7rem;font-weight:600;color:var(--text);margin-bottom:12px;padding:8px 10px;background:var(--surface2);border-radius:var(--radius-sm)">${days.find(d=>d.ds===selDate)?.label||selDate}${entry?' · Editing existing entry':' · New entry'}</div>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px">
@@ -3633,11 +3605,11 @@ function openBackfill(preselectedDate){
       </div>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px">
         <div><label style="font-size:0.62rem;color:var(--muted);display:block;margin-bottom:6px">Energy (1–5)</label>
-          <div style="display:flex;gap:4px">${[1,2,3,4,5].map(n=>`<button id="bf-energy-${n}" onclick="backfillRating('energy',${n})" style="flex:1;padding:6px 0;border:1.5px solid ${entry?.energy===n?'var(--accent)':'var(--border2)'};background:${entry?.energy===n?'var(--accent)':'var(--surface2)'};color:${entry?.energy===n?'white':'var(--text2)'};border-radius:var(--radius-sm);font-size:0.72rem;font-weight:600;cursor:pointer">${n}</button>`).join('')}</div></div>
+          <div style="display:flex;gap:4px">${[1,2,3,4,5].map(n=>`<button id="bf-energy-${n}" onclick="backfillRating('energy',${n})" style="flex:1;padding:6px 0;border:1.5px solid ${entry?.energy===n?'var(--accent)':'var(--border2)'};background:${entry?.energy===n?'var(--accent)':'var(--surface2)'};color:${entry?.energy===n?'var(--on-accent,#fff)':'var(--text2)'};border-radius:var(--radius-sm);font-size:0.72rem;font-weight:600;cursor:pointer">${n}</button>`).join('')}</div></div>
         <div><label style="font-size:0.62rem;color:var(--muted);display:block;margin-bottom:6px">Soreness (1–5)</label>
-          <div style="display:flex;gap:4px">${[1,2,3,4,5].map(n=>`<button id="bf-soreness-${n}" onclick="backfillRating('soreness',${n})" style="flex:1;padding:6px 0;border:1.5px solid ${entry?.soreness===n?'var(--accent)':'var(--border2)'};background:${entry?.soreness===n?'var(--accent)':'var(--surface2)'};color:${entry?.soreness===n?'white':'var(--text2)'};border-radius:var(--radius-sm);font-size:0.72rem;font-weight:600;cursor:pointer">${n}</button>`).join('')}</div></div>
+          <div style="display:flex;gap:4px">${[1,2,3,4,5].map(n=>`<button id="bf-soreness-${n}" onclick="backfillRating('soreness',${n})" style="flex:1;padding:6px 0;border:1.5px solid ${entry?.soreness===n?'var(--accent)':'var(--border2)'};background:${entry?.soreness===n?'var(--accent)':'var(--surface2)'};color:${entry?.soreness===n?'var(--on-accent,#fff)':'var(--text2)'};border-radius:var(--radius-sm);font-size:0.72rem;font-weight:600;cursor:pointer">${n}</button>`).join('')}</div></div>
       </div>
-      <button onclick="saveBackfill('${selDate}')" style="width:100%;padding:11px;background:var(--accent);color:white;border:none;border-radius:var(--radius-sm);font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit">Save ${days.find(d=>d.ds===selDate)?.label||selDate}</button>`;
+      <button onclick="saveBackfill('${selDate}')" style="width:100%;padding:11px;background:var(--accent);color:var(--on-accent,#fff);border:none;border-radius:var(--radius-sm);font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit">Save ${days.find(d=>d.ds===selDate)?.label||selDate}</button>`;
 
     // Init ratings
     window._bfRatings={energy:entry?.energy??null,soreness:entry?.soreness??null};
@@ -3654,7 +3626,7 @@ function openBackfill(preselectedDate){
       if(btn){
         const active=n===window._bfRatings[field];
         btn.style.background=active?'var(--accent)':'var(--surface2)';
-        btn.style.color=active?'white':'var(--text2)';
+        btn.style.color=active?'var(--on-accent,#fff)':'var(--text2)';
         btn.style.borderColor=active?'var(--accent)':'var(--border2)';
       }
     });
@@ -3667,7 +3639,8 @@ function openBackfill(preselectedDate){
     const sleepM=document.getElementById('bf-sleep-m')?.value;
     const sleep=(sleepH!==''||sleepM!=='')?Math.round(((+sleepH||0)+(+sleepM||0)/60)*100)/100:null;
     const ratings=window._bfRatings||{};
-    const entry={date:ds,rhr:rhr?+rhr:null,hrv:hrv?+hrv:null,weight:weight?+weight:null,sleep,energy:ratings.energy||null,soreness:ratings.soreness||null,travel:false};
+    const prev=loadVitals().find(v=>v.date===ds);
+    const entry={date:ds,rhr:rhr?+rhr:null,hrv:hrv?+hrv:null,weight:weight?+weight:null,sleep,energy:ratings.energy||null,soreness:ratings.soreness||null,travel:!!(prev&&prev.travel)};
     const vitals=loadVitals();
     const idx=vitals.findIndex(v=>v.date===ds);
     if(idx>=0)vitals[idx]=entry;else vitals.push(entry);
@@ -3685,6 +3658,9 @@ function openBackfill(preselectedDate){
 }
 
 function vitalsDelete(dateStr){
+  const d=new Date(dateStr+'T00:00:00');
+  if(!confirm('Delete the vitals for '+d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short'})+'? This cannot be undone.'))return;
+  if(dateStr===todayStr())_vEdit=false;
   const vitals=loadVitals().filter(v=>v.date!==dateStr);
   saveVitals(vitals);
   renderVitalsTab();
