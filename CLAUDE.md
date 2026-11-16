@@ -19,6 +19,7 @@ No framework, no build step, no dependencies. Vanilla HTML + CSS + JS.
 ## Data model
 - The plan is a hardcoded JS array: `let workouts=[ {…}, {…} ]`.
 - Each entry: `{id:uid(), week, day, phase, block, movement, weight, sets, tempo, rest, cue, superset?, log:[], checks:{}}`.
+  - Optional `brief:'line|line|⚠ safety line'` — the concise how-to shown in the UI (v213+); the full `cue` stays behind "Full notes". Write one for every new entry: 3-7 short lines, keep every stop rule and ⚠ gate.
   - `id:uid()` is generated at runtime — it does NOT exist in source, so **never anchor edits on it**.
   - `checks` is keyed by date: `{ "YYYY-MM-DD": { done, notes, status, skipReason, deferredTo } }`. This holds the athlete's logs.
 - localStorage keys: `hyrox_plan` (plan + logs), `hyrox_vitals` (sleep/HRV/etc.), `hyrox_dayskips`.
