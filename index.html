@@ -1114,6 +1114,17 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
 .race-chip .rc-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-bg);flex-shrink:0;}
 .race-chip .rc-sub{color:var(--muted);padding-left:7px;border-left:1px solid var(--border);}
 .race-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+/* ═══ Backup + restore (v225) ═══ */
+.hmenu button small.bk-age{display:block;font-size:11.5px;font-weight:400;color:var(--muted);margin-top:1px;}
+.hmenu button small.bk-age.due{color:var(--t-amber);font-weight:600;}
+.rs-tbl{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);gap:0;font-size:13.5px;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.rs-tbl>div{padding:9px 10px;border-top:1px solid var(--border);font-variant-numeric:tabular-nums;}
+.rs-tbl>.h{border-top:0;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--surface2);}
+.rs-tbl>.l{color:var(--muted);}
+.rs-tbl>.new{color:var(--accent);font-weight:700;}
+.rs-ok{font-size:13.5px;line-height:1.45;background:var(--accent-bg);color:var(--text);border-radius:10px;padding:10px 12px;}
+.rs-ok b{color:var(--accent);}
+.tdy-chip.bk{border-color:var(--t-amber);color:var(--t-amber) !important;background:var(--surface);}
 /* ═══ Dark mode (v216) ═══
    Tokens first, then the few places that hard-code light colours. Accent fills use dark ink (--on-accent)
    because the dark-mode accent is light enough to read as text on the dark surfaces. Inline light tints
@@ -1185,16 +1196,16 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 224</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 224</strong></p>
+      <div class="ver">VERSION 225</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 225</strong></p>
       <button type="button" id="raceCountdown" class="race-chip" onclick="showProgress()" aria-label="Rehab progress"></button>
     </div>
     <div class="header-btns">
       <div class="hmenu-wrap">
         <button class="hbtn" aria-label="More actions" onclick="toggleHMenu(event)">&#8943;</button>
         <div class="hmenu" id="hMenu" style="display:none">
-          <button onclick="loadFile();closeHMenu()">&#8593; Load JSON</button>
-          <button onclick="saveFile();closeHMenu()">&#8595; Save JSON</button>
+          <button onclick="loadFile();closeHMenu()">&#8593; Restore from backup</button>
+          <button onclick="saveFile();closeHMenu()">&#8595; Save backup<small class="bk-age" id="bkAge"></small></button>
           <button onclick="openExport();closeHMenu()">Export for review</button>
           <button onclick="closeHMenu();showBench()">Benchmarks</button>
           <button id="themeBtn" onclick="cycleTheme()">Appearance: Auto</button>
@@ -1204,8 +1215,8 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
   </div>
 </header>
 <div class="storage-banner" id="storageBanner">
-  <span>⚠️ <strong>Auto-save unavailable</strong> — Safari blocks local storage when opening files directly. Use <strong>Save JSON</strong> after logging sessions, then <strong>Load JSON</strong> next time to restore.</span>
-  <button onclick="saveFile()">Save JSON now</button>
+  <span>⚠️ <strong>Auto-save unavailable</strong> — Safari blocks local storage when opening files directly. Use <strong>Save backup</strong> after logging sessions, then <strong>Restore from backup</strong> next time.</span>
+  <button onclick="saveFile()">Save backup now</button>
   <button onclick="document.getElementById('storageBanner').style.display='none'">Dismiss</button>
 </div><div class="week-nav-wrap"><nav class="week-nav" id="weekNav"></nav></div>
 <main id="mainContent"></main>
@@ -1236,6 +1247,11 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
   <div class="sh-head"><div class="sh-ht"><div class="sh-kick">Copy to another day</div><h2 id="csTitle">Copy</h2></div><button class="sh-x" type="button" onclick="shClose()" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="sh-body" id="csBody"></div>
   <div class="sh-btns"><button class="wk-btn" type="button" onclick="shClose()">Cancel</button><button class="wk-btn pri" type="button" id="csGo" onclick="executeCopy()">Copy</button></div>
+</div>
+<div class="sh" id="restoreSheet" role="dialog" aria-modal="true" aria-labelledby="rsTitle" aria-hidden="true">
+  <div class="sh-head"><div class="sh-ht"><div class="sh-kick">Restore from backup</div><h2 id="rsTitle">Check before restoring</h2></div><button class="sh-x" type="button" onclick="rsCancel()" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="sh-body" id="rsBody"></div>
+  <div class="sh-btns"><button class="wk-btn" type="button" onclick="rsCancel()">Cancel</button><button class="wk-btn pri" type="button" onclick="rsApply()">Restore</button></div>
 </div>
 <div class="export-scrim" id="exportScrim" onclick="closeExportBg(event)">
   <div class="export-box">
@@ -3187,7 +3203,7 @@ function checkAllDone(){
 // Copies carry user:true so the merge keeps them; a copy can be fully edited and deleted.
 var _es=null,_cs=null;
 function shOpen(id){document.getElementById('shScrim').classList.add('open');var el=document.getElementById(id);el.classList.add('open');el.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
-function shClose(){document.getElementById('shScrim').classList.remove('open');['editSheet','copySheet'].forEach(function(id){var el=document.getElementById(id);if(el){el.classList.remove('open');el.setAttribute('aria-hidden','true');}});
+function shClose(){document.getElementById('shScrim').classList.remove('open');['editSheet','copySheet','restoreSheet'].forEach(function(id){var el=document.getElementById(id);if(el){el.classList.remove('open');el.setAttribute('aria-hidden','true');}});
   if(!document.getElementById('dayLogOverlay').classList.contains('open'))document.body.style.overflow='';_es=null;_cs=null;}
 function shVal(v){return (v==null||v==='N/A')?'':String(v);}
 function shKick(w){return w.day.slice(0,3)+' '+fmtDate(getDate(w.week,w.day))+' · Week '+w.week;}
@@ -3385,32 +3401,77 @@ function saveFile(){
   const vitals=JSON.parse(localStorage.getItem('hyrox_vitals')||'[]');
   const skips=JSON.parse(localStorage.getItem('hyrox_dayskips')||'{}');
   let progress={},progressHist={};try{progress=JSON.parse(localStorage.getItem('hyrox_progress')||'{}');progressHist=JSON.parse(localStorage.getItem('hyrox_progress_hist')||'{}');}catch(e){}
-  const bundle={version:1,plan:workouts,vitals,daySkips:skips,progress,progressHist};
+  const bundle={version:1,savedAt:new Date().toISOString(),plan:workouts,vitals,daySkips:skips,progress,progressHist};
   const blob=new Blob([JSON.stringify(bundle,null,2)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
   a.download=`hyrox-backup-${new Date().toISOString().slice(0,10)}.json`;
-  a.click();showToast('Saved — plan, vitals and progress');
+  a.click();try{localStorage.setItem('rebuild_last_backup',new Date().toISOString());}catch(e){}
+  showToast('Backup saved. Upload it to Drive.');if(activeWeek==='today'&&typeof renderToday==='function')renderToday();
 }
-function loadFile(){const inp=document.createElement('input');inp.type='file';inp.accept='.json';inp.onchange=e=>{const r=new FileReader();r.onload=ev=>{try{
-  const raw=JSON.parse(ev.target.result);
-  // Support both old format (plain array) and new bundle format
-  let loaded,vitals,skips;
-  if(Array.isArray(raw)){
-    loaded=raw;vitals=null;skips=null;
-  } else {
-    loaded=raw.plan||[];vitals=raw.vitals||null;skips=raw.daySkips||null;
-  }
-  const seen=new Set();
-  loaded=loaded.filter(w=>{const k=w.week+'|'+w.day+'|'+w.movement;if(seen.has(k))return false;seen.add(k);return true;});
-  workouts=loaded;
-  if(vitals)localStorage.setItem('hyrox_vitals',JSON.stringify(vitals));
-  if(skips)localStorage.setItem('hyrox_dayskips',JSON.stringify(skips));
-  if(!Array.isArray(raw)&&raw.progress)localStorage.setItem('hyrox_progress',JSON.stringify(raw.progress));
-  if(!Array.isArray(raw)&&raw.progressHist)localStorage.setItem('hyrox_progress_hist',JSON.stringify(raw.progressHist));
-  render();persist();
-  const vMsg=vitals?` + ${vitals.length} vitals entries`:'';
-  showToast('Loaded — '+loaded.length+' exercises'+vMsg);
-}catch(e2){showToast('Invalid file');}};r.readAsText(e.target.files[0]);};inp.click();}
+// v225: Restore never overwrites newer work. It shows what the file holds next to what the phone holds, asks, then
+// MERGES: per date, the phone's record wins if it is marked (done/partial/skip/moved or has notes); otherwise the
+// backup's fills the gap. Vitals, day skips, progress and its history merge the same way (phone wins on a clash).
+var _rs=null;
+function bkLast(){try{var v=localStorage.getItem('rebuild_last_backup');return v?new Date(v):null;}catch(e){return null;}}
+function bkDays(){var d=bkLast();if(!d)return null;var t=new Date();t.setHours(0,0,0,0);var x=new Date(d);x.setHours(0,0,0,0);return Math.round((t-x)/86400000);}
+function bkHasLogs(){return workouts.some(function(w){return Object.keys(w.checks||{}).some(function(k){return rsMarked(w.checks[k]);});});}
+function bkDue(){var n=bkDays();return bkHasLogs()&&(n===null||n>7);}
+function bkChip(){var n=bkDays();return n===null?'Back up your logs':'Back up · last one '+n+' days ago';}
+function bkLabel(){var el=document.getElementById('bkAge');if(!el)return;var n=bkDays();
+  el.textContent=n===null?'Never saved on this phone':n===0?'Last saved today':n===1?'Last saved yesterday':'Last saved '+n+' days ago';
+  el.className='bk-age'+(bkDue()?' due':'');}
+function rsMarked(c){return !!(c&&(c.done||(c.status&&c.status!=='none')||(c.notes&&String(c.notes).trim())||c.knee));}
+function rsSummary(plan,vitals){
+  var days={},last=null;
+  (plan||[]).forEach(function(w){Object.keys(w.checks||{}).forEach(function(k){if(!rsMarked(w.checks[k]))return;days[k]=1;
+    var d=(w.week&&w.day&&tKey(w.week,w.day)===k)?getDate(w.week,w.day):null;if(d&&(!last||d>last))last=d;});});
+  var vd=(vitals||[]).map(function(v){return v.date;}).sort();
+  return {days:Object.keys(days).length,last:last,vitals:vd.length,vlast:vd.length?vd[vd.length-1]:null,
+    logs:(plan||[]).reduce(function(n,w){return n+((w.log||[]).length);},0)};}
+function loadFile(){var inp=document.createElement('input');inp.type='file';inp.accept='.json,application/json';inp.onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){
+  var raw;try{raw=JSON.parse(ev.target.result);}catch(e2){showToast('That file is not a backup');return;}
+  var plan=Array.isArray(raw)?raw:(raw&&raw.plan);if(!Array.isArray(plan)||!plan.length){showToast('That file is not a backup');return;}
+  _rs={plan:plan,vitals:Array.isArray(raw)?null:(raw.vitals||null),skips:Array.isArray(raw)?null:(raw.daySkips||null),
+    progress:Array.isArray(raw)?null:(raw.progress||null),hist:Array.isArray(raw)?null:(raw.progressHist||null),
+    when:(raw&&raw.savedAt)?new Date(raw.savedAt):(f.lastModified?new Date(f.lastModified):null),name:f.name};
+  rsOpen();};r.readAsText(f);};inp.click();}
+function rsOpen(){
+  var B=rsSummary(_rs.plan,_rs.vitals),P=rsSummary(workouts,(typeof loadVitals==='function')?loadVitals():[]);
+  var dd=function(d){return d?d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}):'–';};
+  var vd=function(s){return s?dd(new Date(s+'T00:00:00')):'–';};
+  var newer=function(a,b){return a&&(!b||a>b);};
+  var row=function(l,bv,pv,bn,pn){return '<div class="l">'+l+'</div><div'+(bn?' class="new"':'')+'>'+bv+'</div><div'+(pn?' class="new"':'')+'>'+pv+'</div>';};
+  var h='<div class="vt-meta">'+tEsc(_rs.name||'Backup file')+(_rs.when?' · saved '+_rs.when.toLocaleString('en-GB',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}):'')+'</div>'
+    +'<div class="rs-tbl"><div class="h"></div><div class="h">Backup</div><div class="h">This phone</div>'
+    +row('Days logged',B.days,P.days,B.days>P.days,P.days>B.days)
+    +row('Latest log',dd(B.last),dd(P.last),newer(B.last,P.last),newer(P.last,B.last))
+    +row('Vitals mornings',_rs.vitals?B.vitals:'–',P.vitals,B.vitals>P.vitals,P.vitals>B.vitals)
+    +row('Latest vitals',_rs.vitals?vd(B.vlast):'–',vd(P.vlast),newer(B.vlast,P.vlast),newer(P.vlast,B.vlast))+'</div>'
+    +'<div class="rs-ok"><b>Nothing on this phone is lost.</b> Restoring adds what the backup has and the phone does not. Where both have the same day, the phone’s version is kept.</div>';
+  document.getElementById('rsBody').innerHTML=h;shOpen('restoreSheet');}
+function rsCancel(){_rs=null;shClose();}
+function rsMergeChecks(dst,src){dst=dst||{};Object.keys(src||{}).forEach(function(k){var a=dst[k],b=src[k];if(!a||(!rsMarked(a)&&rsMarked(b)))dst[k]=b;});return dst;}
+function rsApply(){
+  if(!_rs)return;var R=_rs;
+  var key=function(w){return w.week+'|'+w.day+'|'+w.movement;},byKey={};workouts.forEach(function(w){byKey[key(w)]=w;});
+  var added=0;
+  R.plan.forEach(function(b){var k=key(b),w=byKey[k];
+    if(!w){if(Object.keys(b.checks||{}).length||(b.log||[]).length||b.user){var c=Object.assign({},b,{id:uid()});workouts.push(c);byKey[k]=c;added++;}return;}
+    w.checks=rsMergeChecks(w.checks,b.checks);
+    var seen={};w.log=(w.log||[]).concat(b.log||[]).filter(function(e){var s=JSON.stringify(e);if(seen[s])return false;seen[s]=1;return true;});
+    if(!w.edits&&b.edits)w.edits=b.edits;});
+  if(R.vitals&&typeof loadVitals==='function'){var V=loadVitals(),have={};V.forEach(function(v){have[v.date]=1;});
+    R.vitals.forEach(function(v){if(v&&v.date&&!have[v.date])V.push(v);});V.sort(function(a,b){return a.date.localeCompare(b.date);});saveVitals(V);}
+  if(R.skips){Object.keys(R.skips).forEach(function(k){if(!daySkips[k])daySkips[k]=R.skips[k];});saveDaySkips();}
+  try{
+    if(R.progress){var p=JSON.parse(localStorage.getItem('hyrox_progress')||'{}');Object.keys(R.progress).forEach(function(k){if(p[k]===undefined||p[k]===null)p[k]=R.progress[k];});localStorage.setItem('hyrox_progress',JSON.stringify(p));}
+    if(R.hist){var H=JSON.parse(localStorage.getItem('hyrox_progress_hist')||'{}');Object.keys(R.hist).forEach(function(k){var cur=H[k]||[],ds={};cur.forEach(function(r){ds[r.d]=1;});
+      (R.hist[k]||[]).forEach(function(r){if(r&&!ds[r.d])cur.push(r);});cur.sort(function(a,b){return a.d<b.d?-1:1;});H[k]=cur;});localStorage.setItem('hyrox_progress_hist',JSON.stringify(H));}
+  }catch(e){}
+  persist();_rs=null;shClose();
+  if(_storageOk){showToast('Restored. Reloading…');setTimeout(function(){location.reload();},700);} // reload re-runs the plan merge
+  else{render();showToast('Restored'+(added?' · '+added+' extra entries':''));}            // no storage: a reload would lose it
+}
 
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200);}
 
@@ -4399,6 +4460,7 @@ function renderToday(){
   h+='<section><h1 class="tdy-day">'+tEsc(D)+'</h1><div class="tdy-sub">'+fmtDate(date)+' · Week '+W+(focus?' · '+tEsc(focus):'')+rel+'</div>'
     +'<div class="tdy-chips"><span class="tdy-chip streak">Floor streak <b>'+streak+'</b> '+(streak===1?'day':'days')+'</span>'
     +(kt?'<span class="tdy-chip">Knee <b style="font-family:inherit;font-size:13px">'+kt+'</b></span>':'')
+    +((isToday&&bkDue())?'<button class="tdy-chip bk" type="button" onclick="saveFile()">'+bkChip()+'</button>':'')
     +((isToday&&!vitalsLoggedToday())?'<button class="tdy-chip link" type="button" onclick="showVitals()">Log today\'s vitals</button>':'')
     +'</div></section>';
   h+='<div class="tdy-weekbar"><button class="tdy-arrow" type="button" aria-label="Previous week" onclick="todayShiftWeek(-1)"'+(wi<=0?' disabled':'')+'>‹</button>'
@@ -4446,7 +4508,7 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/Hyrox-Prep/s
 </script>
 <script>
 /* Header overflow menu */
-function toggleHMenu(e){e.stopPropagation();var m=document.getElementById('hMenu');if(m)m.style.display=(m.style.display==='none'||!m.style.display)?'block':'none';}
+function toggleHMenu(e){e.stopPropagation();if(typeof bkLabel==='function')bkLabel();var m=document.getElementById('hMenu');if(m)m.style.display=(m.style.display==='none'||!m.style.display)?'block':'none';}
 function closeHMenu(){var m=document.getElementById('hMenu');if(m)m.style.display='none';}
 document.addEventListener('click',function(e){var w=document.querySelector('.hmenu-wrap');if(w&&!w.contains(e.target))closeHMenu();});
 
