@@ -22,6 +22,7 @@ No framework, no build step, no dependencies. Vanilla HTML + CSS + JS.
 ## Data model
 - The plan is a hardcoded JS array: `let workouts=[ {…}, {…} ]`.
 - Each entry: `{id:uid(), week, day, phase, block, movement, weight, sets, tempo, rest, cue, superset?, log:[], checks:{}}`.
+  - Runtime-only fields (never in source): `edits:{weight?,sets?,tempo?,rest?}` on a plan entry he edited; `user:true` on a copy he made.
   - Optional `brief:'line|line|⚠ safety line'` — the concise how-to shown in the UI (v213+); the full `cue` stays behind "Full notes". Write one for every new entry: 3-7 short lines, keep every stop rule and ⚠ gate.
   - `id:uid()` is generated at runtime — it does NOT exist in source, so **never anchor edits on it**.
   - `checks` is keyed by date: `{ "YYYY-MM-DD": { done, notes, status, skipReason, deferredTo } }`. This holds the athlete's logs.
@@ -32,6 +33,7 @@ No framework, no build step, no dependencies. Vanilla HTML + CSS + JS.
 1. Start from the hardcoded `workouts` array (so additions AND removals in code sync on next load).
 2. Restore each entry's `log`/`checks` from the saved localStorage plan by `week|day|movement` key.
 3. Preserve any saved entry that carries real `log`/`checks` but is absent from the hardcoded plan (never lose logged work).
+4. (v223) Re-apply `edits` — the athlete's own overrides on a plan entry, limited to `weight/sets/tempo/rest` (`EDIT_FIELDS`) — over the HTML values; keep any saved entry with `user:true` (his copies) even before it is logged. The older secondary dedup also skips `user:true` entries. **If you change a plan entry's weight/sets/tempo/rest in code, his edit (if any) still wins on that entry — check `edits` in his backup before recalibrating.**
 
 Result: structure comes from the HTML; the athlete's logs are always preserved. **Never write a merge that can drop an entry carrying logs/checks.**
 

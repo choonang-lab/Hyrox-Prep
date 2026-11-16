@@ -1069,6 +1069,45 @@ body{background:var(--bg);}
 @media (prefers-reduced-motion:reduce){.dl-header .dl-header-title{transition:none;}}
 .exp-scope{margin:10px 20px 0;grid-template-columns:repeat(2,1fr) !important;flex-shrink:0;}
 .exp-scope button{font-family:inherit;}
+/* ═══ Edit and Copy sheets (v223) ═══ */
+.sh-scrim{position:fixed;inset:0;background:rgba(10,14,12,.45);z-index:690;opacity:0;pointer-events:none;transition:opacity .2s;}
+.sh-scrim.open{opacity:1;pointer-events:auto;}
+.sh{position:fixed;left:0;right:0;bottom:0;margin:0 auto;max-width:560px;max-height:88vh;display:flex;flex-direction:column;background:var(--bg);color:var(--text);border-radius:20px 20px 0 0;z-index:700;box-shadow:0 -8px 30px rgba(0,0,0,.18);transform:translateY(105%);transition:transform .28s cubic-bezier(.22,1,.36,1);visibility:hidden;}
+.sh.open{transform:translateY(0);visibility:visible;}
+.sh::before{content:'';display:block;width:38px;height:5px;border-radius:3px;background:var(--border2);margin:8px auto 0;flex-shrink:0;}
+.sh button{font-family:inherit;color:inherit;}
+.sh-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:10px 18px 10px;flex-shrink:0;}
+.sh-ht{min-width:0;}
+.sh-kick{font-size:12.5px;color:var(--muted);}
+.sh-head h2{font-family:var(--f-display);font-size:22px;font-weight:800;line-height:1.15;margin:3px 0 0;overflow-wrap:anywhere;}
+.sh-head .dl-tier{font-size:10px;padding:1px 6px;margin:0 6px 0 0;vertical-align:4px;}
+.sh-x{flex-shrink:0;width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:var(--surface);display:grid;place-items:center;cursor:pointer;color:var(--muted) !important;}
+.sh-body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:4px 18px 8px;display:grid;gap:12px;}
+.sh-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.sh-f{display:grid;gap:5px;font-size:12.5px;color:var(--muted);min-width:0;}
+.sh-f.full{grid-column:1/-1;}
+.sh-in{width:100%;box-sizing:border-box;min-height:46px;border:1.5px solid var(--border);border-radius:11px;background:var(--surface);color:var(--text);font:inherit;font-size:16px;padding:10px 12px;}
+textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
+.sh-in:focus{outline:none;border-color:var(--accent);}
+.sh-note{font-size:13px;line-height:1.45;color:var(--muted);background:var(--surface2);border-radius:10px;padding:10px 12px;}
+.sh-edited{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;color:var(--t-amber);background:var(--t-amber-soft);border-radius:10px;padding:9px 12px;}
+.sh-edited button{background:none;border:0;padding:0;font-size:13px;font-weight:700;color:var(--t-amber) !important;cursor:pointer;text-decoration:underline;white-space:nowrap;}
+.sh-lab{font-size:12.5px;color:var(--muted);margin-bottom:-4px;}
+.sh-pills{display:flex;flex-wrap:wrap;gap:6px;}
+.sh-pill{border:1.5px solid var(--border);background:var(--surface);border-radius:999px;min-height:38px;padding:0 14px;font-size:14px;font-weight:600;cursor:pointer;}
+.sh-pill[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent,#fff) !important;}
+.sh-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;}
+.sh-day{display:flex;flex-direction:column;align-items:center;gap:1px;border:1.5px solid var(--border);background:var(--surface);border-radius:11px;padding:7px 0;cursor:pointer;min-width:0;}
+.sh-day small{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+.sh-day b{font-family:var(--f-display);font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;}
+.sh-day[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent,#fff) !important;}
+.sh-day[aria-pressed="true"] small{color:inherit;opacity:.8;}
+.sh-day:disabled{opacity:.38;cursor:default;border-style:dashed;}
+.sh-btns{display:flex;gap:8px;padding:10px 18px calc(14px + env(safe-area-inset-bottom));flex-shrink:0;border-top:1px solid var(--border);}
+.sh-btns .wk-btn{flex:1;min-height:48px;font-size:15px;}
+.sh-btns .wk-btn.pri{flex:2;}
+.sh button:focus-visible,.sh-in:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+@media (prefers-reduced-motion:reduce){.sh,.sh-scrim{transition:none;}}
 /* ═══ Dark mode (v216) ═══
    Tokens first, then the few places that hard-code light colours. Accent fills use dark ink (--on-accent)
    because the dark-mode accent is light enough to read as text on the dark surfaces. Inline light tints
@@ -1140,8 +1179,8 @@ body{background:var(--bg);}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 222</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 222</strong></p>
+      <div class="ver">VERSION 223</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 223</strong></p>
       <span id="raceCountdown" class="race-chip"></span>
     </div>
     <div class="header-btns">
@@ -1181,50 +1220,16 @@ body{background:var(--bg);}
   <div class="dl-body" id="dlBody"></div>
 </div>
 
-<div class="copy-scrim" id="copyScrim" onclick="closeCopyModal()"></div>
-<div class="copy-modal" id="copyModal">
-  <div class="copy-modal-title">Copy exercise to</div>
-  <div class="copy-modal-name" id="copyModalName">—</div>
-  <div class="copy-modal-fields">
-    <div>
-      <label class="copy-modal-label">Week</label>
-      <select class="copy-modal-select" id="copyWeek">
-        <option value="2">Week 2 — DVSN Block</option><option value="3">Week 3 — Solo Return</option><option value="4">Week 4 — Benchmark</option><option value="5">Week 5 — Ski &amp; Engine</option><option value="6">Week 6 — Solo Block Begins</option><option value="7">Week 7 — Strength Build 1</option><option value="8">Week 8 — Strength Build 2</option><option value="9">Week 9 — Strength Build 3</option><option value="10">Week 10 — Strength Build 4</option><option value="11">Week 11 — Block 1 Peak</option><option value="12">Week 12 — Block 1 Exit Test</option><option value="13">Week 13 — Sled Introduction</option><option value="14">Week 14 — Sled Build 1</option><option value="15">Week 15 — Sled Build 2</option><option value="16">Week 16 — Sled Build 3</option><option value="17">Week 17 — Race Spec</option><option value="18">Week 18 — Race Spec Peak</option><option value="19">Week 19 — Block 2 Deload</option><option value="20">Week 20 — Block 2 Exit Test</option><option value="21">Week 21 — Block 3 Entry</option><option value="22">Week 22 — Block 3A Peak</option><option value="30">Week 30 — Rehab Week 1</option><option value="31">Week 31 — Rehab Week 2</option><option value="32">Week 32 — Tiered Rebuild</option>
-      </select>
-    </div>
-    <div>
-      <label class="copy-modal-label">Day</label>
-      <select class="copy-modal-select" id="copyDay">
-        <option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
-      </select>
-    </div>
-  </div>
-  <div class="copy-modal-actions">
-    <button class="copy-modal-btn" onclick="closeCopyModal()">Cancel</button>
-    <button class="copy-modal-btn primary" onclick="executeCopy()">Copy here</button>
-  </div>
+<div class="sh-scrim" id="shScrim" onclick="shClose()"></div>
+<div class="sh" id="editSheet" role="dialog" aria-modal="true" aria-labelledby="esTitle" aria-hidden="true">
+  <div class="sh-head"><div class="sh-ht"><div class="sh-kick" id="esKick"></div><h2 id="esTitle">Edit</h2></div><button class="sh-x" type="button" onclick="shClose()" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="sh-body" id="esBody"></div>
+  <div class="sh-btns"><button class="wk-btn" type="button" onclick="shClose()">Cancel</button><button class="wk-btn pri" type="button" onclick="saveEdit()">Save</button></div>
 </div>
-<div class="modal-scrim" id="editModal" onclick="closeModalBg(event)">
-  <div class="modal">
-    <h2 id="modalTitle">Add <span>Movement</span></h2>
-    <div id="editModalHint" style="display:none;font-size:0.62rem;color:var(--muted);background:var(--surface2);border-radius:var(--radius-sm);padding:6px 10px;margin-bottom:10px">💡 Change Week or Day to move this exercise to a different slot</div>
-    <div class="modal-grid">
-      <div class="mf"><label>Week</label><select id="mWeek"><option value="2">Week 2 — DVSN Block</option><option value="3">Week 3 — Solo Return</option><option value="4">Week 4 — Benchmark</option><option value="5">Week 5 — Ski & Engine</option><option value="6">Week 6 — Solo Block Begins</option><option value="7">Week 7 — Strength Build 1</option><option value="8">Week 8 — Strength Build 2</option><option value="9">Week 9 — Strength Build 3</option><option value="10">Week 10 — Strength Build 4</option><option value="11">Week 11 — Block 1 Peak</option><option value="12">Week 12 — Block 1 Exit Test</option><option value="13">Week 13 — Sled Introduction</option><option value="14">Week 14 — Sled Build 1</option><option value="15">Week 15 — Sled Build 2</option><option value="16">Week 16 — Sled Build 3</option><option value="17">Week 17 — Race Spec + Compromised Run</option><option value="18">Week 18 — Race Spec Peak</option><option value="19">Week 19 — Block 2 Deload</option><option value="20">Week 20 — Block 2 Exit Test</option><option value="21">Week 21 — Block 3 Entry</option><option value="22">Week 22 — Block 3A Peak</option><option value="30">Week 30 — Rehab Week 1</option><option value="31">Week 31 — Rehab Week 2</option><option value="32">Week 32 — Tiered Rebuild</option></select></div>
-      <div class="mf"><label>Day</label><select id="mDay"><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select></div>
-      <div class="mf"><label>Phase</label><input id="mPhase" type="text" placeholder="e.g. Bilateral Armor"></div>
-      <div class="mf"><label>Block</label><select id="mBlock"><option value="Morning Protocol">Morning Protocol</option><option value="Warm-Up">Warm-Up</option><option value="Main Session">Main Session</option><option value="Finisher">Finisher</option><option value="Mobility">Mobility</option></select></div>
-      <div class="mf modal-full"><label>Movement</label><input id="mMovement" type="text" placeholder="e.g. Front Squats"></div>
-      <div class="mf"><label>Target Weight</label><input id="mWeight" type="text" placeholder="e.g. 40-45kg"></div>
-      <div class="mf"><label>Sets × Reps</label><input id="mSets" type="text" placeholder="e.g. 4 x 8"></div>
-      <div class="mf"><label>Tempo / Pace</label><input id="mTempo" type="text" placeholder="e.g. 3-0-X-0"></div>
-      <div class="mf"><label>Rest</label><input id="mRest" type="text" placeholder="e.g. 90s"></div>
-      <div class="mf modal-full"><label>Mechanical Cue</label><textarea id="mCue" placeholder="Key coaching cue..."></textarea></div>
-    </div>
-    <div class="modal-actions">
-      <button class="mabtn" onclick="closeModal()">Cancel</button>
-      <button class="mabtn save" onclick="saveWorkout()">Save Movement</button>
-    </div>
-  </div>
+<div class="sh" id="copySheet" role="dialog" aria-modal="true" aria-labelledby="csTitle" aria-hidden="true">
+  <div class="sh-head"><div class="sh-ht"><div class="sh-kick">Copy to another day</div><h2 id="csTitle">Copy</h2></div><button class="sh-x" type="button" onclick="shClose()" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="sh-body" id="csBody"></div>
+  <div class="sh-btns"><button class="wk-btn" type="button" onclick="shClose()">Cancel</button><button class="wk-btn pri" type="button" id="csGo" onclick="executeCopy()">Copy</button></div>
 </div>
 <div class="export-scrim" id="exportScrim" onclick="closeExportBg(event)">
   <div class="export-box">
@@ -2342,6 +2347,8 @@ let workouts=[
 
 let _storageOk=false;
 var HC_KEYS=new Set(workouts.map(function(w){return w.week+'|'+w.day+'|'+w.movement;})); // v215: plan entries (cannot be deleted; they return on reload)
+var EDIT_FIELDS=['weight','sets','tempo','rest']; // v223: the only fields a plan entry may override
+var HC_ORIG={};workouts.forEach(function(w){HC_ORIG[w.week+'|'+w.day+'|'+w.movement]={weight:w.weight,sets:w.sets,tempo:w.tempo,rest:w.rest};});
 (function init(){try{localStorage.setItem('_hyrox_test','1');localStorage.removeItem('_hyrox_test');_storageOk=true;const s=localStorage.getItem('hyrox_plan');if(s){const saved=JSON.parse(s);if(saved&&saved.length>0){
   // Primary dedup: remove exact week|day|movement duplicates
   const keys=saved.map(w=>w.week+'|'+w.day+'|'+w.movement);
@@ -2365,7 +2372,7 @@ var HC_KEYS=new Set(workouts.map(function(w){return w.week+'|'+w.day+'|'+w.movem
     if(days.size<=1)return;
     if(DAILY_EX.test(items[0].movement))return;
     const withChecks=items.filter(w=>w.checks&&Object.keys(w.checks).length>0);
-    const noChecks=items.filter(w=>!w.checks||Object.keys(w.checks).length===0);
+    const noChecks=items.filter(w=>!w.user&&(!w.checks||Object.keys(w.checks).length===0)); // v223: never treat the athlete's own copies as artifacts
     // Only remove empty copies when a real logged version exists
     if(withChecks.length>0&&noChecks.length>0){
       noChecks.forEach(w=>{const i=base.indexOf(w);removeIdx.add(i);});
@@ -2412,13 +2419,17 @@ var HC_KEYS=new Set(workouts.map(function(w){return w.week+'|'+w.day+'|'+w.movem
   const merged=workouts.map(hc=>{
     const k=hc.week+'|'+hc.day+'|'+hc.movement;
     const sv=savedMap[k];
-    return sv?{...hc,log:(sv.log||[]),checks:(sv.checks||{})}:{...hc,log:(hc.log||[]),checks:(hc.checks||{})};
+    if(!sv)return {...hc,log:(hc.log||[]),checks:(hc.checks||{})};
+    // v223: edits the athlete made to a plan entry (weight/sets/tempo/rest only) survive the HTML-authoritative rebuild
+    const ed={};if(sv.edits)Object.keys(sv.edits).forEach(f=>{if(EDIT_FIELDS.indexOf(f)>=0)ed[f]=sv.edits[f];});
+    const out={...hc,...ed,log:(sv.log||[]),checks:(sv.checks||{})};if(Object.keys(ed).length)out.edits=ed;
+    return out;
   });
   base.forEach(w=>{
     const k=w.week+'|'+w.day+'|'+w.movement;
     if(hcKeys.has(k))return;
     const hasData=(w.checks&&Object.keys(w.checks).length>0)||(w.log&&w.log.length>0);
-    if(hasData)merged.push(w);
+    if(hasData||w.user)merged.push(w); // v223: copies the athlete made are kept even before they are logged
   });
   workouts=merged;
 }}}catch(e){_storageOk=false;}})();
@@ -3165,38 +3176,91 @@ function checkAllDone(){
   persist();
   showToast('All exercises marked done ✓');
 }
-function openCopyModal(wid){
-  copyingWid=wid;
-  const w=workouts.find(x=>x.id===wid);
-  document.getElementById('copyModalName').textContent=w?w.movement:'';
-  if(w){document.getElementById('copyWeek').value=w.week;document.getElementById('copyDay').value=w.day;}
-  document.getElementById('copyModal').classList.add('open');
-  document.getElementById('copyScrim').style.display='block';
+// v223: Edit and Copy are bottom sheets. A PLAN entry can change weight/sets/tempo/rest only; those are stored as
+// w.edits and re-applied by the merge. Name, day and how-to stay with the plan (Move on the log screen changes the day).
+// Copies carry user:true so the merge keeps them; a copy can be fully edited and deleted.
+var _es=null,_cs=null;
+function shOpen(id){document.getElementById('shScrim').classList.add('open');var el=document.getElementById(id);el.classList.add('open');el.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+function shClose(){document.getElementById('shScrim').classList.remove('open');['editSheet','copySheet'].forEach(function(id){var el=document.getElementById(id);if(el){el.classList.remove('open');el.setAttribute('aria-hidden','true');}});
+  if(!document.getElementById('dayLogOverlay').classList.contains('open'))document.body.style.overflow='';_es=null;_cs=null;}
+function shVal(v){return (v==null||v==='N/A')?'':String(v);}
+function shKick(w){return w.day.slice(0,3)+' '+fmtDate(getDate(w.week,w.day))+' · Week '+w.week;}
+function shTitle(w){var t=tTier(w.movement),tiered=/^(FLOOR|GOAL|BONUS)\b/.test(w.movement||'');
+  return (tiered?'<span class="dl-tier t-'+t.toLowerCase()+'">'+(typeof WK_TIER!=='undefined'?WK_TIER[t]:t)+'</span>':'')+tEsc(tiered?tName(w.movement):w.movement);}
+function openEditModal(id){
+  var w=workouts.find(function(x){return x.id===id;});if(!w)return;
+  var key=w.week+'|'+w.day+'|'+w.movement,plan=HC_KEYS.has(key);_es={id:id,plan:plan,key:key};
+  document.getElementById('esKick').textContent='Edit · '+shKick(w);
+  document.getElementById('esTitle').innerHTML=shTitle(w);
+  var f=function(id2,lab,val,full,ph){return '<label class="sh-f'+(full?' full':'')+'"><span>'+lab+'</span><input class="sh-in" id="'+id2+'" type="text" value="'+tEsc(shVal(val))+'" placeholder="'+(ph||'')+'"></label>';};
+  var h='';
+  if(!plan){
+    h+='<div class="sh-grid">'+f('esName','Name',w.movement,true)
+      +'<label class="sh-f"><span>Week</span><select class="sh-in" id="esWeek">'+WEEKS_META.map(function(m){return '<option value="'+m.num+'"'+(m.num===w.week?' selected':'')+'>Week '+m.num+'</option>';}).join('')+'</select></label>'
+      +'<label class="sh-f"><span>Day</span><select class="sh-in" id="esDay">'+DAYS.map(function(d){return '<option'+(d===w.day?' selected':'')+'>'+d+'</option>';}).join('')+'</select></label></div>';
+  }
+  h+='<div class="sh-grid">'+f('esWeight','Load or kit',w.weight,true,'e.g. 12kg or Band')+f('esSets','Sets and reps',w.sets,true,'e.g. 3 x 8')+f('esTempo','Tempo',w.tempo,false,'e.g. 3-1-1')+f('esRest','Rest',w.rest,false,'e.g. 90s')+'</div>';
+  if(!plan)h+='<label class="sh-f"><span>Notes and how-to</span><textarea class="sh-in" id="esCue">'+tEsc(w.cue||'')+'</textarea></label>'
+    +'<div class="sh-note">This is your own copy. You can change anything here, and delete it in Edit week.</div>';
+  else{
+    if(w.edits&&Object.keys(w.edits).length)h+='<div class="sh-edited"><span>You changed this from the plan.</span><button type="button" onclick="restorePlanVersion()">Restore plan</button></div>';
+    h+='<div class="sh-note">The name, day and how-to come from your plan. To do it on another day, use Move on the log screen.</div>';
+  }
+  document.getElementById('esBody').innerHTML=h;
+  shOpen('editSheet');
 }
-function closeCopyModal(){
-  document.getElementById('copyModal').classList.remove('open');
-  document.getElementById('copyScrim').style.display='none';
-  copyingWid=null;
+function saveEdit(){
+  if(!_es)return;var w=workouts.find(function(x){return x.id===_es.id;});if(!w){shClose();return;}
+  var g=function(id){var e=document.getElementById(id);return e?e.value.trim():'';};
+  var vals={weight:g('esWeight')||'N/A',sets:g('esSets')||'N/A',tempo:g('esTempo')||'N/A',rest:g('esRest')||'N/A'};
+  if(_es.plan){
+    var o=HC_ORIG[_es.key]||{},ed={};
+    EDIT_FIELDS.forEach(function(k){w[k]=vals[k];if(vals[k]!==o[k])ed[k]=vals[k];});
+    if(Object.keys(ed).length)w.edits=ed;else delete w.edits;
+  }else{
+    var nm=g('esName');if(!nm){showToast('Give it a name');return;}
+    var wk=parseInt(g('esWeek'),10)||w.week,dy=g('esDay')||w.day;
+    if(workouts.some(function(x){return x!==w&&x.week===wk&&x.day===dy&&x.movement===nm;})){showToast('That day already has an exercise with this name');return;}
+    Object.assign(w,vals,{movement:nm,week:wk,day:dy,cue:g('esCue'),user:true});
+  }
+  persist();shClose();render();showToast('Saved');
+}
+function restorePlanVersion(){
+  if(!_es||!_es.plan)return;var w=workouts.find(function(x){return x.id===_es.id;});if(!w)return;
+  var o=HC_ORIG[_es.key]||{};EDIT_FIELDS.forEach(function(k){if(k in o)w[k]=o[k];});delete w.edits;
+  persist();render();var id=_es.id;openEditModal(id);showToast('Plan version restored');
+}
+function openCopyModal(wid){
+  var w=workouts.find(function(x){return x.id===wid;});if(!w)return;
+  var t0=new Date();t0.setHours(0,0,0,0);
+  var weeks=WEEKS_META.map(function(m){return m.num;}).filter(function(n){var sun=getDate(n,'Sunday');sun.setHours(0,0,0,0);return sun>=t0||n===w.week;});
+  _cs={wid:wid,week:w.week,day:null,weeks:weeks};
+  var i=DAYS.indexOf(w.day);for(var k=1;k<7;k++){var d=DAYS[(i+k)%7];if(!csTaken(w,w.week,d)){_cs.day=d;break;}}
+  document.getElementById('csTitle').innerHTML=shTitle(w);
+  csRender();shOpen('copySheet');
+}
+function csTaken(w,wk,d){return (wk===w.week&&d===w.day)||workouts.some(function(x){return x.week===wk&&x.day===d&&x.movement===w.movement;});}
+function csPick(kind,v){if(!_cs)return;_cs[kind]=v;var w=workouts.find(function(x){return x.id===_cs.wid;});if(kind==='week'&&w&&_cs.day&&csTaken(w,_cs.week,_cs.day))_cs.day=null;csRender();}
+function csRender(){
+  var w=workouts.find(function(x){return x.id===_cs.wid;});if(!w)return;
+  var h='';
+  if(_cs.weeks.length>1)h+='<div class="sh-lab">Week</div><div class="sh-pills">'+_cs.weeks.map(function(n){return '<button class="sh-pill" type="button" aria-pressed="'+(n===_cs.week)+'" onclick="csPick(\'week\','+n+')">Week '+n+'</button>';}).join('')+'</div>';
+  h+='<div class="sh-lab">Day'+(_cs.weeks.length>1?'':' · Week '+_cs.week)+'</div><div class="sh-days">'+DAYS.map(function(d){var dt=getDate(_cs.week,d),dis=csTaken(w,_cs.week,d);
+    return '<button class="sh-day" type="button" aria-pressed="'+(d===_cs.day)+'"'+(dis?' disabled aria-label="'+d+', already has it"':'')+' onclick="csPick(\'day\',\''+d+'\')"><small>'+d.slice(0,3)+'</small><b>'+dt.getDate()+'</b></button>';}).join('')+'</div>'
+    +'<div class="sh-note">The copy starts with no logs. Dashed days already have this exercise. You can edit or delete the copy in Edit week.</div>';
+  document.getElementById('csBody').innerHTML=h;
+  var go=document.getElementById('csGo');go.disabled=!_cs.day;go.textContent=_cs.day?'Copy to '+_cs.day.slice(0,3)+' '+fmtDate(getDate(_cs.week,_cs.day)):'Pick a day';
 }
 function executeCopy(){
-  const w=workouts.find(x=>x.id===copyingWid);
-  if(!w)return;
-  const targetWeek=parseInt(document.getElementById('copyWeek').value);
-  const targetDay=document.getElementById('copyDay').value;
-  const copy={...w,id:uid(),week:targetWeek,day:targetDay,log:[],checks:{}};
-  workouts.push(copy);
-  closeCopyModal();
-  activeWeek=targetWeek;
-  render();
-  persist();
-  showToast(`Copied to Week ${targetWeek} — ${targetDay}`);
+  if(!_cs||!_cs.day)return;var w=workouts.find(function(x){return x.id===_cs.wid;});if(!w)return;
+  if(csTaken(w,_cs.week,_cs.day)){showToast('That day already has it');return;}
+  var c=Object.assign({},w,{id:uid(),week:_cs.week,day:_cs.day,log:[],checks:{},user:true});delete c.edits;
+  workouts.push(c);var lbl=_cs.day.slice(0,3)+' '+fmtDate(getDate(_cs.week,_cs.day));
+  persist();shClose();render();showToast('Copied to '+lbl);
 }
-
-function openEditModal(id){editingId=id;const w=workouts.find(x=>x.id===id);if(!w)return;document.getElementById('modalTitle').innerHTML='Edit <span>Movement</span>';document.getElementById('editModalHint').style.display='block';document.getElementById('mWeek').value=w.week;document.getElementById('mDay').value=w.day;document.getElementById('mPhase').value=w.phase;document.getElementById('mBlock').value=w.block||'Main Session';document.getElementById('mMovement').value=w.movement;document.getElementById('mWeight').value=w.weight;document.getElementById('mSets').value=w.sets;document.getElementById('mTempo').value=w.tempo;document.getElementById('mRest').value=w.rest;document.getElementById('mCue').value=w.cue||'';document.getElementById('editModal').classList.add('open');}
-function openAddModal(week,day){editingId=null;document.getElementById('modalTitle').innerHTML='Add <span>Movement</span>';document.getElementById('editModalHint').style.display='none';document.getElementById('mWeek').value=week??1;document.getElementById('mDay').value=day||'Monday';document.getElementById('mPhase').value='';document.getElementById('mBlock').value='Main Session';['mMovement','mWeight','mSets','mTempo','mRest','mCue'].forEach(id=>document.getElementById(id).value='');document.getElementById('editModal').classList.add('open');}
-function closeModal(){document.getElementById('editModal').classList.remove('open');editingId=null;}
-function closeModalBg(e){if(e.target.id==='editModal')closeModal();}
-function saveWorkout(){const movement=document.getElementById('mMovement').value.trim();if(!movement){showToast('Movement name is required');return;}const data={week:parseInt(document.getElementById('mWeek').value),day:document.getElementById('mDay').value,phase:document.getElementById('mPhase').value.trim()||'Main Session',block:document.getElementById('mBlock').value,movement,weight:document.getElementById('mWeight').value.trim()||'N/A',sets:document.getElementById('mSets').value.trim()||'N/A',tempo:document.getElementById('mTempo').value.trim()||'N/A',rest:document.getElementById('mRest').value.trim()||'N/A',cue:document.getElementById('mCue').value.trim()};if(editingId){const idx=workouts.findIndex(x=>x.id===editingId);workouts[idx]={...workouts[idx],...data};showToast('Updated');}else{workouts.push({id:uid(),log:[],...data});showToast('Movement added');}activeWeek=data.week;closeModal();render();persist();}
+function closeCopyModal(){shClose();}
+function openAddModal(){}  // v220: adding exercises was removed from the UI
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&(_es||_cs))shClose();});
 function delW(id){if(!confirm('Remove this movement?'))return;workouts=workouts.filter(x=>x.id!==id);render();persist();showToast('Removed');}
 
 var _expAll=false;
