@@ -1233,8 +1233,8 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 231</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 231</strong></p>
+      <div class="ver">VERSION 232</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 232</strong></p>
       <button type="button" id="raceCountdown" class="race-chip" onclick="showProgress()" aria-label="Rehab progress"></button>
     </div>
     <div class="header-btns">
@@ -3804,7 +3804,7 @@ function renderVitalsTab(){
     h+='<section class="tdy-card" aria-label="This morning"><div class="tdy-head"><h2>This morning</h2><button class="tdy-link" type="button" onclick="vitalsEdit()">Edit</button></div>'
       +'<div class="vt-sum"><div><b>'+(e.rhr??'–')+'</b><small>RHR bpm</small></div><div><b>'+(e.hrv??'–')+'</b><small>HRV ms</small></div><div><b>'+vtSleep(e.sleep,1)+'</b><small>Sleep</small></div><div><b>'+(e.weight??'–')+'</b><small>Weight kg</small></div></div>'
       +'<div class="vt-meta">'+['Energy '+(e.energy?e.energy+'/5':'–'),'Soreness '+(e.soreness?e.soreness+'/5':'–')].concat(e.travel?['Travel day, left out of baselines']:[]).join(' · ')+'</div>'
-      +'<div class="vt-btns"><button class="wk-btn" type="button" onclick="showToday(true)">Go to Today</button></div></section>';
+      +'<div class="vt-btns"><button class="wk-btn pri" type="button" onclick="showToday(true)">Go to Today</button></div></section>';
   }else{
     const seg=(f,cur)=>'<div class="tdy-seg vt-5" id="v-'+f+'" role="group">'+[1,2,3,4,5].map(n=>'<button type="button" aria-pressed="'+(cur===n)+'" onclick="vitalsSetRating(\''+f+'\','+n+')">'+n+'</button>').join('')+'</div>';
     const inp=(id,lab,val,unit,ph,step)=>'<label class="vt-f"><span>'+lab+'</span><div><input class="vt-in" id="'+id+'" type="number" inputmode="decimal" step="'+(step||'any')+'" placeholder="'+ph+'" value="'+(val??'')+'">'+(unit?'<small>'+unit+'</small>':'')+'</div></label>';
@@ -4595,11 +4595,16 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/Hyrox-Prep/s
 
 // ── Smart startup: vitals-first if not logged today ──────────────
 (function smartStart(){
-  // v211: the app opens on Today. The vitals nudge is a chip on the Today screen instead of a redirect.
-  // Deferred to DOMContentLoaded: Today borrows floorStreak/PROG_DEFS from the SECOND <script> block,
-  // which has not executed yet when this first block runs.
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){showToday(true);});}
-  else{showToday(true);}
+  // v232: opens on Vitals until this morning's numbers are logged, then on Today. Re-checked when the app comes
+  // back to the front on a NEW day (an iPhone keeps a home-screen app alive overnight). Never interrupts an open log.
+  // Deferred to DOMContentLoaded: Today borrows floorStreak/PROG_DEFS from the SECOND <script> block.
+  var lastDay=null;
+  function startView(){lastDay=new Date().toDateString();if(!vitalsLoggedToday())showVitals();else showToday(true);}
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',startView);}
+  else{startView();}
+  document.addEventListener('visibilitychange',function(){if(document.hidden)return;
+    var o=document.getElementById('dayLogOverlay');if(o&&o.classList.contains('open'))return;
+    if(new Date().toDateString()!==lastDay)startView();});
 })();
 </script>
 <script>
