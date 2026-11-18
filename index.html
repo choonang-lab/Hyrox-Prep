@@ -1162,6 +1162,19 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
 .pg-cpd .dl-brief li{font-size:13.5px;}
 .pg-cpn{font-size:12px;color:var(--muted);}
 .pg-cpd>summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+/* ═══ Back pain episodes (v233) ═══ */
+.bp-lab{font-size:12.5px;color:var(--muted);margin-bottom:-4px;}
+.bp-pain{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;}
+.bp-pain button{min-height:42px;border:1.5px solid var(--border);background:var(--surface);border-radius:10px;font-family:var(--f-display) !important;font-size:16px;font-weight:700;cursor:pointer;}
+.bp-pain button[aria-pressed="true"]{background:var(--t-amber);border-color:var(--t-amber);color:#fff !important;}
+.bp-list{display:grid;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:4px 10px;}
+.bp-ev{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13.5px;min-height:40px;}
+.bp-ev+.bp-ev{border-top:1px solid var(--border);}
+.bp-ev b{font-variant-numeric:tabular-nums;margin-right:4px;}
+.bp-ev .wk-ic{width:34px;height:34px;}
+.tdy-chip.bp{cursor:pointer;color:var(--text) !important;}
+.tdy-chip.bp b{font-family:inherit;font-size:13px;color:var(--t-amber);}
+.pg-tl svg{display:block;width:100%;height:auto;color:var(--muted);}
 /* ═══ Dark mode (v216) ═══
    Tokens first, then the few places that hard-code light colours. Accent fills use dark ink (--on-accent)
    because the dark-mode accent is light enough to read as text on the dark surfaces. Inline light tints
@@ -1233,8 +1246,8 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 232</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 232</strong></p>
+      <div class="ver">VERSION 233</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 233</strong></p>
       <button type="button" id="raceCountdown" class="race-chip" onclick="showProgress()" aria-label="Rehab progress"></button>
     </div>
     <div class="header-btns">
@@ -1294,6 +1307,11 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
   <div class="sh-head"><div class="sh-ht"><div class="sh-kick">Make it up on another day?</div><h2 id="mvTitle">Move</h2></div><button class="sh-x" type="button" onclick="shClose()" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="sh-body" id="mvBody"></div>
   <div class="sh-btns"><button class="wk-btn" type="button" onclick="shClose()">Cancel</button><button class="wk-btn" type="button" id="mvLetGo" onclick="mvLetGo()">Let it go</button></div>
+</div>
+<div class="sh" id="backSheet" role="dialog" aria-modal="true" aria-labelledby="bpTitle" aria-hidden="true">
+  <div class="sh-head"><div class="sh-ht"><div class="sh-kick">Log it as it happens</div><h2 id="bpTitle">Back pain now</h2></div><button class="sh-x" type="button" onclick="shClose()" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="sh-body" id="bpBody"></div>
+  <div class="sh-btns"><button class="wk-btn" type="button" onclick="shClose()">Cancel</button><button class="wk-btn pri" type="button" onclick="bpSaveEv()">Save</button></div>
 </div>
 <div class="export-scrim" id="exportScrim" onclick="closeExportBg(event)">
   <div class="export-box">
@@ -3265,7 +3283,7 @@ function checkAllDone(){
 // Copies carry user:true so the merge keeps them; a copy can be fully edited and deleted.
 var _es=null,_cs=null;
 function shOpen(id){document.getElementById('shScrim').classList.add('open');var el=document.getElementById(id);el.classList.add('open');el.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
-function shClose(){document.getElementById('shScrim').classList.remove('open');['editSheet','copySheet','restoreSheet','moveSheet'].forEach(function(id){var el=document.getElementById(id);if(el){el.classList.remove('open');el.setAttribute('aria-hidden','true');}});
+function shClose(){document.getElementById('shScrim').classList.remove('open');['editSheet','copySheet','restoreSheet','moveSheet','backSheet'].forEach(function(id){var el=document.getElementById(id);if(el){el.classList.remove('open');el.setAttribute('aria-hidden','true');}});
   if(!document.getElementById('dayLogOverlay').classList.contains('open'))document.body.style.overflow='';_es=null;_cs=null;}
 function shVal(v){return (v==null||v==='N/A')?'':String(v);}
 function shKick(w){return w.day.slice(0,3)+' '+fmtDate(getDate(w.week,w.day))+' · Week '+w.week;}
@@ -3418,6 +3436,9 @@ function buildExport(){
   });
   // vitals
   const V=(typeof loadVitals==='function'?loadVitals():[]).filter(v=>_expAll||v.date>=loc(from));
+  const BE=(typeof bpLoad==='function'?bpLoad():[]).filter(e=>_expAll||new Date(e.t)>=from);
+  if(BE.length){ln('');ln('BACK PAIN EPISODES (logged as they happened)');ln(hr());
+    BE.forEach(e=>ln(bpDay(e.t)+' '+bpTime(e.t)+'  '+e.pain+'/10 · '+e.doing.toLowerCase()+(e.dur?' for '+e.dur.toLowerCase():'')+(e.side?' · '+e.side.toLowerCase():'')+(e.leg&&e.leg!=='no'?' · LEG SYMPTOMS '+e.leg:'')+(e.eased?' · eased by '+e.eased.toLowerCase():'')));}
   ln('');ln('VITALS (morning)');ln(hr());
   if(!V.length)ln('None logged in this range.');
   else{ln('date        RHR  HRV  sleep  weight  energy  sore');
@@ -3466,7 +3487,8 @@ function saveFile(){
   const vitals=JSON.parse(localStorage.getItem('hyrox_vitals')||'[]');
   const skips=JSON.parse(localStorage.getItem('hyrox_dayskips')||'{}');
   let progress={},progressHist={};try{progress=JSON.parse(localStorage.getItem('hyrox_progress')||'{}');progressHist=JSON.parse(localStorage.getItem('hyrox_progress_hist')||'{}');}catch(e){}
-  const bundle={version:1,savedAt:new Date().toISOString(),plan:workouts,vitals,daySkips:skips,progress,progressHist};
+  let backEvents=[];try{backEvents=JSON.parse(localStorage.getItem('rebuild_back_events')||'[]');}catch(e){}
+  const bundle={version:1,savedAt:new Date().toISOString(),plan:workouts,vitals,daySkips:skips,progress,progressHist,backEvents};
   const blob=new Blob([JSON.stringify(bundle,null,2)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
   a.download=`hyrox-backup-${new Date().toISOString().slice(0,10)}.json`;
@@ -3497,7 +3519,7 @@ function loadFile(){var inp=document.createElement('input');inp.type='file';inp.
   var raw;try{raw=JSON.parse(ev.target.result);}catch(e2){showToast('That file is not a backup');return;}
   var plan=Array.isArray(raw)?raw:(raw&&raw.plan);if(!Array.isArray(plan)||!plan.length){showToast('That file is not a backup');return;}
   _rs={plan:plan,vitals:Array.isArray(raw)?null:(raw.vitals||null),skips:Array.isArray(raw)?null:(raw.daySkips||null),
-    progress:Array.isArray(raw)?null:(raw.progress||null),hist:Array.isArray(raw)?null:(raw.progressHist||null),
+    progress:Array.isArray(raw)?null:(raw.progress||null),hist:Array.isArray(raw)?null:(raw.progressHist||null),bev:Array.isArray(raw)?null:(raw.backEvents||null),
     when:(raw&&raw.savedAt)?new Date(raw.savedAt):(f.lastModified?new Date(f.lastModified):null),name:f.name};
   rsOpen();};r.readAsText(f);};inp.click();}
 function rsOpen(){
@@ -3528,6 +3550,7 @@ function rsApply(){
   if(R.vitals&&typeof loadVitals==='function'){var V=loadVitals(),have={};V.forEach(function(v){have[v.date]=1;});
     R.vitals.forEach(function(v){if(v&&v.date&&!have[v.date])V.push(v);});V.sort(function(a,b){return a.date.localeCompare(b.date);});saveVitals(V);}
   if(R.skips){Object.keys(R.skips).forEach(function(k){if(!daySkips[k])daySkips[k]=R.skips[k];});saveDaySkips();}
+  if(R.bev&&R.bev.length){var B=bpLoad(),seenT={};B.forEach(function(e){seenT[e.t]=1;});R.bev.forEach(function(e){if(e&&e.t&&!seenT[e.t])B.push(e);});B.sort(function(x,y){return x.t<y.t?-1:1;});bpStore(B);}
   try{
     if(R.progress){var p=JSON.parse(localStorage.getItem('hyrox_progress')||'{}');Object.keys(R.progress).forEach(function(k){if(p[k]===undefined||p[k]===null)p[k]=R.progress[k];});localStorage.setItem('hyrox_progress',JSON.stringify(p));}
     if(R.hist){var H=JSON.parse(localStorage.getItem('hyrox_progress_hist')||'{}');Object.keys(R.hist).forEach(function(k){var cur=H[k]||[],ds={};cur.forEach(function(r){ds[r.d]=1;});
@@ -4287,10 +4310,60 @@ function todayKnee(id,field,val){
 // v226: end-of-day check on the steps row. checks[ds].steps = number (10,000+ ticks the row);
 // checks[ds].back = {pain 0-10, trig:[...], leg:'no'|'left'|'right'}. Triggers and leg only show once pain is above 0.
 var BACK_TRIG=['Sitting','Bending','Lifting','Standing','Waking up','Driving'];
+// v233: back pain EPISODES, logged as they happen. localStorage 'rebuild_back_events' = [{t ISO, pain 1-10, doing,
+// dur (sitting-type activities only), side, leg 'no'|'left'|'right', eased}]. Each save also pre-fills that day's
+// evening back check (soreness = worst episode, triggers, leg). In the Save backup bundle as backEvents.
+var BP_KEY='rebuild_back_events',_bp=null;
+var BP_DOING=['Sitting','Driving','Standing','Bending or lifting','Getting up','Waking up','Walking','Training'];
+var BP_DUR=['Under 15 min','15–30 min','30–60 min','Over an hour'];
+var BP_TIMED=['Sitting','Driving','Standing','Walking','Training'];
+var BP_SIDE=['Centre','Left','Right','Both'];
+var BP_EASE=['Standing up','Walking','Changing position','Lying down','Nothing yet'];
+var BP_TRIG={'Sitting':'Sitting','Driving':'Driving','Standing':'Standing','Bending or lifting':'Bending','Waking up':'Waking up'};
+function bpLoad(){try{return JSON.parse(localStorage.getItem(BP_KEY)||'[]');}catch(e){return [];}}
+function bpStore(a){try{localStorage.setItem(BP_KEY,JSON.stringify(a));}catch(e){}}
+function bpDay(t){var d=new Date(t);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function bpTime(t){var d=new Date(t);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
+function bpOn(day){return bpLoad().filter(function(e){return bpDay(e.t)===day;}).sort(function(a,b){return a.t<b.t?-1:1;});}
+function bpOpen(){_bp={ago:0,pain:null,doing:null,dur:null,side:null,leg:'no',eased:null};bpRender();shOpen('backSheet');}
+function bpSet(k,v){if(!_bp)return;if(k==='ago'||k==='leg'||k==='pain')_bp[k]=(k==='leg'&&_bp.leg===v)?'no':v;else _bp[k]=(_bp[k]===v)?null:v;bpRender();}
+function bpPills(k,list){return '<div class="sh-pills">'+list.map(function(v,i){return '<button class="sh-pill" type="button" aria-pressed="'+(_bp[k]===v)+'" onclick="bpSet(\''+k+'\','+k.toUpperCase()+'_L['+i+'])">'+tEsc(v)+'</button>';}).join('')+'</div>';}
+var DOING_L=BP_DOING,DUR_L=BP_DUR,SIDE_L=BP_SIDE,EASED_L=BP_EASE;
+function bpRender(){
+  var td=bpOn(bpDay(new Date())),h='';
+  if(td.length)h+='<div class="bp-lab">Today</div><div class="bp-list">'+td.map(function(e){return '<div class="bp-ev"><span><b>'+bpTime(e.t)+'</b>'+tEsc(e.doing)+(e.dur?' · '+tEsc(e.dur):'')+' · '+e.pain+'/10'+(e.leg&&e.leg!=='no'?' · leg':'')+'</span><button class="wk-ic del" type="button" aria-label="Delete the '+bpTime(e.t)+' episode" onclick="bpDel(\''+e.t+'\')">'+WK_IC.del+'</button></div>';}).join('')+'</div>';
+  h+='<div class="bp-lab">When</div><div class="sh-pills">'+[[0,'Now'],[30,'30 min ago'],[60,'1 hour ago'],[120,'2 hours ago']].map(function(a){return '<button class="sh-pill" type="button" aria-pressed="'+(_bp.ago===a[0])+'" onclick="bpSet(\'ago\','+a[0]+')">'+a[1]+'</button>';}).join('')+'</div>';
+  h+='<div class="bp-lab">How bad, 1–10</div><div class="bp-pain">'+[1,2,3,4,5,6,7,8,9,10].map(function(n){return '<button type="button" aria-pressed="'+(_bp.pain===n)+'" onclick="bpSet(\'pain\','+n+')">'+n+'</button>';}).join('')+'</div>';
+  h+='<div class="bp-lab">What were you doing?</div>'+bpPills('doing',BP_DOING);
+  if(BP_TIMED.indexOf(_bp.doing)>=0)h+='<div class="bp-lab">How long had you been doing it?</div>'+bpPills('dur',BP_DUR);
+  h+='<div class="bp-lab">Where?</div>'+bpPills('side',BP_SIDE);
+  h+='<div class="bp-lab">Anything down the leg? Pain, tingling or numbness</div><div class="tdy-seg">'+['no','left','right'].map(function(v){return '<button type="button" aria-pressed="'+(_bp.leg===v)+'" onclick="bpSet(\'leg\',\''+v+'\')">'+(v==='no'?'No':v.charAt(0).toUpperCase()+v.slice(1))+'</button>';}).join('')+'</div>';
+  if(_bp.leg!=='no')h+='<div class="tdy-eodnote">Leg symptoms matter more than back ache. Tell your physio this week. Numbness, weakness, or any change in bladder or bowel control: see a doctor the same day.</div>';
+  h+='<div class="bp-lab">What eased it? Optional</div>'+bpPills('eased',BP_EASE);
+  document.getElementById('bpBody').innerHTML=h;
+}
+function bpSaveEv(){
+  if(!_bp)return;if(!_bp.pain||!_bp.doing){showToast('Pick how bad and what you were doing');return;}
+  var ev={t:new Date(Date.now()-_bp.ago*60000).toISOString(),pain:_bp.pain,doing:_bp.doing,dur:BP_TIMED.indexOf(_bp.doing)>=0?_bp.dur:null,side:_bp.side,leg:_bp.leg,eased:_bp.eased};
+  var a=bpLoad();a.push(ev);a.sort(function(x,y){return x.t<y.t?-1:1;});bpStore(a);bpFillEvening(bpDay(ev.t));
+  shClose();if(activeWeek==='today')renderToday();else if(activeWeek==='progress'&&typeof renderProgressTab==='function')renderProgressTab();
+  showToast('Logged '+bpTime(ev.t)+' · '+ev.pain+'/10');
+}
+function bpDel(t){if(!confirm('Delete this episode?'))return;bpStore(bpLoad().filter(function(e){return e.t!==t;}));bpRender();if(activeWeek==='today')renderToday();}
+function bpFillEvening(day){
+  var w=workouts.find(function(x){return /^FLOOR/.test(x.movement||'')&&/10,000 Steps/.test(x.movement||'')&&bpDay(getDate(x.week,x.day))===day;});if(!w)return;
+  var evs=bpOn(day);if(!evs.length)return;var ds=tKey(w.week,w.day);w.checks=w.checks||{};var c=w.checks[ds]||(w.checks[ds]={done:false,notes:'',status:'none'});
+  var b=c.back||{},mx=Math.max.apply(null,evs.map(function(e){return e.pain;}));
+  if(typeof b.pain!=='number'||b.pain<mx)b.pain=mx;
+  var tr=b.trig||[];evs.forEach(function(e){var t=BP_TRIG[e.doing];if(t&&tr.indexOf(t)<0)tr.push(t);});b.trig=tr;
+  var lg=evs.find(function(e){return e.leg==='left'||e.leg==='right';});if(lg&&(!b.leg||b.leg==='no'))b.leg=lg.leg;
+  c.back=b;persist();
+}
 function tEodHTML(w,ds){
   var c=((w.checks||{})[ds])||{},b=c.back||{},st=(typeof c.steps==='number')?c.steps:'';
   var pain=(typeof b.pain==='number')?b.pain:'–',trig=b.trig||[];
-  var h='<div class="tdy-dose">'+tEsc(w.sets)+'</div><div class="tdy-check"><div><div class="tdy-lab">Low back soreness today, 0–10</div><div class="tdy-step"><button type="button" aria-label="Lower" onclick="todayEod(\''+w.id+'\',\'pain\',-1)">−</button><output>'+pain+'</output><button type="button" aria-label="Higher" onclick="todayEod(\''+w.id+'\',\'pain\',1)">+</button><small>0 is none</small></div></div>';
+  var _n=bpOn(bpDay(getDate(w.week,w.day))).length;
+  var h='<div class="tdy-dose">'+tEsc(w.sets)+'</div><div class="tdy-check">'+(_n?'<div class="tdy-lab">'+_n+(_n===1?' episode':' episodes')+' logged today. Soreness is set to your worst; change it if the day felt different.</div>':'')+'<div><div class="tdy-lab">Low back soreness today, 0–10</div><div class="tdy-step"><button type="button" aria-label="Lower" onclick="todayEod(\''+w.id+'\',\'pain\',-1)">−</button><output>'+pain+'</output><button type="button" aria-label="Higher" onclick="todayEod(\''+w.id+'\',\'pain\',1)">+</button><small>0 is none</small></div></div>';
   if(typeof b.pain==='number'&&b.pain>0){
     h+='<div><div class="tdy-lab">What set it off? Tap all that apply</div><div class="tdy-chipsel">'+BACK_TRIG.map(function(t){var on=trig.indexOf(t)>=0;
         return '<button type="button" aria-pressed="'+on+'" onclick="todayEod(\''+w.id+'\',\'trig\',\''+t+'\')">'+t+'</button>';}).join('')+'</div></div>'
@@ -4558,6 +4631,7 @@ function renderToday(){
     +(kt?'<span class="tdy-chip">Knee <b style="font-family:inherit;font-size:13px">'+kt+'</b></span>':'')
     +((isToday&&bkDue())?'<button class="tdy-chip bk" type="button" onclick="saveFile()">'+bkChip()+'</button>':'')
     +((isToday&&!vitalsLoggedToday())?'<button class="tdy-chip link" type="button" onclick="showVitals()">Log today\'s vitals</button>':'')
+    +(isToday?(function(){var n=bpOn(bpDay(new Date())).length;return '<button class="tdy-chip bp" type="button" onclick="bpOpen()">Back pain now'+(n?' <b>· '+n+' today</b>':'')+'</button>';})():'')
     +'</div></section>';
   h+='<div class="tdy-weekbar"><button class="tdy-arrow" type="button" aria-label="Previous week" onclick="todayShiftWeek(-1)"'+(wi<=0?' disabled':'')+'>‹</button>'
     +'<span>Week '+W+(meta.sub?' · '+tEsc(meta.sub):'')+'</span>'
@@ -4773,6 +4847,22 @@ function pgBackChart(recs){
   var pd=pts.map(function(q){return '<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="2.8" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>';}).join('');
   return '<div class="pg-chart"><svg viewBox="0 0 300 104" role="img" aria-label="Back soreness by day">'+g+line+pd+dots+'</svg><div class="pg-ax"><span>'+(N>=28?'4 weeks ago':(N-1)+' days ago')+'</span><span>Today</span></div></div>'
     +'<div class="pg-key"><span><i class="ln"></i>Back soreness</span><span><i class="worse"></i>Leg symptoms that day</span></div>';}
+// v233: episodes over the last 14 days: a 24-hour timeline, the most common activity, and sitting tolerance.
+function pgBackEpisodes(today,day){
+  var from=new Date(today.getTime()-13*day),ev=(typeof bpLoad==='function'?bpLoad():[]).filter(function(e){return new Date(e.t)>=from;});
+  var h='<div class="pg-row" style="margin-top:8px"><div><div class="pg-n">Episodes, last 14 days</div><div class="pg-s">'+(ev.length?ev.length+' logged':'Tap Back pain now on Today when it happens')+'</div></div></div>';
+  if(!ev.length)return h;
+  var X=function(hr){return 14+hr/24*272;},g='<line x1="14" x2="286" y1="22" y2="22" stroke="currentColor" stroke-opacity=".3"/>';
+  [[0,'12am'],[6,'6am'],[12,'noon'],[18,'6pm'],[24,'12am']].forEach(function(a){g+='<line x1="'+X(a[0])+'" x2="'+X(a[0])+'" y1="18" y2="26" stroke="currentColor" stroke-opacity=".4"/><text x="'+X(a[0])+'" y="40" text-anchor="middle" font-size="9" fill="currentColor">'+a[1]+'</text>';});
+  ev.forEach(function(e){var d=new Date(e.t),hr=d.getHours()+d.getMinutes()/60;g+='<circle cx="'+X(hr).toFixed(1)+'" cy="22" r="'+(3+e.pain*0.45).toFixed(1)+'" fill="'+(e.leg&&e.leg!=='no'?'var(--t-amber)':'var(--accent)')+'" fill-opacity=".55"/>';});
+  h+='<div class="pg-tl"><svg viewBox="0 0 300 46" role="img" aria-label="Back pain episodes by time of day">'+g+'</svg></div><div class="pg-key"><span><i class="better"></i>Episode, bigger is worse</span><span><i class="worse"></i>With leg symptoms</span></div>';
+  var dc={};ev.forEach(function(e){dc[e.doing]=(dc[e.doing]||0)+1;});var top=Object.keys(dc).sort(function(a,b){return dc[b]-dc[a];})[0];
+  var sit=ev.filter(function(e){return (e.doing==='Sitting'||e.doing==='Driving')&&e.dur;}),bc={};sit.forEach(function(e){bc[e.dur]=(bc[e.dur]||0)+1;});
+  var tb=Object.keys(bc).sort(function(a,b){return bc[b]-bc[a];})[0],mins={'Under 15 min':15,'15–30 min':20,'30–60 min':30,'Over an hour':45}[tb];
+  h+='<div class="pg-row"><div><div class="pg-n">Most often</div><div class="pg-s">'+tEsc(top)+' ('+dc[top]+' of '+ev.length+')</div></div></div>';
+  if(sit.length)h+='<div class="pg-row"><div><div class="pg-n">Sitting tolerance</div><div class="pg-s">Sitting and driving: '+sit.length+(sit.length===1?' episode':' episodes')+', most after '+tEsc(tb.toLowerCase())+'. <span class="up">Set your break reminder to '+mins+' min.</span>'+(tb==='Under 15 min'?' That is very short. Tell your physio.':'')+'</div></div></div>';
+  return h;
+}
 function pgCP(n){var c=loadProgress().cp||0;setProg('cp',c===n?n-1:n);}
 function renderProgressTab(){
   var pv=document.getElementById('progressView'); if(!pv)return;
@@ -4803,7 +4893,7 @@ function renderProgressTab(){
   h+=pgRow(D.thigh,p,false)+'</section>';
   // ---- back (v226)
   var eod=pgEodRecs(),br=eod.filter(function(r){return typeof r.pain==='number';});
-  h+='<section class="tdy-card" aria-label="Back"><div class="tdy-head"><h2>Back</h2><span>Logged at the end of each day</span></div>';
+  h+='<section class="tdy-card" aria-label="Back"><div class="tdy-head"><h2>Back</h2><span>Evening check and episodes</span></div>';
   if(br.length>=2){h+=pgBackChart(br);
     var wk=br.filter(function(r){return r.d>=pgKey(new Date(today.getTime()-6*day));}),tc={};
     wk.forEach(function(r){(r.trig||[]).forEach(function(t){tc[t]=(tc[t]||0)+1;});});
@@ -4813,7 +4903,7 @@ function renderProgressTab(){
     h+='<div class="pg-row" style="margin-top:8px"><div><div class="pg-n">Last 7 days</div><div class="pg-s">'+(avg!=null?'Average '+avg+'/10':'')+(top.length?' · mostly '+top.map(function(t){return t.toLowerCase()+' ('+tc[t]+')';}).join(', '):'')+'</div></div></div>';
     if(legs)h+='<div class="tdy-eodnote" style="margin-top:6px">Leg symptoms on '+legs+' of the last 7 days. Tell your physio.</div>';
   }else h+='<div class="pg-empty">Log your back on the 10,000 Steps row on Today each evening. It needs two days to draw a line.</div>';
-  h+='</section>';
+  h+=pgBackEpisodes(today,day)+'</section>';
   // ---- consistency
   var sk=floorStreak(),hm=pgHeat(),spct=Math.min(100,sk/30*100);
   h+='<section class="tdy-card" aria-label="Consistency"><div class="tdy-head"><h2>Consistency</h2><span>'+(hm.past?hm.ok+' of '+hm.past+' days complete':'')+'</span></div>'
