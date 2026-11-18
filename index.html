@@ -1152,6 +1152,16 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
 .mv-slot.good{border-color:var(--accent);}
 .mv-slot:disabled{opacity:.45;cursor:default;border-style:dashed;}
 .wk-rule{font-size:12.5px;color:var(--muted);line-height:1.4;padding:0 0 8px;}
+/* ═══ Checkpoint criteria fold-out (v231) ═══ */
+.pg-cpd{margin:2px 0 10px;}
+.pg-cpd>summary{list-style:none;cursor:pointer;font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:4px;min-height:28px;}
+.pg-cpd>summary::-webkit-details-marker{display:none;}
+.pg-cpd>summary::after{content:'';width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);margin-left:4px;transition:transform .2s;}
+.pg-cpd[open]>summary::after{transform:rotate(-135deg) translateY(-1px);}
+.pg-cpd .dl-brief{margin:6px 0 4px;}
+.pg-cpd .dl-brief li{font-size:13.5px;}
+.pg-cpn{font-size:12px;color:var(--muted);}
+.pg-cpd>summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 /* ═══ Dark mode (v216) ═══
    Tokens first, then the few places that hard-code light colours. Accent fills use dark ink (--on-accent)
    because the dark-mode accent is light enough to read as text on the dark surfaces. Inline light tints
@@ -1223,8 +1233,8 @@ textarea.sh-in{min-height:96px;resize:vertical;line-height:1.45;}
   <div class="header-inner">
     <div class="logo">
       <h1>The <span>Rebuild</span></h1>
-      <div class="ver">VERSION 230</div>
-      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 230</strong></p>
+      <div class="ver">VERSION 231</div>
+      <p>Knee rehab · Handstand · Muscle-up · <strong style="color:var(--accent)">BUILD 231</strong></p>
       <button type="button" id="raceCountdown" class="race-chip" onclick="showProgress()" aria-label="Rehab progress"></button>
     </div>
     <div class="header-btns">
@@ -4679,6 +4689,14 @@ function showProgress(){
   }
 }
 var PG_CP=['Base','Pull height','Press-out','Transition','Muscle-up'];
+// v231: what clears each checkpoint (from the monthly Checkpoint Test cue). Shown for the NEXT checkpoint only, folded.
+var PG_CP_HOW=[
+  ['8-10 strict pull-ups, full range from a dead hang','5 x 5 half pull-ups, unbroken','A weighted pull-up, any load, for 3 clean reps'],
+  ['Pull the bar to your sternum, then to your low chest','Film it from the side. Chin over the bar does not count.'],
+  ['Weighted dip building toward +25kg','5 dips from a dead stop at the bottom','Straight bar support hold for 30s, slight forward lean'],
+  ['3 slow negatives from support down through the transition, 5s each','A band-assisted bar muscle-up'],
+  ['One strict bar muscle-up, no kip']];
+var _pgCpOpen=false;
 function pgDefs(){var m={};PROG_DEFS.forEach(function(g){g.items.forEach(function(it){m[it.k]=it;});});return m;}
 function pgNum(v,it){if(it&&it.k==='steps')return Number(v).toLocaleString('en-GB');return String(Math.round(v*10)/10);}
 function pgKey(d){var x=new Date(d);x.setHours(0,0,0,0);return x.toISOString().slice(0,10);} // same UTC-shifted key the logs use
@@ -4805,7 +4823,9 @@ function renderProgressTab(){
   var cp=p.cp||0;
   h+='<section class="tdy-card" aria-label="Bar muscle-up"><div class="tdy-head"><h2>Bar muscle-up</h2><span>Goal: one strict rep</span></div>'
     +'<div class="pg-ladder">'+PG_CP.map(function(nm,i){var n=i+1;return '<button class="pg-cp'+(n<=cp?' on':n===cp+1?' next':'')+'" type="button" aria-pressed="'+(n<=cp)+'" onclick="pgCP('+n+')"><b>'+n+'</b><span>'+nm+'</span></button>';}).join('')+'</div>'
-    +'<div class="pg-sub2">'+(cp>=5?'Done. One strict bar muscle-up.':cp?'Cleared CP'+cp+'. Next: CP'+(cp+1)+' '+PG_CP[cp].toLowerCase()+'.':'Tap a checkpoint once you clear it.')+' Test monthly.</div>'
+    +(cp>=5?'<div class="pg-sub2">Done. One strict bar muscle-up.</div>'
+      :'<details class="pg-cpd"'+(_pgCpOpen?' open':'')+' ontoggle="_pgCpOpen=this.open"><summary>'+(cp?'Cleared CP'+cp+'. ':'')+'Next: CP'+(cp+1)+' '+PG_CP[cp].toLowerCase()+' · what clears it</summary>'
+        +'<ul class="dl-brief">'+PG_CP_HOW[cp].map(function(l){return '<li>'+tEsc(l)+'</li>';}).join('')+'</ul><div class="pg-cpn">Tap the checkpoint once you clear it. Test monthly.</div></details>')
     +pgRow(D.pu,p,false)+pgRow(D.dip,p,false)+pgRow(D.wpu,p,false)+pgRow(D.wdip,p,false)+'</section>';
   h+='<div class="wk-foot c">Knee numbers count down, so their bars fill as they fall. Numbers save when you leave the box, and Save backup now includes them.</div>';
   pv.innerHTML=h;
